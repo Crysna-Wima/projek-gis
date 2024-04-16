@@ -236,6 +236,7 @@
                                     <th data-type="text" data-name="first_name">First Name</th>
                                     <th data-type="text" data-name="last_name">Last Name</th>
                                     <th data-type="text" data-name="email">Email</th>
+                                    <th data-type="select" data-name="status">Status</th>
                                     <th data-type="select" data-name="roles">Roles</th>
                                     <th class="filterhead">Action</th>
                                 </tr>
@@ -247,6 +248,7 @@
                                     <td data-type="text" data-name="first_name"></td>
                                     <td data-type="text" data-name="last_name"></td>
                                     <td data-type="text" data-name="email"></td>
+                                    <td data-type="select" data-name="status"></td>
                                     <td data-type="select" data-name="roles"></td>
                                     <td class="filterhead"></td>
                                 </tr>
@@ -392,6 +394,15 @@
                                 <div class="col-sm-8">
                                     <input type="file" class="form-control edit-user" name='edit_foto' value=""
                                         id="edit_foto" placeholder="e.g: upload foto">
+                                </div>
+                            </div>
+                            <div class="mb-3 row align-items-center">
+                                <label class="col-sm-4 col-form-label">Status</label>
+                                <div class="col-sm-8">
+                                    <button type="button" class="btn btn-toggle" id="edit_status"
+                                        data-toggle="button" aria-pressed="false" autocomplete="off">
+                                        <div class="handle"></div>
+                                    </button>
                                 </div>
                             </div>
                         </div>
@@ -556,6 +567,10 @@
                                 @foreach ($roles as $role)
                                     options += '<option value="{{ $role->name }}">{{ $role->name }}</option>';
                                 @endforeach
+                            }else if (iName == 'status') {
+                                options += '<option value="">Semua</option>';
+                                options += '<option value="y">Active</option>';
+                                options += '<option value="n">Inactive</option>';
                             }
 
                             input.innerHTML = options
@@ -640,6 +655,19 @@
                         data: 'email',
                         name: 'email',
                         className: 'vertical-center'
+                    },
+                    {
+                        width: '100px',
+                        data: 'status',
+                        name: 'status',
+                        className: 'text-center vertical-center horizontal-center',
+                        render: function(data) {
+                            if (data === 'y') {
+                                return '<h5><span class="badge bg-success">Active</span></h5>';
+                            } else {
+                                return '<h5><span class="badge bg-danger">Inactive</span></h5>';
+                            }
+                        },
                     },
                     {
                         width: '100px',
@@ -847,6 +875,11 @@
                             $('#edit_lastname').val(data.data.last_name);
                             $('#edit_email').val(data.data.email);
                             $('#edit_roles').val(data.data.roles).trigger('change');
+                            if (data.data.status === 'y') {
+                                $('#edit_status').addClass('active');
+                            } else {
+                                $('#edit_status').removeClass('active');
+                            }
                         } else {
                             Swal.fire({
                                 icon: 'error',
@@ -916,6 +949,11 @@
                 }
 
                 var id = $('#id_user').val();
+                if ($('#edit_status').hasClass('active')) {
+                    var status = 'y';
+                } else {
+                    var status = 'n';
+                }
                 var formData = new FormData();
                 formData.append('username', $('#edit_username').val());
                 formData.append('firstname', $('#edit_firstname').val());
@@ -923,6 +961,7 @@
                 formData.append('email', $('#edit_email').val());
                 formData.append('roles', $('#edit_roles').val());
                 formData.append('foto', $('#edit_foto')[0].files[0]);
+                formData.append('status', status);
 
                 $.ajax({
                     url: '/usersetting/' + id,

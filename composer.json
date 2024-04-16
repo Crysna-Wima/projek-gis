@@ -13,23 +13,28 @@
         "intervention/image": "^2.7",
         "lab404/laravel-impersonate": "^1.7",
         "laravel/framework": "^10.0",
+        "laravel/octane": "^2.3",
         "laravel/sanctum": "^3.2",
         "laravel/tinker": "^2.5",
         "laravel/ui": "^4.5",
         "maatwebsite/excel": "^3.1",
+        "renatomarinho/laravel-page-speed": "*",
         "spatie/laravel-permission": "^6.4",
+        "spiral/roadrunner-cli": "^2.6",
+        "vladimir-yuldashev/laravel-queue-rabbitmq": "^14.0",
         "yajra/laravel-datatables": "^9.0",
         "yajra/laravel-datatables-buttons": "^9.0",
         "yajra/laravel-datatables-oracle": "^10.31",
         "yaza/laravel-repository-service": "^4.0"
     },
     "require-dev": {
-        "spatie/laravel-ignition": "^2.0",
+        "barryvdh/laravel-ide-helper": "^3.0",
         "fakerphp/faker": "^1.9.1",
         "laravel/sail": "^1.0.1",
         "mockery/mockery": "^1.4.4",
         "nunomaduro/collision": "^7.0",
-        "phpunit/phpunit": "^10.0"
+        "phpunit/phpunit": "^10.0",
+        "spatie/laravel-ignition": "^2.0"
     },
     "autoload": {
         "psr-4": {

@@ -33,6 +33,9 @@ class UserDataTable extends DataTable
             ->addColumn('email', function ($data) {
                 return '<a href="mailto:'.$data->email.'">'.$data->email.'</a>';
             })
+            ->addColumn('status', function ($data){
+                return $data->status;
+            })
             ->addColumn('roles', function ($data) {
                 return $data->getRoleNames()[0];
             })
@@ -55,7 +58,7 @@ class UserDataTable extends DataTable
 
                 return $action;
             })
-            ->rawColumns(['foto', 'username', 'firstname', 'lastname', 'email', 'roles', 'action']);
+            ->rawColumns(['foto', 'username', 'firstname', 'lastname', 'email', 'roles', 'status', 'action']);
     }
     
     
@@ -115,6 +118,7 @@ class UserDataTable extends DataTable
             Column::computed('firstname')->title('First Name'),
             Column::computed('lastname')->title('Last Name'),
             Column::computed('email')->title('Email'),
+            Column::computed('status')->title('Status')->searchable(true),
             Column::computed('roles')->title('Role'),
             Column::computed('action')->title('Action')->orderable(false)->searchable(false)->exportable(false),
         ];

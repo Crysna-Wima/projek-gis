@@ -19,6 +19,10 @@ class AuthMode
     {
         if (!Auth::check()) {
             return redirect("./login");
+        } else {
+            if (Auth::user()->status != 'y') {
+                return response('Unauthorized.', 403);
+            }
         }
         return $next($request);
 

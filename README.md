@@ -42,7 +42,7 @@ DB_PASSWORD=your_database
 php artisan migrate --seed
 ```
 
-Jika Anda telah menginstal composer:
+Note : Jika Anda telah menginstal composer:
 
 ```bash
 git pull origin main

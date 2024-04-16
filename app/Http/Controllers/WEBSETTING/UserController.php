@@ -27,12 +27,16 @@ class UserController extends Controller
         $s_firstname = $request->input('columns.4.search.value');
         $s_lastname = $request->input('columns.5.search.value');
         $s_email = $request->input('columns.6.search.value');
-        $s_roles = $request->input('columns.7.search.value');
+        $s_status = $request->input('columns.7.search.value');
+        $s_roles = $request->input('columns.8.search.value');
 
         $query      = User::with('roles')
-        ->select('users.id', 'username', 'first_name', 'last_name', 'email', 'foto')
+        ->select('users.id', 'username', 'first_name', 'last_name', 'email', 'foto', 'users.status')
         ->leftJoin('model_has_roles', 'users.id', '=', 'model_has_roles.model_id')
         ->leftJoin('roles', 'model_has_roles.role_id', '=', 'roles.id')
+        ->when($s_username, function ($query, $s_username) {
+            return $query->whereRaw('LOWER(username) LIKE ?', ['%' . strtolower($s_username) . '%']);
+        })
         ->when($s_firstname, function ($query, $s_firstname) {
             return $query->whereRaw('LOWER(first_name) LIKE ?', ['%' . strtolower($s_firstname) . '%']);
         })
@@ -42,6 +46,9 @@ class UserController extends Controller
         ->when($s_email, function ($query, $s_email) {
             return $query->whereRaw('LOWER(email) LIKE ?', ['%' . strtolower($s_email) . '%']);
         })
+        ->when($s_status, function ($query, $s_status) {
+            return $query->where('users.status', $s_status);
+        })
         ->when($s_roles, function ($query, $s_roles) {
             return $query->whereHas('roles', function ($query) use ($s_roles) {
                 $query->where('name', $s_roles);
@@ -50,6 +57,7 @@ class UserController extends Controller
         ->orderBy('roles.name', 'asc')
         ->get();
         return $userDataTable->dataTable($query)->toJson();
+        // Enable query logging
     }
 
     public function store(Request $request)
@@ -137,7 +145,7 @@ class UserController extends Controller
 
     public function update($id, Request $request)
     {
-        $attributes = $request->only(['username', 'firstname', 'lastname', 'email', 'roles', 'foto']);
+        $attributes = $request->only(['username', 'firstname', 'lastname', 'email', 'roles', 'foto', 'status']);
         // jika foto berisi null, undefined, atau kosong maka hapus kolom foto
         if ($attributes['foto'] == 'null' || $attributes['foto'] == 'undefined' || $attributes['foto'] == '') {
             unset($attributes['foto']);
@@ -149,6 +157,7 @@ class UserController extends Controller
             'lastname' => 'required',
             'email' => 'required|email|unique:users,email,' . $id,
             'roles' => 'required',
+            'status' => 'required|in:y,n',
             // jika foto kosong maka tidak perlu validasi
             'foto' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
         ];
@@ -162,6 +171,7 @@ class UserController extends Controller
             'email.email' => 'Email tidak valid.',
             'email.unique' => 'Email sudah ada.',
             'roles.required' => 'Role harus diisi.',
+            'status.required' => 'Status harus diisi.',
             'foto.image' => 'Foto harus berupa gambar.',
             'foto.mimes' => 'Foto harus berupa gambar.',
             'foto.max' => 'Foto maksimal 2MB.',
@@ -177,6 +187,7 @@ class UserController extends Controller
             $user->first_name = $request->input('firstname');
             $user->last_name = $request->input('lastname');
             $user->email = $request->input('email');
+            $user->status = $request->input('status');
             $user->save();
 
             $user->roles()->detach();

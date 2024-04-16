@@ -1,0 +1,22 @@
+version: '3.8'
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    depends_on:
+      - based_db
+
+
+  based_db:
+    image: postgres:latest
+    environment:
+      POSTGRES_DB: based
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: crysna
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./storage/dbdata:/var/lib/postgresql
