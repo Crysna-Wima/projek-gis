@@ -63,6 +63,10 @@ git branch -M your_branch
 Lakukan commit pada perubahan Anda:
 
 ```bash
+git add .
+```
+
+```bash
 git commit -m "your_commit"
 ```
 
