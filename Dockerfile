@@ -11,6 +11,9 @@ RUN apt-get update && apt-get install -y \
     libzip-dev \
     libonig-dev \
     graphviz \
+    libpq-dev \
+    postgresql-client \
+    git \
     && docker-php-ext-configure gd --with-freetype --with-jpeg \
     && docker-php-ext-install -j$(nproc) gd \
     && docker-php-ext-install pdo_mysql \
@@ -22,8 +25,6 @@ RUN apt-get update && apt-get install -y \
     && docker-php-ext-install opcache \
     && pecl install xdebug \
     && docker-php-ext-enable xdebug \
-    && apt-get install -y postgresql-client \
-    && apt-get install -y git \
     && docker-php-source delete \
     && curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
