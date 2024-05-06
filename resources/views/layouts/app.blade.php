@@ -3,7 +3,7 @@
 <head>
 
     <meta charset="utf-8" />
-    <title>SIMRP</title>
+    <title>JTRice</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
     <meta content="Themesbrand" name="author" />
@@ -142,7 +142,8 @@
                             <img src="{{asset("assets\images\logo\SIMRP_S.png")}}" alt="" height="25">
                         </span>
                         <span class="logo-lg">
-                            <img src="{{asset("assets\images\logo\SIMRP2.png")}}" style="width: 70%;">
+                            <img src="{{asset("assets\images\logo\SIMRP_S.png")}}" style="width: 20%; display: inline; margin-bottom: 15px">
+                            <h1 class="text-center text-warning d-inline p-2 mt-2" style="font-size: 2rem; font-weight: bold">JTRice</h1>
                         </span>
                     </a>
                 </div>

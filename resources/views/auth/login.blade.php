@@ -5,7 +5,7 @@
 <head>
 
     <meta charset="utf-8" />
-    <title>SIMRP</title>
+    <title>JTRice</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
     <meta content="Themesbrand" name="author" />
@@ -50,16 +50,16 @@
                             <div class="row justify-content-center">
                                 <div class="col-lg-7 mt-4">
                                     <div class="text-center">
-                                        <h4><span class="text-primary" style="font-weight: bold;"></span>Sistem Informasi Manajemen Rantai Pasokan</h4>
+                                        <h4><span class="text-primary" style="font-weight: bold;"></span>Sistem Informasi Geografis Produktivitas Padi</h4>
                                         <div dir="ltr">
                                             <div class="owl-carousel owl-theme auth-review-carousel" id="auth-review-carousel">
                                                 <div class="item">
                                                     <div class="py-3">
                                                         <img src="{{asset("assets\images\ilustration/apps.png")}}" style="width: 100%;margin: auto;" alt="">
-                                                        <p class="font-size-16 mb-4">"SIMRP merupakan aplikasi yang memiliki fungsi untuk memanajemen rantai pasokan agar lebih efisien dan membanti menghasilkan keputusan yang lebih baik"</p>
+                                                        <p class="font-size-16 mb-4">"JTRice merupakan aplikasi yang memiliki fungsi untuk memanajemen dan memantau produktivitas padi di wilayah Jawa Timur"</p>
                                                         <div>
                                                             <h4 class="font-size-16 text-primary-cus">Tim IT Perusahaan</h4>
-                                                            <p class="font-size-14 mb-0">SIMRP</p>
+                                                            <p class="font-size-14 mb-0">JTRice </p>
                                                         </div>
                                                     </div>
 
@@ -67,11 +67,11 @@
                                                 <div class="item">
                                                     <div class="py-3">
                                                         <img alt="" src="{{asset("assets/images/logo/SIMRP2.png")}}" style="width: 70%;margin: auto">
-                                                        <p class="font-size-16 mb-4">"Aplikasi SIMRP dibangun untuk meningkatkan efisiensi dan efektivitas rantai pasokan"</p>
+                                                        <p class="font-size-16 mb-4">"Aplikasi JTRice  dibangun untuk meningkatkan efisiensi dan efektivitas produktivitas padi di wilayah Jawa Timur"</p>
 
                                                         <div>
                                                             <h4 class="font-size-16 text-primary-cus">Tim IT Perusahaan</h4>
-                                                            <p class="font-size-14 mb-0">SIMRP</p>
+                                                            <p class="font-size-14 mb-0">JTRice</p>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -95,15 +95,15 @@
                         <div class="d-flex flex-column h-100">
                             <div class="my-auto">
                                 <a href="#" class="d-block auth-logo">
-                                    <img alt="" src="{{asset("assets/images/logo/SIMRP2.png")}}" style="width: 100%">
-{{--                                    <img src="assets/images/logo-light.png" alt="" height="18" class="auth-logo-light">--}}
+                                    <h1 class="text-center text-warning" style="font-size: 4rem; font-weight: bold">JTRice</h1>
+                                    <h6 class="text-center text-success">Sistem Informasi Geografis Produktivitas Padi</h6>
                                 </a>
                             </div>
                             <div class="my-auto">
 
                                 <div>
                                     <h5 class="text-primary-cus">Selamat Datang !</h5>
-                                    <p class="text-muted">Masuk untuk berselancar pada sistem <strong>SIMRP</strong></p>
+                                    <p class="text-muted">Masuk untuk berselancar pada sistem <strong>JTRice</strong></p>
                                 </div>
 
                                 <div class="mt-4">

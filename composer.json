@@ -21,6 +21,7 @@
         "renatomarinho/laravel-page-speed": "*",
         "spatie/laravel-permission": "^6.4",
         "spiral/roadrunner-cli": "^2.6",
+        "tymon/jwt-auth": "^2.1",
         "vladimir-yuldashev/laravel-queue-rabbitmq": "^14.0",
         "yajra/laravel-datatables": "^9.0",
         "yajra/laravel-datatables-buttons": "^9.0",

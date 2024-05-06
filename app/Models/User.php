@@ -11,6 +11,7 @@ use Illuminate\Support\Str;
 use Laravel\Sanctum\HasApiTokens;
 use Spatie\Permission\Traits\HasRoles;
 use Lab404\Impersonate\Models\Impersonate;
+use Tymon\JWTAuth\Contracts\JWTSubject;
 
 
 class User extends Authenticatable
