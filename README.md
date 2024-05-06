@@ -1,8 +1,8 @@
-# Laravel 10 - Sistem Informasi Manajemen Rantai Pasok
+# Laravel 10 - Sistem Informasi Geografis Produktivitas Padi di Jawa Timur
 
 ## Pendahuluan
 
-Selamat datang di base template SIMRP (Sistem Informasi Manajemen Rantai Pasok) versi Laravel 10. Template ini dirancang untuk memenuhi kebutuhan manajemen rantai pasokan menggunakan Laravel 10. Pastikan sistem Anda memenuhi persyaratan minimum seperti PHP 8.1 dan PostgreSQL.
+Selamat datang di base template JTRice versi Laravel 10. Template ini dirancang untuk memenuhi kebutuhan manajemen rantai pasokan menggunakan Laravel 10. Pastikan sistem Anda memenuhi persyaratan minimum seperti PHP 8.1 dan PostgreSQL.
 
 ## Spesifikasi
 
