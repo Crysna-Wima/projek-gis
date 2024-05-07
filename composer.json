@@ -6,6 +6,7 @@
     "license": "MIT",
     "require": {
         "php": "^8.1",
+        "azishapidin/indoregion": "^3.0",
         "barryvdh/laravel-debugbar": "^3.11",
         "doctrine/dbal": "^3.7",
         "dompdf/dompdf": "^2.0",
