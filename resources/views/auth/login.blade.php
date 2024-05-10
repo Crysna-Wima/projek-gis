@@ -5,12 +5,12 @@
 <head>
 
     <meta charset="utf-8" />
-    <title>JTRice</title>
+    <title>PadInsight</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
     <meta content="Themesbrand" name="author" />
     <!-- App favicon -->
-    <link rel="shortcut icon" href="{{asset("assets\images\logo\SIMRP_S.png")}}">
+    <link rel="shortcut icon" href="{{asset("assets-user/img/favicon-icon.png")}}">
 
     <!-- owl.carousel css -->
     <link rel="stylesheet" href="{{asset("assets/libs/owl.carousel/assets/owl.carousel.min.css")}}">
@@ -56,22 +56,22 @@
                                                 <div class="item">
                                                     <div class="py-3">
                                                         <img src="{{asset("assets\images\ilustration/apps.png")}}" style="width: 100%;margin: auto;" alt="">
-                                                        <p class="font-size-16 mb-4">"JTRice merupakan aplikasi yang memiliki fungsi untuk memanajemen dan memantau produktivitas padi di wilayah Jawa Timur"</p>
+                                                        <p class="font-size-16 mt-2 mb-4">"PadInsight merupakan aplikasi yang memiliki fungsi untuk memanajemen dan memantau produktivitas padi di wilayah Jawa Timur"</p>
                                                         <div>
-                                                            <h4 class="font-size-16 text-primary-cus">Tim IT Perusahaan</h4>
-                                                            <p class="font-size-14 mb-0">JTRice </p>
+                                                            <h4 class="font-size-16 text-primary-cus">Kelompok 1</h4>
+                                                            <p class="font-size-14 mb-0">PadInsight </p>
                                                         </div>
                                                     </div>
 
                                                 </div>
                                                 <div class="item">
                                                     <div class="py-3">
-                                                        <img alt="" src="{{asset("assets/images/logo/SIMRP2.png")}}" style="width: 70%;margin: auto">
-                                                        <p class="font-size-16 mb-4">"Aplikasi JTRice  dibangun untuk meningkatkan efisiensi dan efektivitas produktivitas padi di wilayah Jawa Timur"</p>
+                                                        <img alt="" src="{{asset("assets-user/img/logo05.png")}}" style="width: 70%;margin: auto" class="mt-1">
+                                                        <p class="font-size-16 mt-4 mb-4">"Aplikasi PadInsight dibangun untuk meningkatkan efisiensi dan efektivitas produktivitas padi di wilayah Jawa Timur"</p>
 
                                                         <div>
-                                                            <h4 class="font-size-16 text-primary-cus">Tim IT Perusahaan</h4>
-                                                            <p class="font-size-14 mb-0">JTRice</p>
+                                                            <h4 class="font-size-16 text-primary-cus">Kelompok 1</h4>
+                                                            <p class="font-size-14 mb-0">PadInsight</p>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -95,7 +95,7 @@
                         <div class="d-flex flex-column h-100">
                             <div class="my-auto">
                                 <a href="#" class="d-block auth-logo">
-                                    <h1 class="text-center text-warning" style="font-size: 4rem; font-weight: bold">JTRice</h1>
+                                    <h1 class="text-center text-warning" style="font-size: 3rem; font-weight: bold">PadInsight</h1>
                                     <h6 class="text-center text-success">Sistem Informasi Geografis Produktivitas Padi</h6>
                                 </a>
                             </div>
@@ -103,7 +103,7 @@
 
                                 <div>
                                     <h5 class="text-primary-cus">Selamat Datang !</h5>
-                                    <p class="text-muted">Masuk untuk berselancar pada sistem <strong>JTRice</strong></p>
+                                    <p class="text-muted">Masuk untuk berselancar pada sistem <strong>PadInsight</strong></p>
                                 </div>
 
                                 <div class="mt-4">
@@ -142,7 +142,7 @@
                                 </div>
                             </div>
                             <div class="mt-4 mt-md-5 text-center">
-                                <p class="mb-0">© <script>document.write(new Date().getFullYear())</script> Dibuat dengan <i class="mdi mdi-heart text-danger"></i> by <strong>Tim IT Perusahaan</strong></p>
+                                <p class="mb-0">© <script>document.write(new Date().getFullYear())</script><strong>&nbsp;Kelompok 1</strong></p>
                             </div>
                         </div>
                     </div>

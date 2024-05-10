@@ -22,7 +22,7 @@
     <nav class="navbar navbar-expand-lg navbar-light">
       <div class="container">
         <!-- Brand and toggle get grouped for better mobile display -->
-        <a class="navbar-brand" href="index.html">
+        <a class="navbar-brand" href="/">
           <img class="logo-2" src="{{ asset("assets-user/img/logo01.png") }}" width="163" height="38" alt="" />
         </a>
         <button
@@ -84,6 +84,9 @@
           </li>
           <li class="nav-item">
             <a class="nav-link" href="/kontak-kami">Kontak Kami</a>
+          </li>
+          <li class="nav-item">
+          <a class="nav-link" href="/login"><i class="ti-user"></i>&nbsp;&nbsp;Login</a>
           </li>
           <li class="nav-item">
             <a href="#" class="nav-link search" id="search">
