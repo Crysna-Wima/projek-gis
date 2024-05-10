@@ -3,13 +3,13 @@
 <head>
 
     <meta charset="utf-8" />
-    <title>JTRice</title>
+    <title>PadInsight</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
     <meta content="Themesbrand" name="author" />
     <meta name="csrf-token" content="{{ csrf_token() }}" />
     <!-- App favicon -->
-    <link rel="shortcut icon" href="{{asset("assets\images\logo\SIMRP_S.png")}}">
+    <link rel="shortcut icon" href="{{asset("assets-user/img/favicon-icon.png")}}">
 
     <!-- DataTables -->
     <link href="{{asset("assets/libs/datatables.net-bs4/css/dataTables.bootstrap4.min.css")}}" rel="stylesheet" type="text/css" />
@@ -131,19 +131,19 @@
                 <div class="navbar-brand-box" style="background-color: white">
                     <a href="/dashboard" class="logo logo-dark">
                         <span class="logo-sm">
-                            <img src="{{asset("assets\images\logo\SIMRP_S.png")}}" alt="" height="25">
+                            <img src="{{asset("assets-user/img/logo4.png")}}" alt="" height="25">
                         </span>
                         <span class="logo-lg">
-                            <img src="{{asset("assets\images\logo\SIMRP_S.png")}}" alt="" height="17">
+                            <img src="{{asset("assets-user/img/logo4.png")}}" alt="" height="17">
                         </span>
                     </a>
                     <a href="/dashboard" class="logo logo-light">
                         <span class="logo-sm">
-                            <img src="{{asset("assets\images\logo\SIMRP_S.png")}}" alt="" height="25">
+                            <img src="{{asset("assets-user/img/logo4.png")}}" alt="" height="25">
                         </span>
                         <span class="logo-lg">
-                            <img src="{{asset("assets\images\logo\SIMRP_S.png")}}" style="width: 20%; display: inline; margin-bottom: 15px">
-                            <h1 class="text-center text-warning d-inline p-2 mt-2" style="font-size: 2rem; font-weight: bold">JTRice</h1>
+                            <img src="{{asset("assets-user/img/logo4.png")}}" style="width: 20%; display: inline; margin-bottom: 15px">
+                            <h1 class="text-center text-warning d-inline p-2 mt-2" style="font-size: 1.5rem; font-weight: bold">PadInsight</h1>
                         </span>
                     </a>
                 </div>
