@@ -434,7 +434,7 @@
                     </div>
                 </div>
 
-                @can('menusetting-U', 'menusetting-C')
+                {{-- @can('menusetting-U', 'menusetting-C') --}}
                 <!-- Modal List Icon -->
                 <div class="modal fade" id="modal-list-menu-icon" data-bs-backdrop="static" data-bs-keyboard="false"
                     aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -479,7 +479,7 @@
                         </div>
                     </div>
                 </div>
-                @endcan
+                {{-- @endcan --}}
             </div>
         </div>
         @include('layouts.footer')

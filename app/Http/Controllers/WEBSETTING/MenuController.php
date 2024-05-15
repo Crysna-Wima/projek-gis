@@ -72,7 +72,7 @@ class MenuController extends Controller
             'type' => 'required',
             'url' => 'required|unique:menu,url',
             'permission' => 'required|unique:menu,permission',
-            'parent_id' => 'required|numeric|exists:menu,id',
+            'parent_id' => 'required|numeric|' . ($attributes['parent_id'] == 0 ? '' : 'exists:menu,id'),
         ];
         $messages = [
             'url.unique' => 'URL sudah ada',
