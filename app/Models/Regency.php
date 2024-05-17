@@ -25,6 +25,9 @@ class Regency extends Model
      * @var string
      */
     protected $table = 'regencies';
+    protected $primaryKey = 'id';
+    public $incrementing = false; // because it's a char type, not an auto-incrementing integer
+    protected $keyType = 'char'; // ensures Eloquent treats the primary key as a string
 
     /**
      * The attributes that should be hidden for arrays.

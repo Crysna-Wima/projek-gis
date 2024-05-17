@@ -23,5 +23,7 @@ class DatabaseSeeder extends Seeder
         $this->call(RoleHasMenusTableSeeder::class);
         $this->call(RoutesTableSeeder::class);
         $this->call(GlobalVarsTableSeeder::class);
+        $this->call(IndoRegionSeeder::class);
+        $this->call(new_seeder::class);
     }
 }

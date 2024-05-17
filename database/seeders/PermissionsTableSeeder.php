@@ -64,12 +64,6 @@ class PermissionsTableSeeder extends Seeder
             array( 'name' => 'home-U', 'guard_name' => 'web', 'action_id' => 'U', 'menu_id' => 2),
             array( 'name' => 'home-D', 'guard_name' => 'web', 'action_id' => 'D', 'menu_id' => 2),
             array( 'name' => 'home-A', 'guard_name' => 'web', 'action_id' => 'A', 'menu_id' => 2),
-
-            array( 'name' => 'landingPage-C', 'guard_name' => 'web', 'action_id' => 'C', 'menu_id' => 9),
-            array( 'name' => 'landingPage-R', 'guard_name' => 'web', 'action_id' => 'R', 'menu_id' => 9),
-            array( 'name' => 'landingPage-U', 'guard_name' => 'web', 'action_id' => 'U', 'menu_id' => 9),
-            array( 'name' => 'landingPage-D', 'guard_name' => 'web', 'action_id' => 'D', 'menu_id' => 9),
-            array( 'name' => 'landingPage-A', 'guard_name' => 'web', 'action_id' => 'A', 'menu_id' => 9),
         ];
 
         foreach ($permissions as $k_data => $v_data){

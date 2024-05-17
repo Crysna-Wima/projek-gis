@@ -37,7 +37,6 @@ class MenusTableSeeder extends Seeder
             ['type'=> 'dashboard', 'icon' => "fas fa-route", 'name' => 'Route Settings', 'parent_id' => 3, 'url' => 'routesetting', 'permission' => 'routesetting', 'order_no' => 3],
             ['type'=> 'dashboard', 'icon' => "fas fa-user-friends", 'name' => 'Users Management', 'parent_id' => 3, 'url' => 'usersetting', 'permission' => 'usersetting', 'order_no' => 4],
             ['type'=> 'dashboard', 'icon' => "fas fa-user-shield", 'name' => 'Permission', 'parent_id' => 3, 'url' => 'permissionsetting', 'permission' => 'permission', 'order_no' => 5],
-            ['type'=> 'dashboard', 'icon' => "fas fa-database", 'name' => 'Data Master', 'parent_id' => 2, 'url' => 'landingpage', 'permission' => 'landingPage', 'order_no' => 1],
             // ['type'=> 'dashboard', 'icon' => "fa fa-upload text-success", 'name' => 'Company', 'parent_id' => 2, 'url' => 'company', 'permission' => 'company'],
             //master data
 

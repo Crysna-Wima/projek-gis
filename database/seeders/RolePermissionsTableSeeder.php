@@ -31,7 +31,7 @@ class RolePermissionsTableSeeder extends Seeder
         ];
 
         $temp = array();
-        for ($i=1; $i <= 45; $i++) {
+        for ($i=1; $i <= 40; $i++) {
             $temp[] = $i;
         }
 

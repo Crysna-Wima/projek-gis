@@ -24,7 +24,6 @@ class RoleHasMenusTableSeeder extends Seeder
         	['role_id'=> 2, 'menu_id'=>6],
         	['role_id'=> 2, 'menu_id'=>7],
         	['role_id'=> 2, 'menu_id'=>8],
-        	['role_id'=> 2, 'menu_id'=>9],
         ];
 
         RoleHasMenu::insert($datas);
