@@ -7,7 +7,7 @@
       name="viewport"
       content="width=device-width, initial-scale=1, shrink-to-fit=no"
     />
-    <link rel="icon" href="{{ asset("assets-user/img/favicon.png") }}" type="image/png" />
+    <link rel="icon" href="{{ asset("assets-user/img/favicon-icon.png") }}" type="image/png" />
     <title>Data</title>
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="{{asset("assets-user/css/bootstrap.css")}}" />

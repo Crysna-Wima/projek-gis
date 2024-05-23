@@ -1,11 +1,11 @@
 @extends('layouts.app')
 @section('content')
     <style>
-        #dt_produktifitas>tbody>tr {
+        #dt_irigasi>tbody>tr {
             cursor: pointer;
         }
 
-        #dt_produktifitas>tbody>tr:hover {
+        #dt_irigasi>tbody>tr:hover {
             background-color: #00000030;
         }
 
@@ -86,7 +86,7 @@
             /* float: right; */
         }
 
-        #dt_produktifitas_filter {
+        #dt_irigasi_filter {
             display: none !important;
         }
 
@@ -198,38 +198,38 @@
                     <div class="card">
                         <div class="card-header p-2 bg-info shadow">
                             <div class="row">
-                                <h4 class="font-size-15 text-white col-6 m-1"><i class="fas fa-seedling mx-3"></i>Produktifitas Padi</h4>
+                                <h4 class="font-size-15 text-white col-6 m-1"><i class="fas fa-seedling mx-3"></i>Irigasi</h4>
                             </div>
                         </div>
                         <div class="card-body">
-                            <h4 class="card-title mb-4 font-size-12">Daftar Produktifitas Padi</h4>
-                            @can('produktifitas-C')
+                            <h4 class="card-title mb-4 font-size-12">Daftar Irigasi</h4>
+                            @can('irigasi-C')
                                 <div class="row">
                                     <div class="col-sm-6"></div>
                                     <div class="col-sm-6">
-                                        <button class="btn btn-primary btn-sm mx-2 btn-tambah-produktifitas float-end mb-2">
-                                            <i class="fas fa-plus mx-2"></i> Tambah Produktifitas
+                                        <button class="btn btn-primary btn-sm mx-2 btn-tambah-irigasi float-end mb-2">
+                                            <i class="fas fa-plus mx-2"></i> Tambah Irigasi
                                         </button>
                                     </div>
                                 </div>
                             @endcan
-                            <table id="dt_produktifitas" class="table table-bordered table-striped t_per test"
+                            <table id="dt_irigasi" class="table table-bordered table-striped t_per test"
                            style="width: 3030px">
                                 <thead>
                                     <tr>
                                         <th>No</th>
-                                        <th data-type="select" data-name="kota">Kabupaten/Kota</th>
+                                        <th data-type="select" data-name="kota">Kabupaten/kota</th>
                                         <th data-type="year" data-name="tahun">Tahun</th>
-                                        <th data-type="number" data-name="masaPanen">Masa Panen</th>
-                                        <th data-type="number" data-name="produktifitas">Produktifitas Padi</th>
+                                        <th data-type="number" data-name="jenis_irigasi">Jenis Irigasi</th>
+                                        <th data-type="number" data-name="luas">Luas</th>
                                         <th class="filterhead">Action</th>
                                     </tr>
                                     <tr>
                                         <td></td>
                                         <th data-type="select" data-name="kota"></th>
                                         <th data-type="year" data-name="tahun"></th>
-                                        <th data-type="number" data-name="masaPanen"></th>
-                                        <th data-type="number" data-name="produktifitas"></th>
+                                        <th data-type="number" data-name="jenis_irigasi"></th>
+                                        <th data-type="number" data-name="luas"></th>
                                         <td class="filterhead"></td>
                                     </tr>
                                 </thead>
@@ -241,23 +241,23 @@
                 </div>
 
                 <!-- Modal Tambah -->
-                <div class="modal fade" id="modal-tambah-produktifitas" data-bs-backdrop="static" data-bs-keyboard="false"
+                <div class="modal fade" id="modal-tambah-irigasi" data-bs-backdrop="static" data-bs-keyboard="false"
                     aria-labelledby="staticBackdropLabel" aria-hidden="true">
                     <div class="modal-dialog modal-lg modal-dialog-scrollable">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title" id="title-modal">Tambah Produktifitas Padi</h5>
+                                <h5 class="modal-title" id="title-modal">Tambah Irigasi</h5>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal"
                                     aria-label="Close"></button>
                             </div>
 
                             <div class="modal-body p-4">
                                 <div class="mb-3 row">
-                                    <label for="inputPassword" class="col-sm-4 col-form-label">Kota / Kabupaten
+                                    <label for="inputPassword" class="col-sm-4 col-form-label">Kota/Kabupaten
                                         <strong><code>*</code></strong></label>
                                     <div class="col-sm-8">
-                                        <select class="form-control input-produktifitas select2_kota" name='kota' id="kota">
-                                            <option value="">Pilih kota / Kabupaten</option>
+                                        <select class="form-control input-irigasi select2_kota" name='kota' id="kota">
+                                            <option value="">Pilih Kota/Kabupaten</option>
                                             @foreach ($kota as $item)
                                                 <option value="{{ $item->id }}">{{ $item->name }}</option>
                                             @endforeach
@@ -269,32 +269,32 @@
                                         <strong><code>*</code></strong></label>
                                     <div class="col-sm-8">
                                         <div class="position-relative" id="datepicker5">
-                                            <input type="text" class="form-control input-produktifitas" data-provide="datepicker" data-date-container='#datepicker5' data-date-autoclose="true"
+                                            <input type="text" class="form-control input-irigasi" data-provide="datepicker" data-date-container='#datepicker5' data-date-autoclose="true"
                                                 data-date-format="yyyy" data-date-min-view-mode="years" id="tahun" name="tahun" value="{{ date('Y') }}" placeholder="e.g: 2024">
                                         </div>
                                     </div>
                                 </div>
                                 <div class="mb-3 row">
-                                    <label for="inputPassword" class="col-sm-4 col-form-label">Masa Panen
+                                    <label for="inputPassword" class="col-sm-4 col-form-label">Jenis Irigasi
                                         <strong><code>*</code></strong></label>
                                     <div class="col-sm-8">
-                                        <input type="number" class="form-control input-produktifitas" name='masaPanen' value=""
-                                            id="masaPanen" placeholder="e.g: 1">
+                                        <input type="number" class="form-control input-irigasi" name='jenis_irigasi' value=""
+                                            id="jenis_irigasi" placeholder="e.g: 1">
                                     </div>
                                 </div>
                                 <div class="mb-3 row">
-                                    <label for="inputPassword" class="col-sm-4 col-form-label">Produktifitas Padi (Ton/Ha)
+                                    <label for="inputPassword" class="col-sm-4 col-form-label">Luas (Ha)
                                         <strong><code>*</code></strong></label>
                                     <div class="col-sm-8">
-                                        <input type="number" class="form-control input-produktifitas" name='produktifitas'
-                                            value="" id="produktifitas" placeholder="e.g: 5.5" step="0.1">
+                                        <input type="number" class="form-control input-irgasi" name='luas'
+                                            value="" id="luas" placeholder="e.g: 884" step="0.1">
                                     </div>
                                 </div>
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                @can('produktifitas-C')
-                                    <button type="button" id="btn-simpan-produktifitas" class="btn btn-primary btn-simpan-produktivitas"><i
+                                @can('irigasi-C')
+                                    <button type="button" id="btn-simpan-irigasi" class="btn btn-primary btn-simpan-irigasi"><i
                                             class="fas fa-save mx-2"></i>Simpan</button>
                                 @endcan
                             </div>
@@ -304,24 +304,24 @@
 
 
                 <!-- Modal Edit -->
-                <div class="modal fade" id="modal-edit-produktifitas" data-bs-backdrop="static" data-bs-keyboard="false"
+                <div class="modal fade" id="modal-edit-irigasi" data-bs-backdrop="static" data-bs-keyboard="false"
                     aria-labelledby="staticBackdropLabel" aria-hidden="true">
                     <div class="modal-dialog modal-lg modal-dialog-scrollable">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title" id="title-modal">Edit Produktifitas Padi</h5>
+                                <h5 class="modal-title" id="title-modal">Edit Irigasi</h5>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal"
                                     aria-label="Close"></button>
                             </div>
 
                             <div class="modal-body p-4">
-                                <input type="hidden" class="edit-produktifitas" name="id_produktifitas" id="id_produktifitas" value="">
+                                <input type="hidden" class="edit-irigasi" name="id_irigasi" id="id_irigasi" value="">
                                 <div class="mb-3 row">
-                                    <label for="inputPassword" class="col-sm-4 col-form-label">Kota / Kabupaten
+                                    <label for="inputPassword" class="col-sm-4 col-form-label">Kota/Kabupaten
                                         <strong><code>*</code></strong></label>
                                     <div class="col-sm-8">
-                                        <select class="form-control edit-produktifitas select2_edit_kota" name='edit_kota' id="edit_kota">
-                                            <option value="">Pilih Kota / Kabupaten</option>
+                                        <select class="form-control edit-irigasi select2_edit_kota" name='edit_kota' id="edit_kota">
+                                            <option value="">Pilih Kota/Kabupaten</option>
                                             @foreach ($kota as $item)
                                                 <option value="{{ $item->id }}">{{ $item->name }}</option>
                                             @endforeach
@@ -333,32 +333,32 @@
                                         <strong><code>*</code></strong></label>
                                     <div class="col-sm-8">
                                         <div class="position-relative" id="datepicker5">
-                                            <input type="text" class="form-control edit-produktifitas" data-provide="datepicker" data-date-container='#datepicker5' data-date-autoclose="true"
+                                            <input type="text" class="form-control edit-irigasi" data-provide="datepicker" data-date-container='#datepicker5' data-date-autoclose="true"
                                                 data-date-format="yyyy" data-date-min-view-mode="years" id="edit_tahun" name="edit_tahun" value="{{ date('Y') }}" placeholder="e.g: 2024">
                                         </div>
                                     </div>
                                 </div>
                                 <div class="mb-3 row">
-                                    <label for="inputPassword" class="col-sm-4 col-form-label">Masa Panen
+                                    <label for="inputPassword" class="col-sm-4 col-form-label">Jenis Irigasi
                                         <strong><code>*</code></strong></label>
                                     <div class="col-sm-8">
-                                        <input type="number" class="form-control edit-produktifitas" name='edit_masaPanen' value=""
-                                            id="edit_masaPanen" placeholder="e.g: 1">
+                                        <input type="number" class="form-control edit-irigasi" name='edit_jenis_irigasi' value=""
+                                            id="edit_jenis_irigasi" placeholder="e.g: 1">
                                     </div>
                                 </div>
                                 <div class="mb-3 row">
-                                    <label for="inputPassword" class="col-sm-4 col-form-label">Produktifitas Padi (Ton/Ha)
+                                    <label for="inputPassword" class="col-sm-4 col-form-label">Luas (Ha)
                                         <strong><code>*</code></strong></label>
                                     <div class="col-sm-8">
-                                        <input type="number" class="form-control edit-produktifitas" name='edit_produktifitas'
-                                            value="" id="edit_produktifitas" placeholder="e.g: 5.5" step="0.1">
+                                        <input type="number" class="form-control edit-irigasi" name='edit_luas'
+                                            value="" id="edit_luas" placeholder="e.g: 884" step="0.1">
                                     </div>
                                 </div>
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                @can('produktifitas-U')
-                                    <button type="button" id="btn-edit-produktifitas" class="btn btn-primary btn-edit-produktifitas"><i
+                                @can('irigasi-U')
+                                    <button type="button" id="btn-edit-irigasi" class="btn btn-primary btn-edit-irigasi"><i
                                             class="fas fa-save mx-2"></i>Simpan</button>
                                 @endcan
                             </div>
@@ -378,10 +378,10 @@
     <script>
         $(document).ready(function() {
 
-            @can('produktifitas-R')
+            @can('irigasi-R')
 
-            $('#dt_produktifitas').DataTable().clear().destroy();
-            var table = $("#dt_produktifitas").DataTable({
+            $('#dt_irigasi').DataTable().clear().destroy();
+            var table = $("#dt_irigasi").DataTable({
                 scrollX: true,
                 orderCellsTop: false,
                 pageLength: 10,
@@ -516,7 +516,7 @@
                     });
                 },
                 ajax: {
-                    url: '/master-data/produktifitas/list',
+                    url: '/master-data/irigasi/list',
                     complete: function() {
                             $('.dtfh-floatingparenthead').on('scroll', function() {
                                 //    console.log('ssss');
@@ -548,17 +548,17 @@
                     },
                     {
                         width: '100px',
-                        data: 'masaPanen',
-                        name: 'masaPanen',
+                        data: 'jenis_irigasi',
+                        name: 'jenis_irigasi',
                         className: 'text-center'
                     },
                     {
                         width: '300px',
-                        data: 'produktifitas',
-                        name: 'produktifitas',
+                        data: 'luas',
+                        name: 'luas',
                         className: 'text-center',
                         template: function (row) {  
-                            return row.produktifitas + ' Ton/Ha';
+                            return row.luas + ' Ha';
                         },
                     },
                     {
@@ -569,10 +569,10 @@
                         searchable: false,
                         template: function (row) {  
                                 return "<center>"+
-                                    @can('produktifitas-U')
+                                    @can('irigasi-U')
                                         "<button type='button' class='btn btn-outline-warning btn-sm tooltips btn-edit' title='Edit' data-bs-toggle='tooltip' data-bs-placement='top' data-id="+row.id+"><i class='fas fa-pen'></i></button>  "+
                                     @endcan
-                                    @can('produktifitas-D')
+                                    @can('irigasi-D')
                                         "<button type='button' class='btn btn-outline-danger btn-sm tooltips btn-delete' title='Delete' data-bs-toggle='tooltip' data-bs-placement='top' data-id="+row.id+"><i class='fas fa-trash-alt'></i></button> "+
                                     @endcan
                                     "</center>";
@@ -585,27 +585,27 @@
             @endcan
 
 
-            @can('produktifitas-C')
+            @can('irigasi-C')
 
             $('.select2_kota').select2({
                 width: '100%',
                 placeholder: "Pilih kota / Kabupaten",
                 allowClear: true,
-                dropdownParent: $('#modal-tambah-produktifitas')
+                dropdownParent: $('#modal-tambah-irigasi')
             });
             
-            $(document).on("click", ".btn-tambah-produktifitas", function() {
-                $("#modal-tambah-produktifitas").modal("show");
+            $(document).on("click", ".btn-tambah-irigasi", function() {
+                $("#modal-tambah-irigasi").modal("show");
                 $('#kota').val('').trigger('change');
                 $('#tahun').val('');
-                $('#masaPanen').val('');
-                $('#produktifitas').val('');
+                $('#jenis_irigasi').val('');
+                $('#luas').val('');
             });
 
-            $(document).on("click", "#btn-simpan-produktifitas", function() {
+            $(document).on("click", "#btn-simpan-irigasi", function() {
                 var isValid = true;
 
-                $('.input-produktifitas').each(function() {
+                $('.input-irigasi').each(function() {
                     $(this).removeClass('is-invalid');
                     $(this).parent().find('.invalid-feedback').remove();
                     if ($(this).attr('type') == 'text') {
@@ -648,11 +648,11 @@
 
                 var kota = $('#kota').val();
                 var tahun = $('#tahun').val();
-                var masaPanen = $('#masaPanen').val();
-                var produktifitas = $('#produktifitas').val();
+                var jenis_irigasi = $('#jenis_irigasi').val();
+                var luas = $('#luas').val();
 
                 $.ajax({
-                    url: '/master-data/produktifitas',
+                    url: '/master-data/irigasi',
                     type: 'POST',
                     headers: {
                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
@@ -660,11 +660,11 @@
                     data: {
                         kota: kota,
                         tahun: tahun,
-                        masaPanen: masaPanen,
-                        produktifitas: produktifitas,
+                        jenis_irigasi: jenis_irigasi,
+                        luas: luas,
                     },
                     beforeSend: function() {
-                        $('.btn-simpan-produktifitas').attr('disabled', 'disabled');
+                        $('.btn-simpan-irigasi').attr('disabled', 'disabled');
                         Swal.fire({
                             title: 'Mohon Tunggu',
                             text: 'Sedang Menyimpan...',
@@ -677,7 +677,7 @@
                     },
                     success: function(data) {
                         Swal.close();
-                        $('.btn-simpan-produktifitas').removeAttr('disabled', 'disabled');
+                        $('.btn-simpan-irigasi').removeAttr('disabled', 'disabled');
                         if (data.status == 'success') {
                             Swal.fire({
                                 icon: 'success',
@@ -686,7 +686,7 @@
                                 showConfirmButton: false,
                                 timer: 1500
                             });
-                            $("#modal-tambah-produktifitas").modal("hide");
+                            $("#modal-tambah-irigasi").modal("hide");
                             table.ajax.reload();
                         } else {
                             Swal.fire({
@@ -700,7 +700,7 @@
                     },
                     error: function(data) {
                         Swal.close();
-                        $('.btn-simpan-produktifitas').removeAttr('disabled', 'disabled');
+                        $('.btn-simpan-irigasi').removeAttr('disabled', 'disabled');
                         Swal.fire({
                             icon: 'error',
                             title: 'Gagal',
@@ -713,14 +713,14 @@
             });
 
             // on modal close
-            $('#modal-tambah-produktifitas').on('hidden.bs.modal', function(e) {
+            $('#modal-tambah-irigasi').on('hidden.bs.modal', function(e) {
                 $('#kota').val('').trigger('change');
                 $('#tahun').val('');
-                $('#masaPanen').val('');
-                $('#produktifitas').val('');
+                $('#jenis_irigasi').val('');
+                $('#luas').val('');
 
                 // remove invalid class
-                $('.input-produktifitas').each(function() {
+                $('.input-irigasi').each(function() {
                     $(this).removeClass('is-invalid');
                     $(this).parent().find('.invalid-feedback').remove();
                 });
@@ -728,19 +728,19 @@
 
             @endcan
 
-            @can('produktifitas-U')
+            @can('irigasi-U')
 
             $('.select2_edit_kota').select2({
                 width: '100%',
                 placeholder: "Pilih Kota / Kabupaten",
                 allowClear: true,
-                dropdownParent: $('#modal-edit-produktifitas')
+                dropdownParent: $('#modal-edit-irigasi')
             });
 
             $(document).on("click", ".btn-edit", function() {
                 var id = $(this).data('id');
                 $.ajax({
-                    url: '/master-data/produktifitas/' + id,
+                    url: '/master-data/irigasi/' + id,
                     type: 'GET',
                     beforeSend: function() {
                         Swal.fire({
@@ -756,13 +756,13 @@
                     success: function(data) {
                         Swal.close();
                         if (data.status == 'success') {
-                            $("#modal-edit-produktifitas").modal("show");
+                            $("#modal-edit-irigasi").modal("show");
                             console.log(data.data.id);
-                            $('#id_produktifitas').val(data.data.id);
+                            $('#id_irigasi').val(data.data.id);
                             $('#edit_kota').val(data.data.id_kota).trigger('change');
                             $('#edit_tahun').val(data.data.tahun);
-                            $('#edit_masaPanen').val(data.data.masa_panen);
-                            $('#edit_produktifitas').val(data.data.produktifitas);
+                            $('#edit_jenis_irigasi').val(data.data.jenis_irigasi);
+                            $('#edit_luas').val(data.data.luas);
                         } else {
                             Swal.fire({
                                 icon: 'error',
@@ -786,23 +786,23 @@
                 });
             });
 
-            $('#modal-edit-produktifitas').on('hidden.bs.modal', function(e) {
-                $('#id_produktifitas').val('');
+            $('#modal-edit-irigasi').on('hidden.bs.modal', function(e) {
+                $('#id_irigasi').val('');
                 $('#edit_kota').val('').trigger('change');
                 $('#edit_tahun').val('');
-                $('#edit_masaPanen').val('');
-                $('#edit_produktifitas').val('');
+                $('#edit_jenis_irigasi').val('');
+                $('#edit_luas').val('');
                 // remove invalid class
-                $('.edit-produktifitas').each(function() {
+                $('.edit-irigasi').each(function() {
                     $(this).removeClass('is-invalid');
                     $(this).parent().find('.invalid-feedback').remove();
                 });
             });
 
-            $(document).on("click", "#btn-edit-produktifitas", function() {
+            $(document).on("click", "#btn-edit-irigasi", function() {
                 var isValid = true;
 
-                $('.edit-produktifitas').each(function() {
+                $('.edit-irigasi').each(function() {
                     $(this).removeClass('is-invalid');
                     $(this).parent().find('.invalid-feedback').remove();
                     if ($(this).attr('type') == 'text') {
@@ -843,14 +843,14 @@
                 }
 
 
-                var id = $('#id_produktifitas').val();
+                var id = $('#id_irigasi').val();
                 var kota = $('#edit_kota').val();
                 var tahun = $('#edit_tahun').val();
-                var masaPanen = $('#edit_masaPanen').val();
-                var produktifitas = $('#edit_produktifitas').val();
+                var jenis_irigasi = $('#edit_jenis_irigasi').val();
+                var luas = $('#edit_luas').val();
 
                 $.ajax({
-                    url: '/master-data/produktifitas/' + id,
+                    url: '/master-data/irigasi/' + id,
                     type: 'POST',
                     headers: {
                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
@@ -858,11 +858,11 @@
                     data: {
                         kota: kota,
                         tahun: tahun,
-                        masaPanen: masaPanen,
-                        produktifitas: produktifitas,
+                        jenis_irigasi: jenis_irigasi,
+                        luas: luas,
                     },
                     beforeSend: function() {
-                        $('.btn-edit-produktifitas').attr('disabled', 'disabled');
+                        $('.btn-edit-irigasi').attr('disabled', 'disabled');
                         Swal.fire({
                             title: 'Mohon Tunggu',
                             text: 'Sedang Menyimpan...',
@@ -875,7 +875,7 @@
                     },
                     success: function(data) {
                         Swal.close();
-                        $('.btn-edit-produktifitas').removeAttr('disabled', 'disabled');
+                        $('.btn-edit-irigasi').removeAttr('disabled', 'disabled');
                         if (data.status == 'success') {
                             Swal.fire({
                                 icon: 'success',
@@ -884,7 +884,7 @@
                                 showConfirmButton: false,
                                 timer: 1500
                             });
-                            $("#modal-edit-produktifitas").modal("hide");
+                            $("#modal-edit-irigasi").modal("hide");
                             table.ajax.reload();
                         } else {
                             Swal.fire({
@@ -898,7 +898,7 @@
                     },
                     error: function(data) {
                         Swal.close();
-                        $('.btn-edit-produktifitas').removeAttr('disabled', 'disabled');
+                        $('.btn-edit-irigasi').removeAttr('disabled', 'disabled');
                         Swal.fire({
                             icon: 'error',
                             title: 'Gagal',
@@ -911,7 +911,7 @@
             });
             @endcan
 
-            @can('produktifitas-D')
+            @can('irigasi-D')
 
             $(document).on("click", ".btn-delete", function() {
                 var id = $(this).data('id');
@@ -927,7 +927,7 @@
                 }).then((result) => {
                     if (result.isConfirmed) {
                         $.ajax({
-                            url: '/master-data/produktifitas/destroy/' + id,
+                            url: '/master-data/irigasi/destroy/' + id,
                             type: 'DELETE',
                             headers: {
                                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr(

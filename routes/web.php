@@ -43,6 +43,11 @@ Route::get('/kontak-kami', function () {
     return view('home.kontak-kami'); 
 });
 
+//ADMIN
+// Route::get('/data-master/irigasi', function () {
+//     return view('dashboard.irigasi'); 
+// });
+
 try {
     $routes= Routes::where('guard','web')->get()->toArray();
     
