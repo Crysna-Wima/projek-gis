@@ -17,4 +17,9 @@ class Irigasi extends Model
         'jenis_irigasi',
         'luas'
     ];
+
+    public function kota()
+    {
+        return $this->belongsTo(Regency::class, 'id_kota', 'id');
+    }
 }
