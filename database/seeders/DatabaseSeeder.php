@@ -25,5 +25,6 @@ class DatabaseSeeder extends Seeder
         $this->call(GlobalVarsTableSeeder::class);
         $this->call(IndoRegionSeeder::class);
         $this->call(new_seeder::class);
+        $this->call(JenisIrigasiSeeder::class);
     }
 }

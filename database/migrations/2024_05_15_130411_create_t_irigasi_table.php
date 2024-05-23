@@ -15,11 +15,11 @@ return new class extends Migration
             $table->id();
             $table->char('id_kota', 4);
             $table->year('tahun');
-            $table->string('jenis_irigasi');
+            $table->char('id_jenis_irigasi', 4);
             $table->double('luas');
-            $table->timestamps();
 
             $table->foreign('id_kota')->references('id')->on('regencies');
+            $table->foreign('id_jenis_irigasi')->references('id')->on('jenis__irigasis');
         });
     }
 

@@ -220,7 +220,7 @@
                                         <th>No</th>
                                         <th data-type="select" data-name="kota">Kabupaten/kota</th>
                                         <th data-type="year" data-name="tahun">Tahun</th>
-                                        <th data-type="number" data-name="jenis_irigasi">Jenis Irigasi</th>
+                                        <th data-type="select" data-name="id_jenis_irigasi">Jenis Irigasi</th>
                                         <th data-type="number" data-name="luas">Luas</th>
                                         <th class="filterhead">Action</th>
                                     </tr>
@@ -228,7 +228,7 @@
                                         <td></td>
                                         <th data-type="select" data-name="kota"></th>
                                         <th data-type="year" data-name="tahun"></th>
-                                        <th data-type="number" data-name="jenis_irigasi"></th>
+                                        <th data-type="select" data-name="id_jenis_irigasi"></th>
                                         <th data-type="number" data-name="luas"></th>
                                         <td class="filterhead"></td>
                                     </tr>
@@ -277,10 +277,14 @@
                                 <div class="mb-3 row">
                                     <label for="inputPassword" class="col-sm-4 col-form-label">Jenis Irigasi
                                         <strong><code>*</code></strong></label>
-                                    <div class="col-sm-8">
-                                        <input type="number" class="form-control input-irigasi" name='jenis_irigasi' value=""
-                                            id="jenis_irigasi" placeholder="e.g: 1">
-                                    </div>
+                                        <div class="col-sm-8">
+                                            <select class="form-control input-irigasi select2_id_jenis_irigasi" name='id_jenis_irigasi' id="id_jenis_irigasi">
+                                                <option value="">Pilih Jenis Irigasi</option>
+                                                @foreach ($id_jenis_irigasi as $item)
+                                                    <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
                                 </div>
                                 <div class="mb-3 row">
                                     <label for="inputPassword" class="col-sm-4 col-form-label">Luas (Ha)
@@ -342,8 +346,12 @@
                                     <label for="inputPassword" class="col-sm-4 col-form-label">Jenis Irigasi
                                         <strong><code>*</code></strong></label>
                                     <div class="col-sm-8">
-                                        <input type="number" class="form-control edit-irigasi" name='edit_jenis_irigasi' value=""
-                                            id="edit_jenis_irigasi" placeholder="e.g: 1">
+                                        <select class="form-control edit-irigasi select2_edit_id_jenis_irigasi" name='edit_id_jenis_irigasi' id="edit_id_jenis_irigasi">
+                                            <option value="">Pilih Jenis Irigasi</option>
+                                            @foreach ($id_jenis_irigasi as $item)
+                                                <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                            @endforeach
+                                        </select>
                                     </div>
                                 </div>
                                 <div class="mb-3 row">
@@ -480,6 +488,13 @@
                                 @endforeach
                             }
 
+                            else if (iName == "id_jenis_irigasi") {
+                                options += "<option value=''>Semua</option>";
+                                @foreach ($id_jenis_irigasi as $item)
+                                    options += "<option value='{{ $item->id }}'>{{ $item->name }}</option>";
+                                @endforeach
+                            }
+
                             input.innerHTML = options
                             $(input).appendTo($(column.header()).empty())
                                 .on('keyup change clear', function() {
@@ -548,8 +563,8 @@
                     },
                     {
                         width: '100px',
-                        data: 'jenis_irigasi',
-                        name: 'jenis_irigasi',
+                        data: 'id_jenis_irigasi',
+                        name: 'id_jenis_irigasi',
                         className: 'text-center'
                     },
                     {
@@ -593,12 +608,18 @@
                 allowClear: true,
                 dropdownParent: $('#modal-tambah-irigasi')
             });
+            $('.select2_id_jenis_irigasi').select2({
+                width: '100%',
+                placeholder: "Pilih Jenis Irigasi",
+                allowClear: true,
+                dropdownParent: $('#modal-tambah-irigasi')
+            });
             
             $(document).on("click", ".btn-tambah-irigasi", function() {
                 $("#modal-tambah-irigasi").modal("show");
                 $('#kota').val('').trigger('change');
                 $('#tahun').val('');
-                $('#jenis_irigasi').val('');
+                $('#id_jenis_irigasi').val('').trigger('change');
                 $('#luas').val('');
             });
 
@@ -648,7 +669,7 @@
 
                 var kota = $('#kota').val();
                 var tahun = $('#tahun').val();
-                var jenis_irigasi = $('#jenis_irigasi').val();
+                var id_jenis_irigasi = $('#id_jenis_irigasi').val();
                 var luas = $('#luas').val();
 
                 $.ajax({
@@ -660,7 +681,7 @@
                     data: {
                         kota: kota,
                         tahun: tahun,
-                        jenis_irigasi: jenis_irigasi,
+                        id_jenis_irigasi: id_jenis_irigasi,
                         luas: luas,
                     },
                     beforeSend: function() {
@@ -716,7 +737,7 @@
             $('#modal-tambah-irigasi').on('hidden.bs.modal', function(e) {
                 $('#kota').val('').trigger('change');
                 $('#tahun').val('');
-                $('#jenis_irigasi').val('');
+                $('#id_jenis_irigasi').val('').trigger('change');
                 $('#luas').val('');
 
                 // remove invalid class
@@ -733,6 +754,12 @@
             $('.select2_edit_kota').select2({
                 width: '100%',
                 placeholder: "Pilih Kota / Kabupaten",
+                allowClear: true,
+                dropdownParent: $('#modal-edit-irigasi')
+            });
+            $('.select2_edit_id_jenis_irigasi').select2({
+                width: '100%',
+                placeholder: "Pilih Jenis Irigasi",
                 allowClear: true,
                 dropdownParent: $('#modal-edit-irigasi')
             });
@@ -761,7 +788,7 @@
                             $('#id_irigasi').val(data.data.id);
                             $('#edit_kota').val(data.data.id_kota).trigger('change');
                             $('#edit_tahun').val(data.data.tahun);
-                            $('#edit_jenis_irigasi').val(data.data.jenis_irigasi);
+                            $('#edit_id_jenis_irigasi').val(data.data.id_jenis_irigasi).trigger('change');
                             $('#edit_luas').val(data.data.luas);
                         } else {
                             Swal.fire({
@@ -790,7 +817,7 @@
                 $('#id_irigasi').val('');
                 $('#edit_kota').val('').trigger('change');
                 $('#edit_tahun').val('');
-                $('#edit_jenis_irigasi').val('');
+                $('#edit_id_jenis_irigasi').val('').trigger('change');
                 $('#edit_luas').val('');
                 // remove invalid class
                 $('.edit-irigasi').each(function() {
@@ -846,7 +873,7 @@
                 var id = $('#id_irigasi').val();
                 var kota = $('#edit_kota').val();
                 var tahun = $('#edit_tahun').val();
-                var jenis_irigasi = $('#edit_jenis_irigasi').val();
+                var id_jenis_irigasi = $('#edit_id_jenis_irigasi').val();
                 var luas = $('#edit_luas').val();
 
                 $.ajax({
@@ -858,7 +885,7 @@
                     data: {
                         kota: kota,
                         tahun: tahun,
-                        jenis_irigasi: jenis_irigasi,
+                        id_jenis_irigasi: id_jenis_irigasi,
                         luas: luas,
                     },
                     beforeSend: function() {
