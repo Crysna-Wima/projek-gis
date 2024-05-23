@@ -14,12 +14,20 @@ class Irigasi extends Model
     protected $fillable = [
         'id_kota',
         'tahun',
-        'jenis_irigasi',
+        'id_jenis_irigasi',
         'luas'
     ];
+
+    public $timestamps = false;
 
     public function kota()
     {
         return $this->belongsTo(Regency::class, 'id_kota', 'id');
     }
+
+    public function jenis_irigasi()
+    {
+        return $this->belongsTo(Jenis_Irigasi::class, 'id_jenis_irigasi', 'id');
+    }
+
 }

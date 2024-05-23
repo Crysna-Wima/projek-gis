@@ -8,6 +8,7 @@ use App\Models\Regency;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Irigasi;
+use App\Models\Jenis_Irigasi;
 use Illuminate\Support\Facades\DB;
 
 class IrigasiController extends Controller
@@ -20,6 +21,7 @@ class IrigasiController extends Controller
         $data['menus'] = $this->getDashboardMenu();
         $data['menu']  = Menu::select('id', 'name')->get();
         $data['kota'] = Regency::where('province_id', '35')->get();
+        $data['id_jenis_irigasi'] = Jenis_Irigasi::get();
 
         return view('masterdata.irigasi.index', $data);
     }
@@ -31,14 +33,15 @@ class IrigasiController extends Controller
     {
         $s_kota = $request->input('columns.1.search.value');
         $s_tahun = $request->input('columns.2.search.value');
-        $s_jenis_irigasi = $request->input('columns.3.search.value');
+        $s_id_jenis_irigasi = $request->input('columns.3.search.value');
         $s_luas = $request->input('columns.4.search.value');
     
         $query = Irigasi::query()
             ->with('kota')
-            ->select('id','id_kota','tahun','jenis_irigasi','luas')
-            ->when($s_jenis_irigasi, function ($query, $s_jenis_irigasi) {
-                return $query->whereRaw('LOWER(jenis_irigasi) LIKE ?', ['%' . strtolower($s_jenis_irigasi) . '%']);
+            ->with('jenis_irigasi')
+            ->select('id','id_kota','tahun','id_jenis_irigasi','luas')
+            ->when($s_id_jenis_irigasi, function ($query, $s_id_jenis_irigasi) {
+                return $query->where('id_jenis_irigasi', $s_id_jenis_irigasi);
             })
             ->when($s_luas, function ($query, $s_luas) {
                 return $query->whereRaw('LOWER(luas) LIKE ?', ['%' . strtolower($s_luas) . '%']);
@@ -62,13 +65,13 @@ class IrigasiController extends Controller
         $request->validate([
             'kota' => 'required|exists:regencies,id',
             'tahun' => 'required|max:' . date('Y'),
-            'jenis_irigasi' => 'required|min:1|max:12',
+            'id_jenis_irigasi' => 'required|exists:jenis__irigasis,id',
             'luas' => 'required'
         ]);
 
         $check = Irigasi::where('id_kota', $request->kota)
             ->where('tahun', $request->tahun)
-            ->where('jenis_irigasi', $request->jenis_irigasi)
+            ->where('id_jenis_irigasi', $request->id_jenis_irigasi)
             ->first();
         
         if ($check) {
@@ -78,7 +81,7 @@ class IrigasiController extends Controller
         $data = $request->all();
         $data['id_kota'] = $request->kota;
         $data['tahun'] = $request->tahun;
-        $data['jenis_irigasi'] = $request->jenis_irigasi;
+        $data['id_jenis_irigasi'] = $request->id_jenis_irigasi;
         $data['luas'] = $request->luas;
     
         $irigasi = Irigasi::create($data);
@@ -121,11 +124,11 @@ class IrigasiController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $attributes = $request->only(['kota', 'tahun', 'jenis_irigasi', 'luas']);
+        $attributes = $request->only(['kota', 'tahun', 'id_jenis_irigasi', 'luas']);
         $roles = [
             'kota' => 'required|exists:regencies,id',
             'tahun' => 'required|max:' . date('Y'),
-            'jenis_irigasi' => 'required|min:1|max:12',
+            'id_jenis_irigasi' => 'required|exists:jenis__irigasis,id',
             'luas' => 'required'
         ];
         $messages = [
@@ -134,7 +137,7 @@ class IrigasiController extends Controller
 
         $check = Irigasi::where('id_kota', $request->kota)
             ->where('tahun', $request->tahun)
-            ->where('jenis_irigasi', $request->jenis_irigasi)
+            ->where('id_jenis_irigasi', $request->id_jenis_irigasi)
             ->where('id', '!=', $id)
             ->first();
         
@@ -150,7 +153,7 @@ class IrigasiController extends Controller
             $data->update([
                 'id_kota' => $request->kota,
                 'tahun' => $request->tahun,
-                'jenis_irigasi' => $request->jenis_irigasi,
+                'id_jenis_irigasi' => $request->id_jenis_irigasi,
                 'luas' => $request->luas
             ]);
             DB::commit();

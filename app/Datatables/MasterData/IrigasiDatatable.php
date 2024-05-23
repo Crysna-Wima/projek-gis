@@ -22,8 +22,8 @@ class IrigasiDatatable extends DataTable
             ->addColumn('tahun', function ($data) {
                 return $data->tahun;
             })
-            ->addColumn('jenis_irigasi', function ($data) {
-                return $data->jenis_irigasi;
+            ->addColumn('id_jenis_irigasi', function ($data) {
+                return $data->jenis_irigasi->name;
             })
             ->addColumn('luas', function ($data) {
                 return $data->luas . ' Ha';
@@ -43,7 +43,7 @@ class IrigasiDatatable extends DataTable
             
                 return $action;
             })
-            ->rawColumns(['kota', 'tahun', 'jenis_irigasi', 'luas', 'action']);
+            ->rawColumns(['kota', 'tahun', 'id_jenis_irigasi', 'luas', 'action']);
     }
     
     
@@ -100,7 +100,7 @@ class IrigasiDatatable extends DataTable
             Column::make('DT_RowIndex')->title('No')->orderable(false)->searchable(false)->exportable(false),
             Column::make('kota')->title('Kota'),
             Column::make('tahun')->title('Tahun'),
-            Column::make('jenis_irigasi')->title('Jenis Irigasi'),
+            Column::make('id_jenis_irigasi')->title('Jenis Irigasi'),
             Column::make('luas')->title('Luas'),
             Column::computed('action')->title('Action')->orderable(false)->searchable(false)->exportable(false),
         ];
