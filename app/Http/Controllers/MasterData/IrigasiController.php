@@ -27,7 +27,7 @@ class IrigasiController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Datatables the form for creating a new resource.
      */
     public function datatables(Request $request, IrigasiDatatable $irigasiDatatable)
     {
