@@ -1,11 +1,11 @@
 @extends('layouts.app')
 @section('content')
     <style>
-        #dt_irigasi>tbody>tr {
+        #dt_kemiringan>tbody>tr {
             cursor: pointer;
         }
 
-        #dt_irigasi>tbody>tr:hover {
+        #dt_kemiringan>tbody>tr:hover {
             background-color: #00000030;
         }
 
@@ -86,7 +86,7 @@
             /* float: right; */
         }
 
-        #dt_irigasi_filter {
+        #dt_kemiringan_filter {
             display: none !important;
         }
 
@@ -198,37 +198,35 @@
                     <div class="card">
                         <div class="card-header p-2 bg-info shadow">
                             <div class="row">
-                                <h4 class="font-size-15 text-white col-6 m-1"><i class="fas fa-seedling mx-3"></i>Irigasi</h4>
+                                <h4 class="font-size-15 text-white col-6 m-1"><i class="fas fa-seedling mx-3"></i>Kemiringan Wilayah</h4>
                             </div>
                         </div>
                         <div class="card-body">
-                            <h4 class="card-title mb-4 font-size-12">Daftar Irigasi</h4>
-                            @can('irigasi-C')
+                            <h4 class="card-title mb-4 font-size-12">Daftar Kemiringan Wilayah</h4>
+                            @can('kemiringan-C')
                                 <div class="row">
                                     <div class="col-sm-6"></div>
                                     <div class="col-sm-6">
-                                        <button class="btn btn-primary btn-sm mx-2 btn-tambah-irigasi float-end mb-2">
-                                            <i class="fas fa-plus mx-2"></i> Tambah Irigasi
+                                        <button class="btn btn-primary btn-sm mx-2 btn-tambah-kemiringan float-end mb-2">
+                                            <i class="fas fa-plus mx-2"></i> Tambah Kemiringan Wilayah
                                         </button>
                                     </div>
                                 </div>
                             @endcan
-                            <table id="dt_irigasi" class="table table-bordered table-striped t_per test"
+                            <table id="dt_kemiringan" class="table table-bordered table-striped t_per test"
                            style="width: 3030px">
                                 <thead>
                                     <tr>
                                         <th>No</th>
-                                        <th data-type="select" data-name="kota">Kabupaten/kota</th>
-                                        <th data-type="year" data-name="tahun">Tahun</th>
-                                        <th data-type="select" data-name="id_jenis_irigasi">Jenis Irigasi</th>
+                                        <th data-type="select" data-name="kota">Kabupaten/Kota</th>
+                                        <th data-type="select" data-name="id_kemiringa_wilayah">Kemiringan Wilayah</th>
                                         <th data-type="number" data-name="luas">Luas</th>
                                         <th class="filterhead">Action</th>
                                     </tr>
                                     <tr>
                                         <td></td>
                                         <th data-type="select" data-name="kota"></th>
-                                        <th data-type="year" data-name="tahun"></th>
-                                        <th data-type="select" data-name="id_jenis_irigasi"></th>
+                                        <th data-type="select" data-name="id_kemiringa_wilayah"></th>
                                         <th data-type="number" data-name="luas"></th>
                                         <td class="filterhead"></td>
                                     </tr>
@@ -241,23 +239,23 @@
                 </div>
 
                 <!-- Modal Tambah -->
-                <div class="modal fade" id="modal-tambah-irigasi" data-bs-backdrop="static" data-bs-keyboard="false"
+                <div class="modal fade" id="modal-tambah-kemiringan" data-bs-backdrop="static" data-bs-keyboard="false"
                     aria-labelledby="staticBackdropLabel" aria-hidden="true">
                     <div class="modal-dialog modal-lg modal-dialog-scrollable">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title" id="title-modal">Tambah Irigasi</h5>
+                                <h5 class="modal-title" id="title-modal">Tambah Kemiringan Wilayah</h5>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal"
                                     aria-label="Close"></button>
                             </div>
 
                             <div class="modal-body p-4">
                                 <div class="mb-3 row">
-                                    <label for="inputPassword" class="col-sm-4 col-form-label">Kota/Kabupaten
+                                    <label for="inputPassword" class="col-sm-4 col-form-label">Kota / Kabupaten
                                         <strong><code>*</code></strong></label>
                                     <div class="col-sm-8">
-                                        <select class="form-control input-irigasi select2_kota" name='kota' id="kota">
-                                            <option value="">Pilih Kota/Kabupaten</option>
+                                        <select class="form-control input-kemiringan select2_kota" name='kota' id="kota">
+                                            <option value="">Pilih kota / Kabupaten</option>
                                             @foreach ($kota as $item)
                                                 <option value="{{ $item->id }}">{{ $item->name }}</option>
                                             @endforeach
@@ -265,40 +263,30 @@
                                     </div>
                                 </div>
                                 <div class="mb-3 row">
-                                    <label for="inputPassword" class="col-sm-4 col-form-label">Tahun
+                                    <label for="inputPassword" class="col-sm-4 col-form-label">Kemiringan Wilayah
                                         <strong><code>*</code></strong></label>
                                     <div class="col-sm-8">
-                                        <div class="position-relative" id="datepicker5">
-                                            <input type="text" class="form-control input-irigasi" data-provide="datepicker" data-date-container='#datepicker5' data-date-autoclose="true"
-                                                data-date-format="yyyy" data-date-min-view-mode="years" id="tahun" name="tahun" value="{{ date('Y') }}" placeholder="e.g: 2024">
-                                        </div>
+                                        <select class="form-control input-kemiringan select2_id_kemiringan_wilayah" name='id_kemiringan_wilayah' id="id_kemiringan_wilayah">
+                                            <option value="">Pilih Kemiringan Wilayah</option>
+                                            @foreach ($id_kemiringan_wilayah as $item)
+                                                <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                            @endforeach
+                                        </select>
                                     </div>
-                                </div>
-                                <div class="mb-3 row">
-                                    <label for="inputPassword" class="col-sm-4 col-form-label">Jenis Irigasi
-                                        <strong><code>*</code></strong></label>
-                                        <div class="col-sm-8">
-                                            <select class="form-control input-irigasi select2_id_jenis_irigasi" name='id_jenis_irigasi' id="id_jenis_irigasi">
-                                                <option value="">Pilih Jenis Irigasi</option>
-                                                @foreach ($id_jenis_irigasi as $item)
-                                                    <option value="{{ $item->id }}">{{ $item->name }}</option>
-                                                @endforeach
-                                            </select>
-                                        </div>
                                 </div>
                                 <div class="mb-3 row">
                                     <label for="inputPassword" class="col-sm-4 col-form-label">Luas (Ha)
                                         <strong><code>*</code></strong></label>
                                     <div class="col-sm-8">
-                                        <input type="number" class="form-control input-irigasi" name='luas'
-                                            value="" id="luas" placeholder="e.g: 884" step="0.1">
+                                        <input type="number" class="form-control input-kemiringan" name='luas'
+                                            value="" id="luas" placeholder="e.g: 5.5" step="0.1">
                                     </div>
                                 </div>
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                @can('irigasi-C')
-                                    <button type="button" id="btn-simpan-irigasi" class="btn btn-primary btn-simpan-irigasi"><i
+                                @can('kemiringan-C')
+                                    <button type="button" id="btn-simpan-kemiringan" class="btn btn-primary btn-simpan-kemiringan"><i
                                             class="fas fa-save mx-2"></i>Simpan</button>
                                 @endcan
                             </div>
@@ -308,24 +296,24 @@
 
 
                 <!-- Modal Edit -->
-                <div class="modal fade" id="modal-edit-irigasi" data-bs-backdrop="static" data-bs-keyboard="false"
+                <div class="modal fade" id="modal-edit-kemiringan" data-bs-backdrop="static" data-bs-keyboard="false"
                     aria-labelledby="staticBackdropLabel" aria-hidden="true">
                     <div class="modal-dialog modal-lg modal-dialog-scrollable">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title" id="title-modal">Edit Irigasi</h5>
+                                <h5 class="modal-title" id="title-modal">Edit Kemiringan Wilayah</h5>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal"
                                     aria-label="Close"></button>
                             </div>
 
                             <div class="modal-body p-4">
-                                <input type="hidden" class="edit-irigasi" name="id_irigasi" id="id_irigasi" value="">
+                                <input type="hidden" class="edit-kemiringan" name="id_kemiringan" id="id_kemiringan" value="">
                                 <div class="mb-3 row">
-                                    <label for="inputPassword" class="col-sm-4 col-form-label">Kota/Kabupaten
+                                    <label for="inputPassword" class="col-sm-4 col-form-label">Kota / Kabupaten
                                         <strong><code>*</code></strong></label>
                                     <div class="col-sm-8">
-                                        <select class="form-control edit-irigasi select2_edit_kota" name='edit_kota' id="edit_kota">
-                                            <option value="">Pilih Kota/Kabupaten</option>
+                                        <select class="form-control edit-kemiringan select2_edit_kota" name='edit_kota' id="edit_kota">
+                                            <option value="">Pilih Kota / Kabupaten</option>
                                             @foreach ($kota as $item)
                                                 <option value="{{ $item->id }}">{{ $item->name }}</option>
                                             @endforeach
@@ -333,22 +321,12 @@
                                     </div>
                                 </div>
                                 <div class="mb-3 row">
-                                    <label for="inputPassword" class="col-sm-4 col-form-label">Tahun
+                                    <label for="inputPassword" class="col-sm-4 col-form-label">Kemiringan Wilayah
                                         <strong><code>*</code></strong></label>
                                     <div class="col-sm-8">
-                                        <div class="position-relative" id="datepicker5">
-                                            <input type="text" class="form-control edit-irigasi" data-provide="datepicker" data-date-container='#datepicker5' data-date-autoclose="true"
-                                                data-date-format="yyyy" data-date-min-view-mode="years" id="edit_tahun" name="edit_tahun" value="{{ date('Y') }}" placeholder="e.g: 2024">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="mb-3 row">
-                                    <label for="inputPassword" class="col-sm-4 col-form-label">Jenis Irigasi
-                                        <strong><code>*</code></strong></label>
-                                    <div class="col-sm-8">
-                                        <select class="form-control edit-irigasi select2_edit_id_jenis_irigasi" name='edit_id_jenis_irigasi' id="edit_id_jenis_irigasi">
-                                            <option value="">Pilih Jenis Irigasi</option>
-                                            @foreach ($id_jenis_irigasi as $item)
+                                        <select class="form-control edit-kemiringan select2_edit_id_kemiringan_wilayah" name='edit_id_kemiringan_wilayah' id="edit_id_kemiringan_wilayah">
+                                            <option value="">Pilih Kemiringan Wilayah</option>
+                                            @foreach ($id_kemiringan_wilayah as $item)
                                                 <option value="{{ $item->id }}">{{ $item->name }}</option>
                                             @endforeach
                                         </select>
@@ -358,15 +336,15 @@
                                     <label for="inputPassword" class="col-sm-4 col-form-label">Luas (Ha)
                                         <strong><code>*</code></strong></label>
                                     <div class="col-sm-8">
-                                        <input type="number" class="form-control edit-irigasi" name='edit_luas'
-                                            value="" id="edit_luas" placeholder="e.g: 884" step="0.1">
+                                        <input type="number" class="form-control edit-kemiringan" name='edit_luas'
+                                            value="" id="edit_luas" placeholder="e.g: 5.5" step="0.1">
                                     </div>
                                 </div>
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                @can('irigasi-U')
-                                    <button type="button" id="btn-edit-irigasi" class="btn btn-primary btn-edit-irigasi"><i
+                                @can('kemiringan-U')
+                                    <button type="button" id="btn-edit-kemiringan" class="btn btn-primary btn-edit-kemiringan"><i
                                             class="fas fa-save mx-2"></i>Simpan</button>
                                 @endcan
                             </div>
@@ -386,10 +364,10 @@
     <script>
         $(document).ready(function() {
 
-            @can('irigasi-R')
+            @can('kemiringan-R')
 
-            $('#dt_irigasi').DataTable().clear().destroy();
-            var table = $("#dt_irigasi").DataTable({
+            $('#dt_kemiringan').DataTable().clear().destroy();
+            var table = $("#dt_kemiringan").DataTable({
                 scrollX: true,
                 orderCellsTop: false,
                 pageLength: 10,
@@ -486,11 +464,9 @@
                                 @foreach ($kota as $item)
                                     options += "<option value='{{ $item->id }}'>{{ $item->name }}</option>";
                                 @endforeach
-                            }
-
-                            else if (iName == "id_jenis_irigasi") {
+                            } else if (iName == "id_kemiringan_wilayah") {
                                 options += "<option value=''>Semua</option>";
-                                @foreach ($id_jenis_irigasi as $item)
+                                @foreach ($id_kemiringan_wilayah as $item)
                                     options += "<option value='{{ $item->id }}'>{{ $item->name }}</option>";
                                 @endforeach
                             }
@@ -531,7 +507,7 @@
                     });
                 },
                 ajax: {
-                    url: '/master-data/irigasi/list',
+                    url: '/master-data/kemiringan/list',
                     complete: function() {
                             $('.dtfh-floatingparenthead').on('scroll', function() {
                                 //    console.log('ssss');
@@ -557,14 +533,8 @@
                     },
                     {
                         width: '200px',
-                        data: 'tahun',
-                        name: 'tahun',
-                        className: 'text-center'
-                    },
-                    {
-                        width: '100px',
-                        data: 'id_jenis_irigasi',
-                        name: 'id_jenis_irigasi',
+                        data: 'id_kemiringan',
+                        name: 'id_kemiringan',
                         className: 'text-center'
                     },
                     {
@@ -573,7 +543,7 @@
                         name: 'luas',
                         className: 'text-center',
                         template: function (row) {  
-                            return row.luas + ' Ha';
+                            return row.$luas + ' Ha';
                         },
                     },
                     {
@@ -584,10 +554,10 @@
                         searchable: false,
                         template: function (row) {  
                                 return "<center>"+
-                                    @can('irigasi-U')
+                                    @can('kemiringan-U')
                                         "<button type='button' class='btn btn-outline-warning btn-sm tooltips btn-edit' title='Edit' data-bs-toggle='tooltip' data-bs-placement='top' data-id="+row.id+"><i class='fas fa-pen'></i></button>  "+
                                     @endcan
-                                    @can('irigasi-D')
+                                    @can('kemiringan-D')
                                         "<button type='button' class='btn btn-outline-danger btn-sm tooltips btn-delete' title='Delete' data-bs-toggle='tooltip' data-bs-placement='top' data-id="+row.id+"><i class='fas fa-trash-alt'></i></button> "+
                                     @endcan
                                     "</center>";
@@ -600,33 +570,32 @@
             @endcan
 
 
-            @can('irigasi-C')
+            @can('kemiringan-C')
 
             $('.select2_kota').select2({
                 width: '100%',
                 placeholder: "Pilih kota / Kabupaten",
                 allowClear: true,
-                dropdownParent: $('#modal-tambah-irigasi')
+                dropdownParent: $('#modal-tambah-kemiringan')
             });
-            $('.select2_id_jenis_irigasi').select2({
+            $('.select2_id_kemiringan_wilayah').select2({
                 width: '100%',
-                placeholder: "Pilih Jenis Irigasi",
+                placeholder: "Pilih Jenis Tanah",
                 allowClear: true,
-                dropdownParent: $('#modal-tambah-irigasi')
+                dropdownParent: $('#modal-tambah-kemiringan')
             });
             
-            $(document).on("click", ".btn-tambah-irigasi", function() {
-                $("#modal-tambah-irigasi").modal("show");
+            $(document).on("click", ".btn-tambah-kemiringan", function() {
+                $("#modal-tambah-kemiringan").modal("show");
                 $('#kota').val('').trigger('change');
-                $('#tahun').val('');
-                $('#id_jenis_irigasi').val('').trigger('change');
+                $('#id_kemiringan_wilayah').val('').trigger('change');
                 $('#luas').val('');
             });
 
-            $(document).on("click", "#btn-simpan-irigasi", function() {
+            $(document).on("click", "#btn-simpan-kemiringan", function() {
                 var isValid = true;
 
-                $('.input-irigasi').each(function() {
+                $('.input-kemiringan').each(function() {
                     $(this).removeClass('is-invalid');
                     $(this).parent().find('.invalid-feedback').remove();
                     if ($(this).attr('type') == 'text') {
@@ -668,24 +637,22 @@
 
 
                 var kota = $('#kota').val();
-                var tahun = $('#tahun').val();
-                var id_jenis_irigasi = $('#id_jenis_irigasi').val();
+                var id_kemiringan_wilayah = $('#id_kemiringan_wilayah').val();
                 var luas = $('#luas').val();
 
                 $.ajax({
-                    url: '/master-data/irigasi',
+                    url: '/master-data/kemiringan',
                     type: 'POST',
                     headers: {
                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
                     },
                     data: {
                         kota: kota,
-                        tahun: tahun,
-                        id_jenis_irigasi: id_jenis_irigasi,
+                        id_kemiringan_wilayah: id_kemiringan_wilayah,
                         luas: luas,
                     },
                     beforeSend: function() {
-                        $('.btn-simpan-irigasi').attr('disabled', 'disabled');
+                        $('.btn-simpan-kemiringan').attr('disabled', 'disabled');
                         Swal.fire({
                             title: 'Mohon Tunggu',
                             text: 'Sedang Menyimpan...',
@@ -698,7 +665,7 @@
                     },
                     success: function(data) {
                         Swal.close();
-                        $('.btn-simpan-irigasi').removeAttr('disabled', 'disabled');
+                        $('.btn-simpan-kemiringan').removeAttr('disabled', 'disabled');
                         if (data.status == 'success') {
                             Swal.fire({
                                 icon: 'success',
@@ -707,7 +674,7 @@
                                 showConfirmButton: false,
                                 timer: 1500
                             });
-                            $("#modal-tambah-irigasi").modal("hide");
+                            $("#modal-tambah-kemiringan").modal("hide");
                             table.ajax.reload();
                         } else {
                             Swal.fire({
@@ -721,7 +688,7 @@
                     },
                     error: function(data) {
                         Swal.close();
-                        $('.btn-simpan-irigasi').removeAttr('disabled', 'disabled');
+                        $('.btn-simpan-kemiringan').removeAttr('disabled', 'disabled');
                         Swal.fire({
                             icon: 'error',
                             title: 'Gagal',
@@ -734,14 +701,13 @@
             });
 
             // on modal close
-            $('#modal-tambah-irigasi').on('hidden.bs.modal', function(e) {
+            $('#modal-tambah-kemiringan').on('hidden.bs.modal', function(e) {
                 $('#kota').val('').trigger('change');
-                $('#tahun').val('');
-                $('#id_jenis_irigasi').val('').trigger('change');
+                $('#id_kemiringan_wilayah').val('').trigger('change');
                 $('#luas').val('');
 
                 // remove invalid class
-                $('.input-irigasi').each(function() {
+                $('.input-kemiringan').each(function() {
                     $(this).removeClass('is-invalid');
                     $(this).parent().find('.invalid-feedback').remove();
                 });
@@ -749,25 +715,25 @@
 
             @endcan
 
-            @can('irigasi-U')
+            @can('kemiringan-U')
 
             $('.select2_edit_kota').select2({
                 width: '100%',
                 placeholder: "Pilih Kota / Kabupaten",
                 allowClear: true,
-                dropdownParent: $('#modal-edit-irigasi')
+                dropdownParent: $('#modal-edit-kemiringan')
             });
-            $('.select2_edit_id_jenis_irigasi').select2({
+            $('.select2_edit_id_kemiringan_wilayah').select2({
                 width: '100%',
-                placeholder: "Pilih Jenis Irigasi",
+                placeholder: "Pilih Jenis Tanah",
                 allowClear: true,
-                dropdownParent: $('#modal-edit-irigasi')
+                dropdownParent: $('#modal-edit-kemiringan')
             });
 
             $(document).on("click", ".btn-edit", function() {
                 var id = $(this).data('id');
                 $.ajax({
-                    url: '/master-data/irigasi/' + id,
+                    url: '/master-data/kemiringan/' + id,
                     type: 'GET',
                     beforeSend: function() {
                         Swal.fire({
@@ -783,12 +749,11 @@
                     success: function(data) {
                         Swal.close();
                         if (data.status == 'success') {
-                            $("#modal-edit-irigasi").modal("show");
+                            $("#modal-edit-kemiringan").modal("show");
                             console.log(data.data.id);
-                            $('#id_irigasi').val(data.data.id);
+                            $('#id_kemiringan').val(data.data.id);
                             $('#edit_kota').val(data.data.id_kota).trigger('change');
-                            $('#edit_tahun').val(data.data.tahun);
-                            $('#edit_id_jenis_irigasi').val(data.data.id_jenis_irigasi).trigger('change');
+                            $('#edit_id_kemiringan').val(data.data.id_kemiringan).trigger('change');
                             $('#edit_luas').val(data.data.luas);
                         } else {
                             Swal.fire({
@@ -813,23 +778,22 @@
                 });
             });
 
-            $('#modal-edit-irigasi').on('hidden.bs.modal', function(e) {
-                $('#id_irigasi').val('');
+            $('#modal-edit-kemiringan').on('hidden.bs.modal', function(e) {
+                $('#id_kemiringan').val('');
                 $('#edit_kota').val('').trigger('change');
-                $('#edit_tahun').val('');
-                $('#edit_id_jenis_irigasi').val('').trigger('change');
+                $('#edit_id_kemiringan_wilayah').val('').trigger('change')
                 $('#edit_luas').val('');
                 // remove invalid class
-                $('.edit-irigasi').each(function() {
+                $('.edit-kemiringan').each(function() {
                     $(this).removeClass('is-invalid');
                     $(this).parent().find('.invalid-feedback').remove();
                 });
             });
 
-            $(document).on("click", "#btn-edit-irigasi", function() {
+            $(document).on("click", "#btn-edit-kemiringan", function() {
                 var isValid = true;
 
-                $('.edit-irigasi').each(function() {
+                $('.edit-kemiringan').each(function() {
                     $(this).removeClass('is-invalid');
                     $(this).parent().find('.invalid-feedback').remove();
                     if ($(this).attr('type') == 'text') {
@@ -870,26 +834,24 @@
                 }
 
 
-                var id = $('#id_irigasi').val();
+                var id = $('#id_kemiringan').val();
                 var kota = $('#edit_kota').val();
-                var tahun = $('#edit_tahun').val();
-                var id_jenis_irigasi = $('#edit_id_jenis_irigasi').val();
+                var id_kemiringan_wilayah = $('#edit_id_kemiringan_wilayah').val();
                 var luas = $('#edit_luas').val();
 
                 $.ajax({
-                    url: '/master-data/irigasi/' + id,
+                    url: '/master-data/kemiringan/' + id,
                     type: 'POST',
                     headers: {
                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
                     },
                     data: {
                         kota: kota,
-                        tahun: tahun,
-                        id_jenis_irigasi: id_jenis_irigasi,
+                        id_kemiringan_wilayah: id_kemiringan_wilayah,
                         luas: luas,
                     },
                     beforeSend: function() {
-                        $('.btn-edit-irigasi').attr('disabled', 'disabled');
+                        $('.btn-edit-kemiringan').attr('disabled', 'disabled');
                         Swal.fire({
                             title: 'Mohon Tunggu',
                             text: 'Sedang Menyimpan...',
@@ -902,7 +864,7 @@
                     },
                     success: function(data) {
                         Swal.close();
-                        $('.btn-edit-irigasi').removeAttr('disabled', 'disabled');
+                        $('.btn-edit-kemiringan').removeAttr('disabled', 'disabled');
                         if (data.status == 'success') {
                             Swal.fire({
                                 icon: 'success',
@@ -911,7 +873,7 @@
                                 showConfirmButton: false,
                                 timer: 1500
                             });
-                            $("#modal-edit-irigasi").modal("hide");
+                            $("#modal-edit-kemiringan").modal("hide");
                             table.ajax.reload();
                         } else {
                             Swal.fire({
@@ -925,7 +887,7 @@
                     },
                     error: function(data) {
                         Swal.close();
-                        $('.btn-edit-irigasi').removeAttr('disabled', 'disabled');
+                        $('.btn-edit-kemiringan').removeAttr('disabled', 'disabled');
                         Swal.fire({
                             icon: 'error',
                             title: 'Gagal',
@@ -938,7 +900,7 @@
             });
             @endcan
 
-            @can('irigasi-D')
+            @can('kemiringan-D')
 
             $(document).on("click", ".btn-delete", function() {
                 var id = $(this).data('id');
@@ -954,7 +916,7 @@
                 }).then((result) => {
                     if (result.isConfirmed) {
                         $.ajax({
-                            url: '/master-data/irigasi/destroy/' + id,
+                            url: '/master-data/kemiringan/destroy/' + id,
                             type: 'DELETE',
                             headers: {
                                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr(

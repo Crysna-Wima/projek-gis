@@ -13,7 +13,19 @@ class JenisTanah extends Model
     protected $primaryKey = 'id';
     protected $fillable = [
         'id_kota',
-        'jenis_tanah',
+        'id_jenis_tanah',
         'luas'
     ];
+
+    public $timestamps = false;
+
+    public function kota()
+    {
+        return $this->belongsTo(Regency::class, 'id_kota', 'id');
+    }
+
+    public function jenistanah()
+    {
+        return $this->belongsTo(Jenis_Tanah::class, 'id_jenis_tanah', 'id');
+    }
 }
