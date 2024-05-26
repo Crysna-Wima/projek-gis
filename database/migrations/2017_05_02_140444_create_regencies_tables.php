@@ -24,6 +24,8 @@ class CreateRegenciesTables extends Migration
             $table->char('id', 4)->index();
             $table->char('province_id', 2);
             $table->string('name', 50);
+            $table->string('latitude')->nullable();
+            $table->string('longitude')->nullable();
             $table->foreign('province_id')
                 ->references('id')
                 ->on('provinces')

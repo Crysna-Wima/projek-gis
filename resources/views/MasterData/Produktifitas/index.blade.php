@@ -184,6 +184,22 @@
             background-color: #009E3C;
         }
 
+        .bg-green {
+            background-color: green;
+        }
+
+        .bg-yellow {
+            background-color: yellow;
+        }
+
+        .bg-orange {
+            background-color: orange;
+        }
+
+        .bg-red {
+            background-color: red;
+        }
+
     </style>
 
     <div class="main-content">
@@ -191,9 +207,6 @@
             <div class="container-fluid">
                 <!-- start page title -->
 
-                {{-- <div class="page-title-box d-sm-flex align-items-center justify-content-flex-end">
-                    <h5 class="mb-sm-0 pull-right">p</h5>
-                </div> --}}
                 <div class="col-xl-12">
                     <div class="card">
                         <div class="card-header p-2 bg-info shadow">
@@ -201,44 +214,147 @@
                                 <h4 class="font-size-15 text-white col-6 m-1"><i class="fas fa-seedling mx-3"></i>Produktifitas Padi</h4>
                             </div>
                         </div>
+
                         <div class="card-body">
-                            <h4 class="card-title mb-4 font-size-12">Daftar Produktifitas Padi</h4>
-                            @can('produktifitas-C')
-                                <div class="row">
-                                    <div class="col-sm-6"></div>
-                                    <div class="col-sm-6">
-                                        <button class="btn btn-primary btn-sm mx-2 btn-tambah-produktifitas float-end mb-2">
-                                            <i class="fas fa-plus mx-2"></i> Tambah Produktifitas
-                                        </button>
+                            <ul class="nav nav-tabs" role="tablist" id="tab_produktifitas">
+                                <li class="nav-item waves-effect waves-light" id="daftar_produktifitas">
+                                    <a class="nav-link tab_prod active" data-bs-toggle="tab" href="#tab_daftar_produktifitas" role="tab" data-state="1">
+                                        <span class="d-block d-sm-none"><i class="fas fa-home"></i> <span class="badge bg-danger rounded-pill"></span></span>
+                                        <span class="d-none d-sm-block">Daftar Produktivitas Padi</span>
+                                    </a>
+                                </li>
+                                <li class="nav-item waves-effect waves-light" id="mapping_produktifitas">
+                                    <a class="nav-link tab_prod" data-bs-toggle="tab" href="#tab_mapping_produktifitas" role="tab" data-state="2">
+                                        <span class="d-block d-sm-none"><i class="far fa-user"></i> <span class="badge bg-danger rounded-pill"></span></span>
+                                        <span class="d-none d-sm-block">Mapping</span>
+                                    </a>
+                                </li>
+                            </ul>
+
+                            {{-- tab panel  --}}
+                            <div class="tab-content p-3 text-muted">
+                                {{-- tab_daftar_produktifitas --}}
+                                <div class="tab-pane fade show active" id="tab_daftar_produktifitas" role="tabpanel">
+                                    <h4 class="card-title mb-4 font-size-12">Daftar Produktifitas Padi</h4>
+                                    @can('produktifitas-C')
+                                        <div class="row">
+                                            <div class="col-sm-6"></div>
+                                            <div class="col-sm-6">
+                                                <button class="btn btn-primary btn-sm mx-2 btn-tambah-produktifitas float-end mb-2">
+                                                    <i class="fas fa-plus mx-2"></i> Tambah Produktifitas
+                                                </button>
+                                            </div>
+                                        </div>
+                                    @endcan
+
+                                    <table id="dt_produktifitas" class="table table-bordered table-striped t_prod test" style="width: 3030px">
+                                        <thead>
+                                            <tr>
+                                                <th>No</th>
+                                                <th data-type="select" data-name="kota">Kabupaten/Kota</th>
+                                                <th data-type="year" data-name="tahun">Tahun</th>
+                                                <th data-type="number" data-name="masaPanen">Masa Panen</th>
+                                                <th data-type="number" data-name="produktifitas">Produktifitas Padi</th>
+                                                <th class="filterhead">Action</th>
+                                            </tr>
+                                            <tr>
+                                                <td></td>
+                                                <th data-type="select" data-name="kota"></th>
+                                                <th data-type="year" data-name="tahun"></th>
+                                                <th data-type="number" data-name="masaPanen"></th>
+                                                <th data-type="number" data-name="produktifitas"></th>
+                                                <td class="filterhead"></td>
+                                            </tr>
+                                        </thead>
+                                    </table>
+                                </div>
+
+                                
+                                {{-- tab_mapping --}}
+                                <div class="tab-pane fade" id="tab_mapping_produktifitas" role="tabpanel">
+                                    <div class="row">
+                                        <div class="col-xl-12">
+                                            <div class="card-xl">
+                                                <div class="card-body">
+                                                    <h4 class="card-title mb-4">Mapping Produktifitas Padi</h4>
+                                                    {{-- button reload --}}
+                                                    <div class="row mb-4">
+                                                        <div class="col-sm-3 row">
+                                                            <div class="col-sm-4">
+                                                                <label for="inputPassword" class="col-form-label">Tahun</label>
+                                                            </div>
+                                                            <div class="col-sm-6">
+                                                                <div class="position-relative" id="datepicker5">
+                                                                    <input type="text" class="form-control" data-provide="datepicker" data-date-container='#datepicker5' data-date-autoclose="true"
+                                                                        data-date-format="yyyy" data-date-min-view-mode="years" id="tahun_map" name="tahun_map" value="{{ $tahun_now }}" placeholder="e.g: 2024">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-3 row">
+                                                            <div class="col-sm-4">
+                                                                <label for="inputPassword" class="col-form-label">Masa Panen</label>
+                                                            </div>
+                                                            <div class="col-sm-6">
+                                                                <input type="number" class="form-control" name='masaPanen_map' value="{{ $masa_panen_now }}"
+                                                                    id="masaPanen_map" placeholder="e.g: 1">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-4">
+                                                            <button type="button" class="btn btn-primary btn-sm" id="search_map"><i class="fas fa-search mx-2"></i>Search</button>
+                                                        </div>
+                                                        <div class="col-sm-12">
+                                                            <button type="button" class="btn btn-warning btn-sm float-end" id="btn_reload_map">
+                                                                <i class="bx bx-revision mx-2"></i>
+                                                                Reload
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                    {{-- legend warna untuk map --}}
+                                                    <div class="row mb-4">
+                                                        <div class="col-sm-12">
+                                                            <div class="row">
+                                                                <div class="col-sm-3">
+                                                                    <div class="d-flex align-items-center">
+                                                                        <div class="bg-green" style="width: 20px; height: 20px;"></div>
+                                                                        <span class="mx-2">Produktifitas < 100</span>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-sm-3">
+                                                                    <div class="d-flex align-items-center">
+                                                                        <div class="bg-yellow" style="width: 20px; height: 20px;"></div>
+                                                                        <span class="mx-2">Produktifitas 100 - 500</span>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-sm-3">
+                                                                    <div class="d-flex align-items-center">
+                                                                        <div class="bg-orange" style="width: 20px; height: 20px;"></div>
+                                                                        <span class="mx-2">Produktifitas 500 - 1000</span>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-sm-3">
+                                                                    <div class="d-flex align-items-center">
+                                                                        <div class="bg-red" style="width: 20px; height: 20px;"></div>
+                                                                        <span class="mx-2">Produktifitas > 1000</span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div style="overflow-x: auto">
+                                                        <div id="map" style="height: 500px"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!--end card-->
+                                        </div>
                                     </div>
                                 </div>
-                            @endcan
-                            <table id="dt_produktifitas" class="table table-bordered table-striped t_per test"
-                           style="width: 3030px">
-                                <thead>
-                                    <tr>
-                                        <th>No</th>
-                                        <th data-type="select" data-name="kota">Kabupaten/Kota</th>
-                                        <th data-type="year" data-name="tahun">Tahun</th>
-                                        <th data-type="number" data-name="masaPanen">Masa Panen</th>
-                                        <th data-type="number" data-name="produktifitas">Produktifitas Padi</th>
-                                        <th class="filterhead">Action</th>
-                                    </tr>
-                                    <tr>
-                                        <td></td>
-                                        <th data-type="select" data-name="kota"></th>
-                                        <th data-type="year" data-name="tahun"></th>
-                                        <th data-type="number" data-name="masaPanen"></th>
-                                        <th data-type="number" data-name="produktifitas"></th>
-                                        <td class="filterhead"></td>
-                                    </tr>
-                                </thead>
-                            </table>
+                            </div>
                         </div>
-                        <!-- end card body -->
                     </div>
                     <!-- end card -->
                 </div>
+                
 
                 <!-- Modal Tambah -->
                 <div class="modal fade" id="modal-tambah-produktifitas" data-bs-backdrop="static" data-bs-keyboard="false"
@@ -378,7 +494,271 @@
     <script>
         $(document).ready(function() {
 
+            // change state tab
+            $(document).on("click", ".tab_prod", function() {
+                var curr_state = $(this).data('state');
+                if (curr_state == 1){
+                    $(document).ready(function() {
+                        if ($('#dt_produktifitas').length) {
+                            $('#dt_produktifitas').DataTable().columns.adjust().draw();
+                            table.ajax.reload();
+                        } else {
+                            location.reload();
+                        }
+                    })
+                } else if (curr_state == 2){
+                    var tahun = $('#tahun_map').val();
+                    var masaPanen = $('#masaPanen_map').val();
+
+                    $.ajax({
+                        url: '/master-data/map-produktifitas',
+                        type: 'POST',
+                        data: {
+                            tahun: tahun,
+                            masaPanen: masaPanen
+                        },
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+                        },
+                        beforeSend: function() {
+                            Swal.fire({
+                                title: 'Mohon Tunggu',
+                                text: 'Sedang Mengambil Data...',
+                                showConfirmButton: false,
+                                allowOutsideClick: false,
+                                willOpen: () => {
+                                    Swal.showLoading()
+                                },
+                            });
+                        },
+                        success: function(data) {
+                            Swal.close();
+                            if (data.status == 'success') {
+                                map.eachLayer(function(layer) {
+                                    if (layer instanceof L.Circle) {
+                                        map.removeLayer(layer);
+                                    }
+                                });
+
+                                data.data.forEach(function(kota) {
+                                    var totalProduktifitas = kota.produktifitas;
+                                    var color = 'green';
+
+                                    if (totalProduktifitas > 1000) color = 'red';
+                                    else if (totalProduktifitas > 500) color = 'orange';
+                                    else if (totalProduktifitas > 100) color = 'yellow';
+
+                                    L.circle([kota.kota.latitude, kota.kota.longitude], {
+                                        color: color,
+                                        fillColor: color,
+                                        fillOpacity: 0.5,
+                                        radius: 5000
+                                    }).addTo(map)
+                                    .bindPopup(`<b>${kota.kota.name}</b><br>Total Produktifitas: ${totalProduktifitas}`);
+                                });
+                            } else {
+                                Swal.fire({
+                                    icon: 'error',
+                                    title: 'Gagal',
+                                    text: data.message,
+                                    showConfirmButton: false,
+                                    timer: 1500
+                                });
+                            }
+                        },
+                        error: function(data) {
+                            Swal.close();
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Gagal',
+                                text: data.message,
+                                showConfirmButton: false,
+                                timer: 1500
+                            });
+                        }
+                    });
+                }
+            });
+
             @can('produktifitas-R')
+
+            // Set up the map
+            var map = L.map('map', {
+                center: [-7.250445, 112.768845], // Koordinat Jawa Timur
+                zoom: 8, // Set the initial zoom level
+            });
+
+            // Add the tile layer
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '© OpenStreetMap contributors'
+            }).addTo(map);
+
+            var mapData = @json($produktifitas);
+            console.log(mapData);
+
+            mapData.forEach(function(kota) {
+                var totalProduktifitas = kota.produktifitas;
+                var color = 'green';
+
+                if (totalProduktifitas > 1000) color = 'red';
+                else if (totalProduktifitas > 500) color = 'orange';
+                else if (totalProduktifitas > 100) color = 'yellow';
+
+                L.circle([kota.kota.latitude, kota.kota.longitude], {
+                    color: color,
+                    fillColor: color,
+                    fillOpacity: 0.5,
+                    radius: 5000
+                }).addTo(map)
+                .bindPopup(`<b>${kota.kota.name}</b><br>Total Produktifitas: ${totalProduktifitas}`);
+            });
+
+            $(document).on("click", "#search_map", function() {
+                var tahun = $('#tahun_map').val();
+                var masaPanen = $('#masaPanen_map').val();
+
+                $.ajax({
+                    url: '/master-data/map-produktifitas',
+                    type: 'POST',
+                    data: {
+                        tahun: tahun,
+                        masaPanen: masaPanen
+                    },
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+                    },
+                    beforeSend: function() {
+                        Swal.fire({
+                            title: 'Mohon Tunggu',
+                            text: 'Sedang Mengambil Data...',
+                            showConfirmButton: false,
+                            allowOutsideClick: false,
+                            willOpen: () => {
+                                Swal.showLoading()
+                            },
+                        });
+                    },
+                    success: function(data) {
+                        Swal.close();
+                        if (data.status == 'success') {
+                            map.eachLayer(function(layer) {
+                                if (layer instanceof L.Circle) {
+                                    map.removeLayer(layer);
+                                }
+                            });
+
+                            data.data.forEach(function(kota) {
+                                var totalProduktifitas = kota.produktifitas;
+                                var color = 'green';
+
+                                if (totalProduktifitas > 1000) color = 'red';
+                                else if (totalProduktifitas > 500) color = 'orange';
+                                else if (totalProduktifitas > 100) color = 'yellow';
+
+                                L.circle([kota.kota.latitude, kota.kota.longitude], {
+                                    color: color,
+                                    fillColor: color,
+                                    fillOpacity: 0.5,
+                                    radius: 5000
+                                }).addTo(map)
+                                .bindPopup(`<b>${kota.kota.name}</b><br>Total Produktifitas: ${totalProduktifitas}`);
+                            });
+                        } else {
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Gagal',
+                                text: data.message,
+                                showConfirmButton: false,
+                                timer: 1500
+                            });
+                        }
+                    },
+                    error: function(data) {
+                        Swal.close();
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Gagal',
+                            text: data.message,
+                            showConfirmButton: false,
+                            timer: 1500
+                        });
+                    }
+                });
+            });
+
+            $(document).on("click", "#btn_reload_map", function() {
+                var tahun = $('#tahun_map').val();
+                var masaPanen = $('#masaPanen_map').val();
+
+                $.ajax({
+                    url: '/master-data/map-produktifitas',
+                    type: 'POST',
+                    data: {
+                        tahun: tahun,
+                        masaPanen: masaPanen
+                    },
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+                    },
+                    beforeSend: function() {
+                        Swal.fire({
+                            title: 'Mohon Tunggu',
+                            text: 'Sedang Mengambil Data...',
+                            showConfirmButton: false,
+                            allowOutsideClick: false,
+                            willOpen: () => {
+                                Swal.showLoading()
+                            },
+                        });
+                    },
+                    success: function(data) {
+                        Swal.close();
+                        if (data.status == 'success') {
+                            map.eachLayer(function(layer) {
+                                if (layer instanceof L.Circle) {
+                                    map.removeLayer(layer);
+                                }
+                            });
+
+                            data.data.forEach(function(kota) {
+                                var totalProduktifitas = kota.produktifitas;
+                                var color = 'green';
+
+                                if (totalProduktifitas > 1000) color = 'red';
+                                else if (totalProduktifitas > 500) color = 'orange';
+                                else if (totalProduktifitas > 100) color = 'yellow';
+
+                                L.circle([kota.kota.latitude, kota.kota.longitude], {
+                                    color: color,
+                                    fillColor: color,
+                                    fillOpacity: 0.5,
+                                    radius: 5000
+                                }).addTo(map)
+                                .bindPopup(`<b>${kota.kota.name}</b><br>Total Produktifitas: ${totalProduktifitas}`);
+                            });
+                        } else {
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Gagal',
+                                text: data.message,
+                                showConfirmButton: false,
+                                timer: 1500
+                            });
+                        }
+                    },
+                    error: function(data) {
+                        Swal.close();
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Gagal',
+                            text: data.message,
+                            showConfirmButton: false,
+                            timer: 1500
+                        });
+                    }
+                });
+            });
+
 
             $('#dt_produktifitas').DataTable().clear().destroy();
             var table = $("#dt_produktifitas").DataTable({

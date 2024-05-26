@@ -124,6 +124,7 @@ class new_seeder extends Seeder
             ['permission' => 'produktifitas-D', 'middleware' => 'lang,authz', 'type' => 'data', 'method' => 'DELETE', 'url' => '/master-data/produktifitas/destroy/{id}', 'route' => 'MasterData\ProduktifitasController@destroy', 'guard' => 'web'],
             ['permission' => 'produktifitas-C', 'middleware' => 'lang,authz', 'type' => 'data', 'method' => 'POST', 'url' => '/master-data/produktifitas', 'route' => 'MasterData\ProduktifitasController@store', 'guard' => 'web'],
             ['permission' => 'produktifitas-U', 'middleware' => 'lang,authz', 'type' => 'data', 'method' => 'POST', 'url' => '/master-data/produktifitas/{id}', 'route' => 'MasterData\ProduktifitasController@update', 'guard' => 'web'],
+            ['middleware' => 'lang', 'type' => 'data', 'method' => 'POST', 'url' => '/master-data/map-produktifitas', 'route' => 'MasterData\ProduktifitasController@searchMap', 'guard' => 'web'],
 
             // route irigasi
             ['permission' => 'irigasi-R', 'middleware' => 'lang,authz', 'type' => 'view', 'method' => 'GET', 'url' => '/master-data/irigasi', 'route' => 'MasterData\IrigasiController@index', 'guard' => 'web'],

@@ -12,9 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('jenis__tanahs', function (Blueprint $table) {
-            $table->char('id', 4)->index();
+            $table->id();
             $table->string('name', 50);
-            $table->primary('id');
         });
     }
 

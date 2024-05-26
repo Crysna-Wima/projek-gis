@@ -24,10 +24,28 @@ class IndoRegionRegencySeeder extends Seeder
      */
     public function run()
     {
-        // Get Data
-        $regencies = RawDataGetter::getRegencies();
+        // Path to your CSV file
+        $csvFile = database_path('seeders/csv/kota.csv');
 
-        // Insert Data to Database
+        // Read the CSV file
+        $csvData = array_map('str_getcsv', file($csvFile));
+
+        // Remove the header (if exists)
+        $header = array_shift($csvData);
+
+        // Prepare the data for insertion
+        $regencies = [];
+        foreach ($csvData as $row) {
+            $regencies[] = [
+                'id' => $row[0],
+                'province_id' => $row[1],
+                'name' => $row[2],
+                'latitude' => $row[3],
+                'longitude' => $row[4]
+            ];
+        }
+
+        // Insert data into the database
         DB::table('regencies')->insert($regencies);
     }
 }

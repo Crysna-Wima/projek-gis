@@ -17,6 +17,20 @@ class ProduktifitasController extends Controller
         $data['menus'] = $this->getDashboardMenu();
         $data['menu']  = Menu::select('id', 'name')->get();
         $data['kota'] = Regency::where('province_id', '35')->get();
+        $tahun_now = date('Y');
+        $masa_panen = 1;
+        if (date('m') >= 1 && date('m') <= 3) {
+            $masa_panen = 1;
+        } elseif (date('m') >= 4 && date('m') <= 6) {
+            $masa_panen = 2;
+        } elseif (date('m') >= 7 && date('m') <= 9) {
+            $masa_panen = 3;
+        } elseif (date('m') >= 10 && date('m') <= 12) {
+            $masa_panen = 4;
+        }
+        $data['produktifitas'] = Produktifitas::with('kota')->where('tahun', $tahun_now)->where('masa_panen', $masa_panen)->get();
+        $data['tahun_now'] = $tahun_now;
+        $data['masa_panen_now'] = $masa_panen;
 
         return view('masterdata.produktifitas.index', $data);
     }
@@ -155,4 +169,26 @@ class ProduktifitasController extends Controller
             return response()->json($messages, 500, [], JSON_PRETTY_PRINT);
         }
     }
+
+    public function searchMap(Request $request)
+    {
+        $tahun = $request->input('tahun', date('Y'));
+        $masaPanen = $request->input('masaPanen', 1);
+        
+        if ($masaPanen == null || $masaPanen == '' || $masaPanen == 0 || $masaPanen == 'undefined') {
+            $masaPanen = 1; // Default to 1 if invalid
+        }
+    
+        if ($tahun == null || $tahun == '' || $tahun == 0 || $tahun == 'undefined') {
+            $tahun = date('Y'); // Default to current year if invalid
+        }
+    
+        $produktifitas = Produktifitas::with('kota')
+            ->where('tahun', $tahun)
+            ->where('masa_panen', $masaPanen)
+            ->get();
+    
+        return response()->json(['status' => 'success', 'data' => $produktifitas]);
+    }
+    
 }
