@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('t_kemiringan', function (Blueprint $table) {
             $table->id();
             $table->char('id_kota', 4);
-            $table->string('id_kemiringan_wilayah');
+            $table->unsignedInteger('id_kemiringan_wilayah');
             $table->double('luas');
 
             $table->foreign('id_kota')->references('id')->on('regencies');

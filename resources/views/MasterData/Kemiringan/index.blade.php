@@ -533,8 +533,8 @@
                     },
                     {
                         width: '200px',
-                        data: 'id_kemiringan',
-                        name: 'id_kemiringan',
+                        data: 'id_kemiringan_wilayah',
+                        name: 'id_kemiringan_wilayah',
                         className: 'text-center'
                     },
                     {
@@ -753,7 +753,7 @@
                             console.log(data.data.id);
                             $('#id_kemiringan').val(data.data.id);
                             $('#edit_kota').val(data.data.id_kota).trigger('change');
-                            $('#edit_id_kemiringan').val(data.data.id_kemiringan).trigger('change');
+                            $('#edit_id_kemiringan_wilayah').val(data.data.id_kemiringan_wilayah).trigger('change');
                             $('#edit_luas').val(data.data.luas);
                         } else {
                             Swal.fire({

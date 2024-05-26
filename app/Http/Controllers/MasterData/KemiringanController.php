@@ -36,8 +36,7 @@ class KemiringanController extends Controller
         $s_luas = $request->input('columns.3.search.value');
     
         $query = Kemiringan::query()
-            ->with('kota')
-            ->with('kemiringan_wilayah')
+            ->with(['kota', 'kemiringanWilayah'])
             ->select('id','id_kota','id_kemiringan_wilayah','luas')
             ->when($s_id_kemiringan_wilayah, function ($query, $s_id_kemiringan_wilayah) {
                 return $query->where('id_kemiringan_wilayah', $s_id_kemiringan_wilayah);
@@ -120,7 +119,6 @@ class KemiringanController extends Controller
         $attributes = $request->only(['kota', 'id_kemiringan_wilayah', 'luas']);
         $roles = [
             'kota' => 'required|exists:regencies,id',
-            'tahun' => 'required|max:' . date('Y'),
             'id_kemiringan_wilayah' => 'required|exists:kemiringan__wilayahs,id',
             'luas' => 'required'
         ];

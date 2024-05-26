@@ -20,7 +20,7 @@ class KemiringanDatatable extends DataTable
                 return $data->kota->name;
             })
             ->addColumn('id_kemiringan_wilayah', function ($data) {
-                return $data->kemiringan_wilayah->name;
+                return $data->kemiringanWilayah->name;
             })
             ->addColumn('luas', function ($data) {
                 return $data->luas . ' Ha';

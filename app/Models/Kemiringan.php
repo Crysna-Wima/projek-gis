@@ -24,7 +24,7 @@ class Kemiringan extends Model
         return $this->belongsTo(Regency::class, 'id_kota', 'id');
     }
 
-    public function kemiringan_wilayah()
+    public function kemiringanWilayah()
     {
         return $this->belongsTo(Kemiringan_Wilayah::class, 'id_kemiringan_wilayah', 'id');
     }
