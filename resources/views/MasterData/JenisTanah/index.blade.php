@@ -1,4 +1,87 @@
 @extends('layouts.app')
+
+@section('css')
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+        integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+
+    <style>
+        #map {
+            height: 400px
+        }
+
+        .bg-green {
+            background-color: #009E3C
+        }
+
+        .bg-red {
+            background-color: #dc3545
+        }
+
+        .bg-yellow {
+            background-color: yellow
+        }
+
+        .bg-orange {
+            background-color: orange
+        }
+
+        .bg-blue {
+            background-color: blue
+        }
+
+        .bg-violet {
+            background-color: violet
+        }
+
+        .bg-brown {
+            background-color: brown
+        }
+
+        .bg-beige {
+            background-color: beige
+        }
+
+        .bg-blueviolet {
+            background-color: blueviolet
+        }
+
+        .bg-purple {
+            background-color: purple
+        }
+
+        .bg-peru {
+            background-color: peru
+        }
+        .bg-maroon {
+            background-color: maroon
+        }
+        .bg-magenta {
+            background-color: magenta
+        }
+        .bg-navyblue {
+            background-color: navy
+        }
+        .bg-gray {
+            background-color: gray
+        }
+        .bg-black {
+            background-color: black
+        }
+        .bg-chartreuse {
+            background-color: chartreuse
+        }
+        .bg-darkgoldenrod {
+            background-color: darkgoldenrod
+        }
+        .bg-crimson {
+            background-color: crimson
+        }
+        .bg-indianred {
+            background-color: indianred
+        }
+    </style>
+@endsection
+
 @section('content')
     <style>
         #dt_jenistanah>tbody>tr {
@@ -232,6 +315,214 @@
                                     </tr>
                                 </thead>
                             </table>
+                            <div class="row">
+                                <div class="col-xl-12">
+                                    <div class="card-xl">
+                                        <div class="card-body">
+                                            <h4 class="card-title mb-4">Mapping Jenis Tanah</h4>
+                                            {{-- button reload --}}
+                                            <div class="row mb-4">
+                                                <div class="col-sm-3 row">
+                                                    <div class="col-sm-4">
+                                                        <label for="inputPassword" class="col-form-label">Jenis
+                                                            Tanah</label>
+                                                    </div>
+                                                    <div class="col-sm-8">
+                                                        <select class="form-control" name='jenis_tanah_map'
+                                                            id="jenis_tanah_map">
+                                                            <option value="">Pilih Jenis Tanah</option>
+                                                            @foreach ($id_jenis_tanah as $item)
+                                                                <option value="{{ $item->id }}">
+                                                                    {{ $item->name }}</option>
+                                                            @endforeach
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-4">
+                                                    <button type="button" class="btn btn-primary btn-sm"
+                                                        id="search_map"><i
+                                                            class="fas fa-search mx-2"></i>Search</button>
+                                                </div>
+                                                <div class="col-sm-12">
+                                                    <button type="button"
+                                                        class="btn btn-warning btn-sm float-end"
+                                                        id="btn_reload_map">
+                                                        <i class="bx bx-revision mx-2"></i>
+                                                        Reload
+                                                    </button>
+                                                </div>
+                                            </div>
+                                            {{-- legend warna untuk map --}}
+                                            <div class="row mb-4">
+                                                <div class="col-sm-12">
+                                                    <div class="row">
+                                                        <div class="col-sm-3">
+                                                            <div class="d-flex align-items-center">
+                                                                <div class="bg-green"
+                                                                    style="width: 20px; height: 20px;"></div>
+                                                                <span class="mx-2">Organosol (Histosols)</span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-3">
+                                                            <div class="d-flex align-items-center">
+                                                                <div class="bg-red"
+                                                                    style="width: 20px; height: 20px;"></div>
+                                                                <span class="mx-2">Litosol (Entisols)</span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-3">
+                                                            <div class="d-flex align-items-center">
+                                                                <div class="bg-yellow"
+                                                                    style="width: 20px; height: 20px;"></div>
+                                                                <span class="mx-2">Aluvial (Entisols)</span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-3">
+                                                            <div class="d-flex align-items-center">
+                                                                <div class="bg-orange"
+                                                                    style="width: 20px; height: 20px;"></div>
+                                                                <span class="mx-2">Regosol (Entisols)</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-12">
+                                                    <div class="row">
+                                                        <div class="col-sm-3">
+                                                            <div class="d-flex align-items-center">
+                                                                <div class="bg-blue"
+                                                                    style="width: 20px; height: 20px;"></div>
+                                                                <span class="mx-2">Umbrisol (Inceptisols)</span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-3">
+                                                            <div class="d-flex align-items-center">
+                                                                <div class="bg-violet"
+                                                                    style="width: 20px; height: 20px;"></div>
+                                                                <span class="mx-2">Renzina (Mollisols)</span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-3">
+                                                            <div class="d-flex align-items-center">
+                                                                <div class="bg-brown"
+                                                                    style="width: 20px; height: 20px;"></div>
+                                                                <span class="mx-2">Grumusol (Vertisols)</span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-3">
+                                                            <div class="d-flex align-items-center">
+                                                                <div class="bg-beige"
+                                                                    style="width: 20px; height: 20px;"></div>
+                                                                <span class="mx-2">Arenosol (Entisols)</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-12">
+                                                    <div class="row">
+                                                        <div class="col-sm-3">
+                                                            <div class="d-flex align-items-center">
+                                                                <div class="bg-blueviolet"
+                                                                    style="width: 20px; height: 20px;"></div>
+                                                                <span class="mx-2">Andosol (Andisols)</span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-3">
+                                                            <div class="d-flex align-items-center">
+                                                                <div class="bg-purple"
+                                                                    style="width: 20px; height: 20px;"></div>
+                                                                <span class="mx-2">Latosol (Inceptisols)</span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-3">
+                                                            <div class="d-flex align-items-center">
+                                                                <div class="bg-peru"
+                                                                    style="width: 20px; height: 20px;"></div>
+                                                                <span class="mx-2">Molisol (Mollisols)</span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-3">
+                                                            <div class="d-flex align-items-center">
+                                                                <div class="bg-maroon"
+                                                                    style="width: 20px; height: 20px;"></div>
+                                                                <span class="mx-2">Kambisol (Inceptisols)</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-12">
+                                                    <div class="row">
+                                                        <div class="col-sm-3">
+                                                            <div class="d-flex align-items-center">
+                                                                <div class="bg-magenta"
+                                                                    style="width: 20px; height: 20px;"></div>
+                                                                <span class="mx-2">Gleisol (Inceptisols)</span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-3">
+                                                            <div class="d-flex align-items-center">
+                                                                <div class="bg-navyblue"
+                                                                    style="width: 20px; height: 20px;"></div>
+                                                                <span class="mx-2">Nitosol (Ultisols, Alfisols, Mollisols)</span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-3">
+                                                            <div class="d-flex align-items-center">
+                                                                <div class="bg-gray"
+                                                                    style="width: 20px; height: 20px;"></div>
+                                                                <span class="mx-2">Podsolik (Ultisols)</span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-3">
+                                                            <div class="d-flex align-items-center">
+                                                                <div class="bg-black"
+                                                                    style="width: 20px; height: 20px;"></div>
+                                                                <span class="mx-2">Mediteran (Alfisols)</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-12">
+                                                    <div class="row">
+                                                        <div class="col-sm-3">
+                                                            <div class="d-flex align-items-center">
+                                                                <div class="bg-chartreuse"
+                                                                    style="width: 20px; height: 20px;"></div>
+                                                                <span class="mx-2">Planosol (Albaqualfs, Albaquults)</span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-3">
+                                                            <div class="d-flex align-items-center">
+                                                                <div class="bg-darkgoldenrod"
+                                                                    style="width: 20px; height: 20px;"></div>
+                                                                <span class="mx-2">Podsol (Spodosols)</span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-3">
+                                                            <div class="d-flex align-items-center">
+                                                                <div class="bg-crimson"
+                                                                    style="width: 20px; height: 20px;"></div>
+                                                                <span class="mx-2">Oksisol (Oxisols)</span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-3">
+                                                            <div class="d-flex align-items-center">
+                                                                <div class="bg-indianred"
+                                                                    style="width: 20px; height: 20px;"></div>
+                                                                <span class="mx-2">Lateritik (Oxisols, Ultisols, Alfisols)</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div style="overflow-x: auto">
+                                                <div id="map" style="height: 500px"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--end card-->
+                                </div>
+                            </div>
                         </div>
                         <!-- end card body -->
                     </div>
@@ -363,8 +654,336 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha.6/js/bootstrap.min.js"></script>
     <script>
         $(document).ready(function() {
+// change state tab
+$(document).on("click", ".tab_jenis_tanah", function() {
+                    var curr_state = $(this).data('state');
+                    if (curr_state == 1) {
+                        $(document).ready(function() {
+                            if ($('#dt_jenistanah').length) {
+                                $('#dt_jenistanah').DataTable().columns.adjust().draw();
+                                table.ajax.reload();
+                            } else {
+                                location.reload();
+                            }
+                        })
+                    } else if (curr_state == 2) {
+                        var jenis_tanah = $('#jenis_tanah_map').val();
 
+                        $.ajax({
+                            url: '/master-data/map-jenis-tanah',
+                            type: 'POST',
+                            data: {
+                                jenis_tanah: jenis_tanah
+                            },
+                            headers: {
+                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+                            },
+                            beforeSend: function() {
+                                Swal.fire({
+                                    title: 'Mohon Tunggu',
+                                    text: 'Sedang Mengambil Data...',
+                                    showConfirmButton: false,
+                                    allowOutsideClick: false,
+                                    willOpen: () => {
+                                        Swal.showLoading()
+                                    },
+                                });
+                            },
+                            success: function(data) {
+                                Swal.close();
+                                if (data.status == 'success') {
+                                    map.eachLayer(function(layer) {
+                                        if (layer instanceof L.Circle) {
+                                            map.removeLayer(layer);
+                                        }
+                                    });
+
+                                    data.data.forEach(function(kota) {
+                                        var totalJenisTanah = kota.id_jenis_tanah;
+                                        var color = 'green';
+
+                                        if (totalJenisTanah == 2) color = 'red';
+                                        else if (totalJenisTanah == 3) color = 'yellow';
+                                        else if (totalJenisTanah == 4) color = 'orange';
+                                        else if (totalJenisTanah == 5) color = 'blue';
+                                        else if (totalJenisTanah == 6) color = 'violet';
+                                        else if (totalJenisTanah == 7) color = 'brown';
+                                        else if (totalJenisTanah == 8) color = 'beige';
+                                        else if (totalJenisTanah == 9) color = 'blueviolet';
+                                        else if (totalJenisTanah == 10) color = 'purple';
+                                        else if (totalJenisTanah == 11) color = 'peru';
+                                        else if (totalJenisTanah == 12) color = 'maroon';
+                                        else if (totalJenisTanah == 13) color = 'magenta';
+                                        else if (totalJenisTanah == 14) color = 'navy';
+                                        else if (totalJenisTanah == 15) color = 'gray';
+                                        else if (totalJenisTanah == 16) color = 'black';
+                                        else if (totalJenisTanah == 17) color = 'chartreuse';
+                                        else if (totalJenisTanah == 18) color = 'darkgoldenro';
+                                        else if (totalJenisTanah == 19) color = 'crimson';
+                                        else if (totalJenisTanah == 20) color = 'indianred';
+
+                                        L.circle([kota.kota.latitude, kota.kota
+                                            .longitude], {
+                                                color: color,
+                                                fillColor: color,
+                                                fillOpacity: 0.5,
+                                                radius: 5000
+                                            }).addTo(map)
+                                            .bindPopup(
+                                                `<b>${kota.kota.name}</b><br>Jenis Tanah: ${totalJenisTanah}`
+                                                );
+                                    });
+                                } else {
+                                    Swal.fire({
+                                        icon: 'error',
+                                        title: 'Gagal',
+                                        text: data.message,
+                                        showConfirmButton: false,
+                                        timer: 1500
+                                    });
+                                }
+                            },
+                            error: function(data) {
+                                Swal.close();
+                                Swal.fire({
+                                    icon: 'error',
+                                    title: 'Gagal',
+                                    text: data.message,
+                                    showConfirmButton: false,
+                                    timer: 1500
+                                });
+                            }
+                        });
+                    }
+                });
             @can('jenistanah-R')
+
+             // Set up the map
+             var map = L.map('map', {
+                        center: [-7.250445, 112.768845], // Koordinat Jawa Timur
+                        zoom: 8, // Set the initial zoom level
+                    });
+
+                    // Add the tile layer
+                    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                        attribution: '© OpenStreetMap contributors'
+                    }).addTo(map);
+
+                    var mapData = @json($jenis_tanah);
+                    console.log(mapData);
+
+                    mapData.forEach(function(kota) {
+                        var totalJenisTanah = kota.id_jenis_tanah;
+                                        var color = 'green';
+
+                                        if (totalJenisTanah == 2) color = 'red';
+                                        else if (totalJenisTanah == 3) color = 'yellow';
+                                        else if (totalJenisTanah == 4) color = 'orange';
+                                        else if (totalJenisTanah == 5) color = 'blue';
+                                        else if (totalJenisTanah == 6) color = 'violet';
+                                        else if (totalJenisTanah == 7) color = 'brown';
+                                        else if (totalJenisTanah == 8) color = 'beige';
+                                        else if (totalJenisTanah == 9) color = 'blueviolet';
+                                        else if (totalJenisTanah == 10) color = 'purple';
+                                        else if (totalJenisTanah == 11) color = 'peru';
+                                        else if (totalJenisTanah == 12) color = 'maroon';
+                                        else if (totalJenisTanah == 13) color = 'magenta';
+                                        else if (totalJenisTanah == 14) color = 'navy';
+                                        else if (totalJenisTanah == 15) color = 'gray';
+                                        else if (totalJenisTanah == 16) color = 'black';
+                                        else if (totalJenisTanah == 17) color = 'chartreuse';
+                                        else if (totalJenisTanah == 18) color = 'darkgoldenro';
+                                        else if (totalJenisTanah == 19) color = 'crimson';
+                                        else if (totalJenisTanah == 20) color = 'indianred';
+
+                        L.circle([kota.kota.latitude, kota.kota.longitude], {
+                                color: color,
+                                fillColor: color,
+                                fillOpacity: 0.5,
+                                radius: 5000
+                            }).addTo(map)
+                            .bindPopup(`<b>${kota.kota.name}</b><br>Jenis Tanah: ${totalTanah}`);
+                    });
+
+                    $(document).on("click", "#search_map", function() {
+                        var jenis_tanah = $('#jenis_tanah_map').val();
+
+                        $.ajax({
+                            url: '/master-data/map-jenis-tanah',
+                            type: 'POST',
+                            data: {
+                                jenis_tanah: jenis_tanah
+                            },
+                            headers: {
+                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+                            },
+                            beforeSend: function() {
+                                Swal.fire({
+                                    title: 'Mohon Tunggu',
+                                    text: 'Sedang Mengambil Data...',
+                                    showConfirmButton: false,
+                                    allowOutsideClick: false,
+                                    willOpen: () => {
+                                        Swal.showLoading()
+                                    },
+                                });
+                            },
+                            success: function(data) {
+                                Swal.close();
+                                if (data.status == 'success') {
+                                    map.eachLayer(function(layer) {
+                                        if (layer instanceof L.Circle) {
+                                            map.removeLayer(layer);
+                                        }
+                                    });
+
+                                    data.data.forEach(function(kota) {
+                                        var totalJenisTanah = kota.id_jenis_tanah;
+                                        var color = 'green';
+
+                                        if (totalJenisTanah == 2) color = 'red';
+                                        else if (totalJenisTanah == 3) color = 'yellow';
+                                        else if (totalJenisTanah == 4) color = 'orange';
+                                        else if (totalJenisTanah == 5) color = 'blue';
+                                        else if (totalJenisTanah == 6) color = 'violet';
+                                        else if (totalJenisTanah == 7) color = 'brown';
+                                        else if (totalJenisTanah == 8) color = 'beige';
+                                        else if (totalJenisTanah == 9) color = 'blueviolet';
+                                        else if (totalJenisTanah == 10) color = 'purple';
+                                        else if (totalJenisTanah == 11) color = 'peru';
+                                        else if (totalJenisTanah == 12) color = 'maroon';
+                                        else if (totalJenisTanah == 13) color = 'magenta';
+                                        else if (totalJenisTanah == 14) color = 'navy';
+                                        else if (totalJenisTanah == 15) color = 'gray';
+                                        else if (totalJenisTanah == 16) color = 'black';
+                                        else if (totalJenisTanah == 17) color = 'chartreuse';
+                                        else if (totalJenisTanah == 18) color = 'darkgoldenro';
+                                        else if (totalJenisTanah == 19) color = 'crimson';
+                                        else if (totalJenisTanah == 20) color = 'indianred';
+
+                                        L.circle([kota.kota.latitude, kota.kota
+                                            .longitude], {
+                                                color: color,
+                                                fillColor: color,
+                                                fillOpacity: 0.5,
+                                                radius: 5000
+                                            }).addTo(map)
+                                            .bindPopup(
+                                                `<b>${kota.kota.name}</b><br>Jenis Tanah: ${totalJenisTanah}`
+                                                );
+                                    });
+                                } else {
+                                    Swal.fire({
+                                        icon: 'error',
+                                        title: 'Gagal',
+                                        text: data.message,
+                                        showConfirmButton: false,
+                                        timer: 1500
+                                    });
+                                }
+                            },
+                            error: function(data) {
+                                Swal.close();
+                                Swal.fire({
+                                    icon: 'error',
+                                    title: 'Gagal',
+                                    text: data.message,
+                                    showConfirmButton: false,
+                                    timer: 1500
+                                });
+                            }
+                        });
+                    });
+
+                    $(document).on("click", "#btn_reload_map", function() {
+                        var jenis_tanah = $('#jenis_tanah_map').val();
+
+                        $.ajax({
+                            url: '/master-data/map-jenis-tanah',
+                            type: 'POST',
+                            data: {
+                                jenis_tanah: jenis_tanah
+                            },
+                            headers: {
+                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+                            },
+                            beforeSend: function() {
+                                Swal.fire({
+                                    title: 'Mohon Tunggu',
+                                    text: 'Sedang Mengambil Data...',
+                                    showConfirmButton: false,
+                                    allowOutsideClick: false,
+                                    willOpen: () => {
+                                        Swal.showLoading()
+                                    },
+                                });
+                            },
+                            success: function(data) {
+                                Swal.close();
+                                if (data.status == 'success') {
+                                    map.eachLayer(function(layer) {
+                                        if (layer instanceof L.Circle) {
+                                            map.removeLayer(layer);
+                                        }
+                                    });
+
+                                    data.data.forEach(function(kota) {
+                                        var totalJenisTanah = kota.id_jenis_tanah;
+                                        var color = 'green';
+
+                                        if (totalJenisTanah == 2) color = 'red';
+                                        else if (totalJenisTanah == 3) color = 'yellow';
+                                        else if (totalJenisTanah == 4) color = 'orange';
+                                        else if (totalJenisTanah == 5) color = 'blue';
+                                        else if (totalJenisTanah == 6) color = 'violet';
+                                        else if (totalJenisTanah == 7) color = 'brown';
+                                        else if (totalJenisTanah == 8) color = 'beige';
+                                        else if (totalJenisTanah == 9) color = 'blueviolet';
+                                        else if (totalJenisTanah == 10) color = 'purple';
+                                        else if (totalJenisTanah == 11) color = 'peru';
+                                        else if (totalJenisTanah == 12) color = 'maroon';
+                                        else if (totalJenisTanah == 13) color = 'magenta';
+                                        else if (totalJenisTanah == 14) color = 'navy';
+                                        else if (totalJenisTanah == 15) color = 'gray';
+                                        else if (totalJenisTanah == 16) color = 'black';
+                                        else if (totalJenisTanah == 17) color = 'chartreuse';
+                                        else if (totalJenisTanah == 18) color = 'darkgoldenro';
+                                        else if (totalJenisTanah == 19) color = 'crimson';
+                                        else if (totalJenisTanah == 20) color = 'indianred';
+
+                                        L.circle([kota.kota.latitude, kota.kota
+                                            .longitude], {
+                                                color: color,
+                                                fillColor: color,
+                                                fillOpacity: 0.5,
+                                                radius: 5000
+                                            }).addTo(map)
+                                            .bindPopup(
+                                                `<b>${kota.kota.name}</b><br>Jenis Tanah: ${totalJenisTanah}`
+                                                );
+                                    });
+                                } else {
+                                    Swal.fire({
+                                        icon: 'error',
+                                        title: 'Gagal',
+                                        text: data.message,
+                                        showConfirmButton: false,
+                                        timer: 1500
+                                    });
+                                }
+                            },
+                            error: function(data) {
+                                Swal.close();
+                                Swal.fire({
+                                    icon: 'error',
+                                    title: 'Gagal',
+                                    text: data.message,
+                                    showConfirmButton: false,
+                                    timer: 1500
+                                });
+                            }
+                        });
+                    });
 
             $('#dt_jenistanah').DataTable().clear().destroy();
             var table = $("#dt_jenistanah").DataTable({

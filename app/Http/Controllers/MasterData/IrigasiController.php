@@ -26,8 +26,7 @@ class IrigasiController extends Controller
         $jenis_irigasi = 6;
         $data['irigasi'] = Irigasi::with('kota')->where('tahun', $tahun_now)->where('id_jenis_irigasi', $jenis_irigasi)->get();
         $data['tahun_now'] = $tahun_now;
-        $data['jenis_irigasi_now'] = $jenis_irigasi;
-        // dd($data);  
+        $data['jenis_irigasi_now'] = $jenis_irigasi;  
 
         return view('masterdata.irigasi.index', $data);
     }
