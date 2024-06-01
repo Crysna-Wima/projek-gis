@@ -268,14 +268,6 @@
                                         <span class="d-none d-sm-block">Daftar Irigasi</span>
                                     </a>
                                 </li>
-                                <li class="nav-item waves-effect waves-light" id="mapping_irigasi">
-                                    <a class="nav-link tab_irig" data-bs-toggle="tab" href="#tab_mapping_irigasi"
-                                        role="tab" data-state="2">
-                                        <span class="d-block d-sm-none"><i class="far fa-user"></i> <span
-                                                class="badge bg-danger rounded-pill"></span></span>
-                                        <span class="d-none d-sm-block">Mapping</span>
-                                    </a>
-                                </li>
                             </ul>
                             {{-- tab panel  --}}
                             <div class="tab-content p-3 text-muted">
@@ -470,15 +462,6 @@
                                     <div style="overflow-x: auto">
                                         <div id="map"></div>
                                     </div>
-                                </div>
-
-                                {{-- tab_mapping --}}
-                                <div class="tab-pane fade" id="tab_mapping_irigasi" role="tabpanel">
-
-                                    <div style="overflow-x: auto">
-                                        <div id="map"></div>
-                                    </div>
-
                                 </div>
                                 <!-- end card body -->
                             </div>
@@ -707,7 +690,7 @@
                                         else if (totalIrigasi == 8) color = 'beige';
                                         else if (totalIrigasi == 9) color = 'blueviolet';
                                         else if (totalIrigasi == 10) color = 'purple';
-                                        else if (totalIrigasi == 10) color = 'peru';
+                                        else if (totalIrigasi == 11) color = 'peru';
 
                                         L.circle([kota.kota.latitude, kota.kota
                                             .longitude], {
@@ -717,7 +700,7 @@
                                                 radius: 5000
                                             }).addTo(map)
                                             .bindPopup(
-                                                `<b>${kota.kota.name}</b><br>Total Jenis Irigasi: ${totalIrigasi}`
+                                                `<b>${kota.kota.name}</b><br>Jenis Irigasi: ${totalIrigasi}`
                                                 );
                                     });
                                 } else {
@@ -772,7 +755,7 @@
                         else if (totalIrigasi == 8) color = 'beige';
                         else if (totalIrigasi == 9) color = 'blueviolet';
                         else if (totalIrigasi == 10) color = 'purple';
-                        else if (totalIrigasi == 10) color = 'peru';
+                        else if (totalIrigasi == 11) color = 'peru';
 
                         L.circle([kota.kota.latitude, kota.kota.longitude], {
                                 color: color,
@@ -780,7 +763,7 @@
                                 fillOpacity: 0.5,
                                 radius: 5000
                             }).addTo(map)
-                            .bindPopup(`<b>${kota.kota.name}</b><br>Total Jenis Irigasi: ${totalIrigasi}`);
+                            .bindPopup(`<b>${kota.kota.name}</b><br>Jenis Irigasi: ${totalIrigasi}`);
                     });
 
                     $(document).on("click", "#search_map", function() {
@@ -830,7 +813,7 @@
                                         else if (totalIrigasi == 8) color = 'beige';
                                         else if (totalIrigasi == 9) color = 'blueviolet';
                                         else if (totalIrigasi == 10) color = 'purple';
-                                        else if (totalIrigasi == 10) color = 'peru';
+                                        else if (totalIrigasi == 11) color = 'peru';
 
                                         L.circle([kota.kota.latitude, kota.kota
                                             .longitude], {
@@ -840,7 +823,7 @@
                                                 radius: 5000
                                             }).addTo(map)
                                             .bindPopup(
-                                                `<b>${kota.kota.name}</b><br>Total Jenis Irigasi: ${totalIrigasi}`
+                                                `<b>${kota.kota.name}</b><br>Jenis Irigasi: ${totalIrigasi}`
                                                 );
                                     });
                                 } else {
@@ -913,7 +896,7 @@
                                         else if (totalIrigasi == 8) color = 'beige';
                                         else if (totalIrigasi == 9) color = 'blueviolet';
                                         else if (totalIrigasi == 10) color = 'purple';
-                                        else if (totalIrigasi == 10) color = 'peru';
+                                        else if (totalIrigasi == 11) color = 'peru';
 
                                         L.circle([kota.kota.latitude, kota.kota
                                             .longitude], {
@@ -923,7 +906,7 @@
                                                 radius: 5000
                                             }).addTo(map)
                                             .bindPopup(
-                                                `<b>${kota.kota.name}</b><br>Total Irigasi: ${totalIrigasi}`
+                                                `<b>${kota.kota.name}</b><br>Jenis Irigasi: ${totalIrigasi}`
                                                 );
                                     });
                                 } else {
