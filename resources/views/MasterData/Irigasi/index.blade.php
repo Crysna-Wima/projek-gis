@@ -8,6 +8,50 @@
         #map {
             height: 400px
         }
+
+        .bg-green {
+            background-color: #009E3C
+        }
+
+        .bg-red {
+            background-color: #dc3545
+        }
+
+        .bg-yellow {
+            background-color: yellow
+        }
+
+        .bg-orange {
+            background-color: orange
+        }
+
+        .bg-blue {
+            background-color: blue
+        }
+
+        .bg-violet {
+            background-color: violet
+        }
+
+        .bg-brown {
+            background-color: brown
+        }
+
+        .bg-beige {
+            background-color: beige
+        }
+
+        .bg-blueviolet {
+            background-color: blueviolet
+        }
+
+        .bg-purple {
+            background-color: purple
+        }
+
+        .bg-peru {
+            background-color: peru
+        }
     </style>
 @endsection
 
@@ -81,11 +125,11 @@
         }
 
         /* .sticky-left {
-                             position:-webkit-sticky;position:sticky;top:0px;left:0px;opacity: 1;background: rgb(255,255,255);
-                         }
-                         th.sticky-left {
-                             z-index:9;
-                         } */
+                                 position:-webkit-sticky;position:sticky;top:0px;left:0px;opacity: 1;background: rgb(255,255,255);
+                             }
+                             th.sticky-left {
+                                 z-index:9;
+                             } */
         .dtfh-floatingparenthead {
             top: 70px !important;
             overflow-x: auto !important;
@@ -278,29 +322,46 @@
                                                     <div class="row mb-4">
                                                         <div class="col-sm-3 row">
                                                             <div class="col-sm-4">
-                                                                <label for="inputPassword" class="col-form-label">Tahun</label>
+                                                                <label for="inputPassword"
+                                                                    class="col-form-label">Tahun</label>
                                                             </div>
                                                             <div class="col-sm-6">
                                                                 <div class="position-relative" id="datepicker5">
-                                                                    <input type="text" class="form-control" data-provide="datepicker" data-date-container='#datepicker5' data-date-autoclose="true"
-                                                                        data-date-format="yyyy" data-date-min-view-mode="years" id="tahun_map" name="tahun_map" value="{{ $tahun_now }}" placeholder="e.g: 2024">
+                                                                    <input type="text" class="form-control"
+                                                                        data-provide="datepicker"
+                                                                        data-date-container='#datepicker5'
+                                                                        data-date-autoclose="true" data-date-format="yyyy"
+                                                                        data-date-min-view-mode="years" id="tahun_map"
+                                                                        name="tahun_map" value="{{ $tahun_now }}"
+                                                                        placeholder="e.g: 2024">
                                                                 </div>
                                                             </div>
                                                         </div>
                                                         <div class="col-sm-3 row">
                                                             <div class="col-sm-4">
-                                                                <label for="inputPassword" class="col-form-label">Jenis Irigasi</label>
+                                                                <label for="inputPassword" class="col-form-label">Jenis
+                                                                    Irigasi</label>
                                                             </div>
-                                                            <div class="col-sm-6">
-                                                                <input type="number" class="form-control" name='jenis_irigasi_map' value="{{ $jenis_irigasi_now }}"
-                                                                    id="jenis_irigasi_map" placeholder="e.g: 1">
+                                                            <div class="col-sm-8">
+                                                                <select class="form-control" name='jenis_irigasi_map'
+                                                                    id="jenis_irigasi_map">
+                                                                    <option value="">Pilih Jenis Irigasi</option>
+                                                                    @foreach ($id_jenis_irigasi as $item)
+                                                                        <option value="{{ $item->id }}">
+                                                                            {{ $item->name }}</option>
+                                                                    @endforeach
+                                                                </select>
                                                             </div>
                                                         </div>
                                                         <div class="col-sm-4">
-                                                            <button type="button" class="btn btn-primary btn-sm" id="search_map"><i class="fas fa-search mx-2"></i>Search</button>
+                                                            <button type="button" class="btn btn-primary btn-sm"
+                                                                id="search_map"><i
+                                                                    class="fas fa-search mx-2"></i>Search</button>
                                                         </div>
                                                         <div class="col-sm-12">
-                                                            <button type="button" class="btn btn-warning btn-sm float-end" id="btn_reload_map">
+                                                            <button type="button"
+                                                                class="btn btn-warning btn-sm float-end"
+                                                                id="btn_reload_map">
                                                                 <i class="bx bx-revision mx-2"></i>
                                                                 Reload
                                                             </button>
@@ -312,26 +373,87 @@
                                                             <div class="row">
                                                                 <div class="col-sm-3">
                                                                     <div class="d-flex align-items-center">
-                                                                        <div class="bg-green" style="width: 20px; height: 20px;"></div>
-                                                                        <span class="mx-2">Danau</span>
+                                                                        <div class="bg-green"
+                                                                            style="width: 20px; height: 20px;"></div>
+                                                                        <span class="mx-2">Wilayah Sungai</span>
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-sm-3">
                                                                     <div class="d-flex align-items-center">
-                                                                        <div class="bg-yellow" style="width: 20px; height: 20px;"></div>
+                                                                        <div class="bg-red"
+                                                                            style="width: 20px; height: 20px;"></div>
+                                                                        <span class="mx-2">Daerah Aliran Sungai</span>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-sm-3">
+                                                                    <div class="d-flex align-items-center">
+                                                                        <div class="bg-yellow"
+                                                                            style="width: 20px; height: 20px;"></div>
                                                                         <span class="mx-2">Sungai</span>
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-sm-3">
                                                                     <div class="d-flex align-items-center">
-                                                                        <div class="bg-orange" style="width: 20px; height: 20px;"></div>
-                                                                        <span class="mx-2">Embun</span>
+                                                                        <div class="bg-orange"
+                                                                            style="width: 20px; height: 20px;"></div>
+                                                                        <span class="mx-2">Danau</span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-12">
+                                                            <div class="row">
+                                                                <div class="col-sm-3">
+                                                                    <div class="d-flex align-items-center">
+                                                                        <div class="bg-blue"
+                                                                            style="width: 20px; height: 20px;"></div>
+                                                                        <span class="mx-2">Embung</span>
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-sm-3">
                                                                     <div class="d-flex align-items-center">
-                                                                        <div class="bg-red" style="width: 20px; height: 20px;"></div>
-                                                                        <span class="mx-2">Hujan</span>
+                                                                        <div class="bg-violet"
+                                                                            style="width: 20px; height: 20px;"></div>
+                                                                        <span class="mx-2">Bendungan</span>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-sm-3">
+                                                                    <div class="d-flex align-items-center">
+                                                                        <div class="bg-brown"
+                                                                            style="width: 20px; height: 20px;"></div>
+                                                                        <span class="mx-2">Bendung</span>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-sm-3">
+                                                                    <div class="d-flex align-items-center">
+                                                                        <div class="bg-beige"
+                                                                            style="width: 20px; height: 20px;"></div>
+                                                                        <span class="mx-2">Waduk</span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-12">
+                                                            <div class="row">
+                                                                <div class="col-sm-3">
+                                                                    <div class="d-flex align-items-center">
+                                                                        <div class="bg-blueviolet"
+                                                                            style="width: 20px; height: 20px;"></div>
+                                                                        <span class="mx-2">Tampungan Air Lainnya</span>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-sm-3">
+                                                                    <div class="d-flex align-items-center">
+                                                                        <div class="bg-purple"
+                                                                            style="width: 20px; height: 20px;"></div>
+                                                                        <span class="mx-2">Pantai</span>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-sm-3">
+                                                                    <div class="d-flex align-items-center">
+                                                                        <div class="bg-peru"
+                                                                            style="width: 20px; height: 20px;"></div>
+                                                                        <span class="mx-2">Tadah Hujan</span>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -352,11 +474,11 @@
 
                                 {{-- tab_mapping --}}
                                 <div class="tab-pane fade" id="tab_mapping_irigasi" role="tabpanel">
-                                   
-                                        <div style="overflow-x: auto">
-                                            <div id="map"></div>
-                                        </div>
-                                        
+
+                                    <div style="overflow-x: auto">
+                                        <div id="map"></div>
+                                    </div>
+
                                 </div>
                                 <!-- end card body -->
                             </div>
@@ -523,72 +645,93 @@
         <!-- fontawesome icons init -->
         <script src="{{ asset('assets/js/pages/fontawesome.init.js') }}"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha.6/js/bootstrap.min.js"></script>
-        
+
         <script>
             $(document).ready(function() {
                 // change state tab
                 $(document).on("click", ".tab_irig", function() {
                     var curr_state = $(this).data('state');
-                if (curr_state == 1){
-                    $(document).ready(function() {
-                        if ($('#dt_irigasi').length) {
-                            $('#dt_irigasi').DataTable().columns.adjust().draw();
-                            table.ajax.reload();
-                        } else {
-                            location.reload();
-                        }
-                    })
-                } else if (curr_state == 2){
-                    var tahun = $('#tahun_map').val();
-                    var jenis_irigasi = $('#jenis_irigasi_map').val();
-
-                    $.ajax({
-                        url: '/master-data/map-irigasi',
-                        type: 'POST',
-                        data: {
-                            tahun: tahun,
-                            jenis_irigasi: jenis_irigasi
-                        },
-                        headers: {
-                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
-                        },
-                        beforeSend: function() {
-                            Swal.fire({
-                                title: 'Mohon Tunggu',
-                                text: 'Sedang Mengambil Data...',
-                                showConfirmButton: false,
-                                allowOutsideClick: false,
-                                willOpen: () => {
-                                    Swal.showLoading()
-                                },
-                            });
-                        },
-                        success: function(data) {
-                            Swal.close();
-                            if (data.status == 'success') {
-                                map.eachLayer(function(layer) {
-                                    if (layer instanceof L.Circle) {
-                                        map.removeLayer(layer);
-                                    }
-                                });
-
-                                data.data.forEach(function(kota) {
-                                    var totalIrigasi = kota.irigasi;
-                                    var color = 'green';
-
-                                    if (totalIrigasi > 1000) color = 'red';
-                                    else if (totalIrigasi > 500) color = 'orange';
-                                    else if (totalIrigasi > 100) color = 'yellow';
-
-                                    L.circle([kota.kota.latitude, kota.kota.longitude], {
-                                        color: color,
-                                        fillColor: color,
-                                        fillOpacity: 0.5,
-                                        radius: 5000
-                                    }).addTo(map)
-                                    .bindPopup(`<b>${kota.kota.name}</b><br>Total Jenis Irigasi: ${totalIrigasi}`);
-                                });
+                    if (curr_state == 1) {
+                        $(document).ready(function() {
+                            if ($('#dt_irigasi').length) {
+                                $('#dt_irigasi').DataTable().columns.adjust().draw();
+                                table.ajax.reload();
                             } else {
+                                location.reload();
+                            }
+                        })
+                    } else if (curr_state == 2) {
+                        var tahun = $('#tahun_map').val();
+                        var jenis_irigasi = $('#jenis_irigasi_map').val();
+
+                        $.ajax({
+                            url: '/master-data/map-irigasi',
+                            type: 'POST',
+                            data: {
+                                tahun: tahun,
+                                jenis_irigasi: jenis_irigasi
+                            },
+                            headers: {
+                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+                            },
+                            beforeSend: function() {
+                                Swal.fire({
+                                    title: 'Mohon Tunggu',
+                                    text: 'Sedang Mengambil Data...',
+                                    showConfirmButton: false,
+                                    allowOutsideClick: false,
+                                    willOpen: () => {
+                                        Swal.showLoading()
+                                    },
+                                });
+                            },
+                            success: function(data) {
+                                Swal.close();
+                                if (data.status == 'success') {
+                                    map.eachLayer(function(layer) {
+                                        if (layer instanceof L.Circle) {
+                                            map.removeLayer(layer);
+                                        }
+                                    });
+
+                                    data.data.forEach(function(kota) {
+                                        var totalIrigasi = kota.id_jenis_irigasi;
+                                        var color = 'green';
+
+                                        if (totalIrigasi == 2) color = 'red';
+                                        else if (totalIrigasi == 3) color = 'yellow';
+                                        else if (totalIrigasi == 4) color = 'orange';
+                                        else if (totalIrigasi == 5) color = 'blue';
+                                        else if (totalIrigasi == 6) color = 'violet';
+                                        else if (totalIrigasi == 7) color = 'brown';
+                                        else if (totalIrigasi == 8) color = 'beige';
+                                        else if (totalIrigasi == 9) color = 'blueviolet';
+                                        else if (totalIrigasi == 10) color = 'purple';
+                                        else if (totalIrigasi == 10) color = 'peru';
+
+                                        L.circle([kota.kota.latitude, kota.kota
+                                            .longitude], {
+                                                color: color,
+                                                fillColor: color,
+                                                fillOpacity: 0.5,
+                                                radius: 5000
+                                            }).addTo(map)
+                                            .bindPopup(
+                                                `<b>${kota.kota.name}</b><br>Total Jenis Irigasi: ${totalIrigasi}`
+                                                );
+                                    });
+                                } else {
+                                    Swal.fire({
+                                        icon: 'error',
+                                        title: 'Gagal',
+                                        text: data.message,
+                                        showConfirmButton: false,
+                                        timer: 1500
+                                    });
+                                }
+                            },
+                            error: function(data) {
+                                Swal.close();
                                 Swal.fire({
                                     icon: 'error',
                                     title: 'Gagal',
@@ -597,198 +740,214 @@
                                     timer: 1500
                                 });
                             }
-                        },
-                        error: function(data) {
-                            Swal.close();
-                            Swal.fire({
-                                icon: 'error',
-                                title: 'Gagal',
-                                text: data.message,
-                                showConfirmButton: false,
-                                timer: 1500
-                            });
-                        }
-                    });
-                }
-            });
+                        });
+                    }
+                });
 
                 @can('irigasi-R')
                     // Set up the map
-            var map = L.map('map', {
-                center: [-7.250445, 112.768845], // Koordinat Jawa Timur
-                zoom: 8, // Set the initial zoom level
-            });
+                    var map = L.map('map', {
+                        center: [-7.250445, 112.768845], // Koordinat Jawa Timur
+                        zoom: 8, // Set the initial zoom level
+                    });
 
-            // Add the tile layer
-            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                attribution: '© OpenStreetMap contributors'
-            }).addTo(map);
+                    // Add the tile layer
+                    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                        attribution: '© OpenStreetMap contributors'
+                    }).addTo(map);
 
-            var mapData = @json($irigasi);
-            console.log(mapData);
+                    var mapData = @json($irigasi);
+                    console.log(mapData);
 
-            mapData.forEach(function(kota) {
-                var totalIrigasi = kota.irigasi;
-                var color = 'green';
+                    mapData.forEach(function(kota) {
+                        var totalIrigasi = kota.id_jenis_irigasi;
+                        var color = 'green';
 
-                if (totalIrigasi > 1000) color = 'red';
-                else if (totalIrigasi > 500) color = 'orange';
-                else if (totalIrigasi > 100) color = 'yellow';
+                        if (totalIrigasi == 2) color = 'red';
+                        else if (totalIrigasi == 3) color = 'yellow';
+                        else if (totalIrigasi == 4) color = 'orange';
+                        else if (totalIrigasi == 5) color = 'blue';
+                        else if (totalIrigasi == 6) color = 'violet';
+                        else if (totalIrigasi == 7) color = 'brown';
+                        else if (totalIrigasi == 8) color = 'beige';
+                        else if (totalIrigasi == 9) color = 'blueviolet';
+                        else if (totalIrigasi == 10) color = 'purple';
+                        else if (totalIrigasi == 10) color = 'peru';
 
-                L.circle([kota.kota.latitude, kota.kota.longitude], {
-                    color: color,
-                    fillColor: color,
-                    fillOpacity: 0.5,
-                    radius: 5000
-                }).addTo(map)
-                .bindPopup(`<b>${kota.kota.name}</b><br>Total Jenis Irigasi: ${totalIrigasi}`);
-            });
+                        L.circle([kota.kota.latitude, kota.kota.longitude], {
+                                color: color,
+                                fillColor: color,
+                                fillOpacity: 0.5,
+                                radius: 5000
+                            }).addTo(map)
+                            .bindPopup(`<b>${kota.kota.name}</b><br>Total Jenis Irigasi: ${totalIrigasi}`);
+                    });
 
-            $(document).on("click", "#search_map", function() {
-                var tahun = $('#tahun_map').val();
-                var jenis_irigasi = $('#jenis_irigasi_map').val();
+                    $(document).on("click", "#search_map", function() {
+                        var tahun = $('#tahun_map').val();
+                        var jenis_irigasi = $('#jenis_irigasi_map').val();
 
-                $.ajax({
-                    url: '/master-data/map-irigasi',
-                    type: 'POST',
-                    data: {
-                        tahun: tahun,
-                        jenis_irigasi: jenis_irigasi
-                    },
-                    headers: {
-                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
-                    },
-                    beforeSend: function() {
-                        Swal.fire({
-                            title: 'Mohon Tunggu',
-                            text: 'Sedang Mengambil Data...',
-                            showConfirmButton: false,
-                            allowOutsideClick: false,
-                            willOpen: () => {
-                                Swal.showLoading()
+                        $.ajax({
+                            url: '/master-data/map-irigasi',
+                            type: 'POST',
+                            data: {
+                                tahun: tahun,
+                                jenis_irigasi: jenis_irigasi
                             },
-                        });
-                    },
-                    success: function(data) {
-                        Swal.close();
-                        if (data.status == 'success') {
-                            map.eachLayer(function(layer) {
-                                if (layer instanceof L.Circle) {
-                                    map.removeLayer(layer);
-                                }
-                            });
-
-                            data.data.forEach(function(kota) {
-                                var totalIrigasi = kota.irigasi;
-                                var color = 'green';
-
-                                if (totalIrigasi > 1000) color = 'red';
-                                else if (totalIrigasi > 500) color = 'orange';
-                                else if (totalIrigasi > 100) color = 'yellow';
-
-                                L.circle([kota.kota.latitude, kota.kota.longitude], {
-                                    color: color,
-                                    fillColor: color,
-                                    fillOpacity: 0.5,
-                                    radius: 5000
-                                }).addTo(map)
-                                .bindPopup(`<b>${kota.kota.name}</b><br>Total Jenis Irigasi: ${totalIrigasi}`);
-                            });
-                        } else {
-                            Swal.fire({
-                                icon: 'error',
-                                title: 'Gagal',
-                                text: data.message,
-                                showConfirmButton: false,
-                                timer: 1500
-                            });
-                        }
-                    },
-                    error: function(data) {
-                        Swal.close();
-                        Swal.fire({
-                            icon: 'error',
-                            title: 'Gagal',
-                            text: data.message,
-                            showConfirmButton: false,
-                            timer: 1500
-                        });
-                    }
-                });
-            });
-
-            $(document).on("click", "#btn_reload_map", function() {
-                var tahun = $('#tahun_map').val();
-                var jenis_irigasi = $('#jenis_irigasi_map').val();
-
-                $.ajax({
-                    url: '/master-data/map-irigasi',
-                    type: 'POST',
-                    data: {
-                        tahun: tahun,
-                        jenis_irigasi: jenis_irigasi
-                    },
-                    headers: {
-                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
-                    },
-                    beforeSend: function() {
-                        Swal.fire({
-                            title: 'Mohon Tunggu',
-                            text: 'Sedang Mengambil Data...',
-                            showConfirmButton: false,
-                            allowOutsideClick: false,
-                            willOpen: () => {
-                                Swal.showLoading()
+                            headers: {
+                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
                             },
-                        });
-                    },
-                    success: function(data) {
-                        Swal.close();
-                        if (data.status == 'success') {
-                            map.eachLayer(function(layer) {
-                                if (layer instanceof L.Circle) {
-                                    map.removeLayer(layer);
+                            beforeSend: function() {
+                                Swal.fire({
+                                    title: 'Mohon Tunggu',
+                                    text: 'Sedang Mengambil Data...',
+                                    showConfirmButton: false,
+                                    allowOutsideClick: false,
+                                    willOpen: () => {
+                                        Swal.showLoading()
+                                    },
+                                });
+                            },
+                            success: function(data) {
+                                Swal.close();
+                                if (data.status == 'success') {
+                                    map.eachLayer(function(layer) {
+                                        if (layer instanceof L.Circle) {
+                                            map.removeLayer(layer);
+                                        }
+                                    });
+
+                                    data.data.forEach(function(kota) {
+                                        var totalIrigasi = kota.id_jenis_irigasi;
+                                        var color = 'green';
+
+                                        if (totalIrigasi == 2) color = 'red';
+                                        else if (totalIrigasi == 3) color = 'yellow';
+                                        else if (totalIrigasi == 4) color = 'orange';
+                                        else if (totalIrigasi == 5) color = 'blue';
+                                        else if (totalIrigasi == 6) color = 'violet';
+                                        else if (totalIrigasi == 7) color = 'brown';
+                                        else if (totalIrigasi == 8) color = 'beige';
+                                        else if (totalIrigasi == 9) color = 'blueviolet';
+                                        else if (totalIrigasi == 10) color = 'purple';
+                                        else if (totalIrigasi == 10) color = 'peru';
+
+                                        L.circle([kota.kota.latitude, kota.kota
+                                            .longitude], {
+                                                color: color,
+                                                fillColor: color,
+                                                fillOpacity: 0.5,
+                                                radius: 5000
+                                            }).addTo(map)
+                                            .bindPopup(
+                                                `<b>${kota.kota.name}</b><br>Total Jenis Irigasi: ${totalIrigasi}`
+                                                );
+                                    });
+                                } else {
+                                    Swal.fire({
+                                        icon: 'error',
+                                        title: 'Gagal',
+                                        text: data.message,
+                                        showConfirmButton: false,
+                                        timer: 1500
+                                    });
                                 }
-                            });
-
-                            data.data.forEach(function(kota) {
-                                var totalIrigasi = kota.irigasi;
-                                var color = 'green';
-
-                                if (totalIrigasi > 1000) color = 'red';
-                                else if (totalIrigasi > 500) color = 'orange';
-                                else if (totalIrigasi > 100) color = 'yellow';
-
-                                L.circle([kota.kota.latitude, kota.kota.longitude], {
-                                    color: color,
-                                    fillColor: color,
-                                    fillOpacity: 0.5,
-                                    radius: 5000
-                                }).addTo(map)
-                                .bindPopup(`<b>${kota.kota.name}</b><br>Total Irigasi: ${totalIrigasi}`);
-                            });
-                        } else {
-                            Swal.fire({
-                                icon: 'error',
-                                title: 'Gagal',
-                                text: data.message,
-                                showConfirmButton: false,
-                                timer: 1500
-                            });
-                        }
-                    },
-                    error: function(data) {
-                        Swal.close();
-                        Swal.fire({
-                            icon: 'error',
-                            title: 'Gagal',
-                            text: data.message,
-                            showConfirmButton: false,
-                            timer: 1500
+                            },
+                            error: function(data) {
+                                Swal.close();
+                                Swal.fire({
+                                    icon: 'error',
+                                    title: 'Gagal',
+                                    text: data.message,
+                                    showConfirmButton: false,
+                                    timer: 1500
+                                });
+                            }
                         });
-                    }
-                });
-            });
+                    });
+
+                    $(document).on("click", "#btn_reload_map", function() {
+                        var tahun = $('#tahun_map').val();
+                        var jenis_irigasi = $('#jenis_irigasi_map').val();
+
+                        $.ajax({
+                            url: '/master-data/map-irigasi',
+                            type: 'POST',
+                            data: {
+                                tahun: tahun,
+                                jenis_irigasi: jenis_irigasi
+                            },
+                            headers: {
+                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+                            },
+                            beforeSend: function() {
+                                Swal.fire({
+                                    title: 'Mohon Tunggu',
+                                    text: 'Sedang Mengambil Data...',
+                                    showConfirmButton: false,
+                                    allowOutsideClick: false,
+                                    willOpen: () => {
+                                        Swal.showLoading()
+                                    },
+                                });
+                            },
+                            success: function(data) {
+                                Swal.close();
+                                if (data.status == 'success') {
+                                    map.eachLayer(function(layer) {
+                                        if (layer instanceof L.Circle) {
+                                            map.removeLayer(layer);
+                                        }
+                                    });
+
+                                    data.data.forEach(function(kota) {
+                                        var totalIrigasi = kota.id_jenis_irigasi;
+                                        var color = 'green';
+
+                                        if (totalIrigasi == 2) color = 'red';
+                                        else if (totalIrigasi == 3) color = 'yellow';
+                                        else if (totalIrigasi == 4) color = 'orange';
+                                        else if (totalIrigasi == 5) color = 'blue';
+                                        else if (totalIrigasi == 6) color = 'violet';
+                                        else if (totalIrigasi == 7) color = 'brown';
+                                        else if (totalIrigasi == 8) color = 'beige';
+                                        else if (totalIrigasi == 9) color = 'blueviolet';
+                                        else if (totalIrigasi == 10) color = 'purple';
+                                        else if (totalIrigasi == 10) color = 'peru';
+
+                                        L.circle([kota.kota.latitude, kota.kota
+                                            .longitude], {
+                                                color: color,
+                                                fillColor: color,
+                                                fillOpacity: 0.5,
+                                                radius: 5000
+                                            }).addTo(map)
+                                            .bindPopup(
+                                                `<b>${kota.kota.name}</b><br>Total Irigasi: ${totalIrigasi}`
+                                                );
+                                    });
+                                } else {
+                                    Swal.fire({
+                                        icon: 'error',
+                                        title: 'Gagal',
+                                        text: data.message,
+                                        showConfirmButton: false,
+                                        timer: 1500
+                                    });
+                                }
+                            },
+                            error: function(data) {
+                                Swal.close();
+                                Swal.fire({
+                                    icon: 'error',
+                                    title: 'Gagal',
+                                    text: data.message,
+                                    showConfirmButton: false,
+                                    timer: 1500
+                                });
+                            }
+                        });
+                    });
                     $('#dt_irigasi').DataTable().clear().destroy();
                     var table = $("#dt_irigasi").DataTable({
                         scrollX: true,
