@@ -133,6 +133,8 @@ class new_seeder extends Seeder
             ['permission' => 'irigasi-D', 'middleware' => 'lang,authz', 'type' => 'data', 'method' => 'DELETE', 'url' => '/master-data/irigasi/destroy/{id}', 'route' => 'MasterData\IrigasiController@destroy', 'guard' => 'web'],
             ['permission' => 'irigasi-C', 'middleware' => 'lang,authz', 'type' => 'data', 'method' => 'POST', 'url' => '/master-data/irigasi', 'route' => 'MasterData\IrigasiController@store', 'guard' => 'web'],
             ['permission' => 'irigasi-U', 'middleware' => 'lang,authz', 'type' => 'data', 'method' => 'POST', 'url' => '/master-data/irigasi/{id}', 'route' => 'MasterData\IrigasiController@update', 'guard' => 'web'],
+            ['middleware' => 'lang', 'type' => 'data', 'method' => 'POST', 'url' => '/master-data/map-irigasi', 'route' => 'MasterData\IrigasiController@searchMap', 'guard' => 'web'],
+
 
             // route curah hujan
             ['permission' => 'curahhujan-R', 'middleware' => 'lang,authz', 'type' => 'view', 'method' => 'GET', 'url' => '/master-data/curah-hujan', 'route' => 'MasterData\CurahHujanController@index', 'guard' => 'web'],

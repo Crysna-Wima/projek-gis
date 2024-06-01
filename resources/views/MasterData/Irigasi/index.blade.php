@@ -292,8 +292,13 @@
                                                                 <label for="inputPassword" class="col-form-label">Jenis Irigasi</label>
                                                             </div>
                                                             <div class="col-sm-6">
-                                                                <input type="number" class="form-control" name='jenis_irigasi_map' value="{{ $jenis_irigasi_now }}"
-                                                                    id="jenis_irigasi_map" placeholder="e.g: 1">
+                                                                <select class="form-control"
+                                                                    name='jenis_irigasi_map' id="jenis_irigasi_map">
+                                                                    <option value="">Pilih Jenis Irigasi</option>
+                                                                    @foreach ($id_jenis_irigasi as $item)
+                                                                        <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                                                    @endforeach
+                                                                </select>
                                                             </div>
                                                         </div>
                                                         <div class="col-sm-4">
@@ -631,7 +636,7 @@
                 var totalIrigasi = kota.irigasi;
                 var color = 'green';
 
-                if (totalIrigasi > 1000) color = 'red';
+                if (totalIrigasi = 1) color = 'red';
                 else if (totalIrigasi > 500) color = 'orange';
                 else if (totalIrigasi > 100) color = 'yellow';
 

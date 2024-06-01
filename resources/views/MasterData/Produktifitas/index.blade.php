@@ -1,4 +1,17 @@
 @extends('layouts.app')
+
+@section('css')
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+        integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+
+    <style>
+        #map {
+            height: 400px
+        }
+    </style>
+@endsection
+
+
 @section('content')
     <style>
         #dt_produktifitas>tbody>tr {
@@ -395,6 +408,8 @@
                                     <label for="inputPassword" class="col-sm-4 col-form-label">Masa Panen
                                         <strong><code>*</code></strong></label>
                                     <div class="col-sm-8">
+                                        </select class="form-control input-produktifitas" name='masaPanen' value=""
+                                            id="masaPanen" placeholder="e.g: 1">
                                         <input type="number" class="form-control input-produktifitas" name='masaPanen' value=""
                                             id="masaPanen" placeholder="e.g: 1">
                                     </div>
@@ -535,6 +550,8 @@
                         success: function(data) {
                             Swal.close();
                             if (data.status == 'success') {
+                                map.invalidateSize();
+
                                 map.eachLayer(function(layer) {
                                     if (layer instanceof L.Circle) {
                                         map.removeLayer(layer);
