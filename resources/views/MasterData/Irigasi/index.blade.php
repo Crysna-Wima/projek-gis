@@ -125,11 +125,11 @@
         }
 
         /* .sticky-left {
-                                 position:-webkit-sticky;position:sticky;top:0px;left:0px;opacity: 1;background: rgb(255,255,255);
-                             }
-                             th.sticky-left {
-                                 z-index:9;
-                             } */
+                                     position:-webkit-sticky;position:sticky;top:0px;left:0px;opacity: 1;background: rgb(255,255,255);
+                                 }
+                                 th.sticky-left {
+                                     z-index:9;
+                                 } */
         .dtfh-floatingparenthead {
             top: 70px !important;
             overflow-x: auto !important;
@@ -253,7 +253,7 @@
                     <div class="card">
                         <div class="card-header p-2 bg-info shadow">
                             <div class="row">
-                                <h4 class="font-size-15 text-white col-6 m-1"><i class="fas fa-seedling mx-3"></i>Irigasi
+                                <h4 class="font-size-15 text-white col-6 m-1"><i class="fas fa-utensil-spoon mx-3"></i>Irigasi
                                 </h4>
                             </div>
                         </div>
@@ -266,6 +266,14 @@
                                         <span class="d-block d-sm-none"><i class="fas fa-home"></i> <span
                                                 class="badge bg-danger rounded-pill"></span></span>
                                         <span class="d-none d-sm-block">Daftar Irigasi</span>
+                                    </a>
+                                </li>
+                                <li class="nav-item waves-effect waves-light" id="mapping_irigasi">
+                                    <a class="nav-link tab_irig" data-bs-toggle="tab" href="#tab_mapping_irigasi"
+                                        role="tab" data-state="2">
+                                        <span class="d-block d-sm-none"><i class="far fa-user"></i> <span
+                                                class="badge bg-danger rounded-pill"></span></span>
+                                        <span class="d-none d-sm-block">Mapping</span>
                                     </a>
                                 </li>
                             </ul>
@@ -305,6 +313,9 @@
                                             </tr>
                                         </thead>
                                     </table>
+                                </div>
+
+                                <div class="tab-pane fade" id="tab_mapping_irigasi" role="tabpanel">
                                     <div class="row">
                                         <div class="col-xl-12">
                                             <div class="card-xl">
@@ -337,7 +348,7 @@
                                                             <div class="col-sm-8">
                                                                 <select class="form-control" name='jenis_irigasi_map'
                                                                     id="jenis_irigasi_map">
-                                                                    <option value="">Pilih Jenis Irigasi</option>
+                                                                    <option value="">Semua Jenis Irigasi</option>
                                                                     @foreach ($id_jenis_irigasi as $item)
                                                                         <option value="{{ $item->id }}">
                                                                             {{ $item->name }}</option>
@@ -458,9 +469,9 @@
                                             </div>
                                             <!--end card-->
                                         </div>
-                                    </div>
-                                    <div style="overflow-x: auto">
-                                        <div id="map"></div>
+                                        <div style="overflow-x: auto">
+                                            <div id="map"></div>
+                                        </div>
                                     </div>
                                 </div>
                                 <!-- end card body -->
@@ -590,7 +601,7 @@
                                         <div class="col-sm-8">
                                             <select class="form-control edit-irigasi select2_edit_id_jenis_irigasi"
                                                 name='edit_id_jenis_irigasi' id="edit_id_jenis_irigasi">
-                                                <option value="">Pilih Jenis Irigasi</option>
+                                                <option value="">Semua Jenis</option>
                                                 @foreach ($id_jenis_irigasi as $item)
                                                     <option value="{{ $item->id }}">{{ $item->name }}</option>
                                                 @endforeach
@@ -637,13 +648,14 @@
                     if (curr_state == 1) {
                         $(document).ready(function() {
                             if ($('#dt_irigasi').length) {
-                                $('#dt_irigasi').DataTable().columns.adjust().draw();
                                 table.ajax.reload();
+                                table.columns.adjust().draw();
                             } else {
                                 location.reload();
                             }
                         })
                     } else if (curr_state == 2) {
+                        console.log('tab 2');
                         var tahun = $('#tahun_map').val();
                         var jenis_irigasi = $('#jenis_irigasi_map').val();
 
@@ -671,6 +683,8 @@
                             success: function(data) {
                                 Swal.close();
                                 if (data.status == 'success') {
+                                    map.invalidateSize();
+
                                     map.eachLayer(function(layer) {
                                         if (layer instanceof L.Circle) {
                                             map.removeLayer(layer);
@@ -678,30 +692,33 @@
                                     });
 
                                     data.data.forEach(function(kota) {
-                                        var totalIrigasi = kota.id_jenis_irigasi;
+                                        var id_jenis_irigasi = kota.id_jenis_irigasi;
+                                        var jenisIrigasi = kota.jenis_irigasi.name;
+                                        var luasIrigasi = kota.luas;
                                         var color = 'green';
 
-                                        if (totalIrigasi == 2) color = 'red';
-                                        else if (totalIrigasi == 3) color = 'yellow';
-                                        else if (totalIrigasi == 4) color = 'orange';
-                                        else if (totalIrigasi == 5) color = 'blue';
-                                        else if (totalIrigasi == 6) color = 'violet';
-                                        else if (totalIrigasi == 7) color = 'brown';
-                                        else if (totalIrigasi == 8) color = 'beige';
-                                        else if (totalIrigasi == 9) color = 'blueviolet';
-                                        else if (totalIrigasi == 10) color = 'purple';
-                                        else if (totalIrigasi == 11) color = 'peru';
+                                        if (id_jenis_irigasi == "2   ") color = 'red';
+                                        else if (id_jenis_irigasi == "3   ") color = 'yellow';
+                                        else if (id_jenis_irigasi == "4   ") color = 'orange';
+                                        else if (id_jenis_irigasi == "5   ") color = 'blue';
+                                        else if (id_jenis_irigasi == "6   ") color = 'violet';
+                                        else if (id_jenis_irigasi == "7   ") color = 'brown';
+                                        else if (id_jenis_irigasi == "8   ") color = 'beige';
+                                        else if (id_jenis_irigasi == "9   ") color = 'blueviolet';
+                                        else if (id_jenis_irigasi == "10  ") color = 'purple';
+                                        else if (id_jenis_irigasi == "11  ") color = 'peru';
 
                                         L.circle([kota.kota.latitude, kota.kota
-                                            .longitude], {
+                                                .longitude
+                                            ], {
                                                 color: color,
                                                 fillColor: color,
                                                 fillOpacity: 0.5,
                                                 radius: 5000
                                             }).addTo(map)
                                             .bindPopup(
-                                                `<b>${kota.kota.name}</b><br>Jenis Irigasi: ${totalIrigasi}`
-                                                );
+                                                `<b>${kota.kota.name}</b><br>Jenis Irigasi: ${jenisIrigasi}<br>Luas: ${luasIrigasi} Ha`
+                                            );
                                     });
                                 } else {
                                     Swal.fire({
@@ -743,27 +760,33 @@
                     console.log(mapData);
 
                     mapData.forEach(function(kota) {
-                        var totalIrigasi = kota.id_jenis_irigasi;
-                        var color = 'green';
+                        var id_jenis_irigasi = kota.id_jenis_irigasi;
+                                        var jenisIrigasi = kota.jenis_irigasi.name;
+                                        var luasIrigasi = kota.luas;
+                                        var color = 'green';
 
-                        if (totalIrigasi == 2) color = 'red';
-                        else if (totalIrigasi == 3) color = 'yellow';
-                        else if (totalIrigasi == 4) color = 'orange';
-                        else if (totalIrigasi == 5) color = 'blue';
-                        else if (totalIrigasi == 6) color = 'violet';
-                        else if (totalIrigasi == 7) color = 'brown';
-                        else if (totalIrigasi == 8) color = 'beige';
-                        else if (totalIrigasi == 9) color = 'blueviolet';
-                        else if (totalIrigasi == 10) color = 'purple';
-                        else if (totalIrigasi == 11) color = 'peru';
+                                        if (id_jenis_irigasi == "2   ") color = 'red';
+                                        else if (id_jenis_irigasi == "3   ") color = 'yellow';
+                                        else if (id_jenis_irigasi == "4   ") color = 'orange';
+                                        else if (id_jenis_irigasi == "5   ") color = 'blue';
+                                        else if (id_jenis_irigasi == "6   ") color = 'violet';
+                                        else if (id_jenis_irigasi == "7   ") color = 'brown';
+                                        else if (id_jenis_irigasi == "8   ") color = 'beige';
+                                        else if (id_jenis_irigasi == "9   ") color = 'blueviolet';
+                                        else if (id_jenis_irigasi == "10  ") color = 'purple';
+                                        else if (id_jenis_irigasi == "11  ") color = 'peru';
 
-                        L.circle([kota.kota.latitude, kota.kota.longitude], {
+                        L.circle([kota.kota.latitude, kota.kota
+                                .longitude
+                            ], {
                                 color: color,
                                 fillColor: color,
                                 fillOpacity: 0.5,
                                 radius: 5000
                             }).addTo(map)
-                            .bindPopup(`<b>${kota.kota.name}</b><br>Jenis Irigasi: ${totalIrigasi}`);
+                            .bindPopup(
+                                `<b>${kota.kota.name}</b><br>Jenis Irigasi: ${jenisIrigasi}<br>Luas: ${luasIrigasi} Ha`
+                            );
                     });
 
                     $(document).on("click", "#search_map", function() {
@@ -794,6 +817,8 @@
                             success: function(data) {
                                 Swal.close();
                                 if (data.status == 'success') {
+                                    map.invalidateSize();
+
                                     map.eachLayer(function(layer) {
                                         if (layer instanceof L.Circle) {
                                             map.removeLayer(layer);
@@ -801,30 +826,33 @@
                                     });
 
                                     data.data.forEach(function(kota) {
-                                        var totalIrigasi = kota.id_jenis_irigasi;
+                                        var id_jenis_irigasi = kota.id_jenis_irigasi;
+                                        var jenisIrigasi = kota.jenis_irigasi.name;
+                                        var luasIrigasi = kota.luas;
                                         var color = 'green';
 
-                                        if (totalIrigasi == 2) color = 'red';
-                                        else if (totalIrigasi == 3) color = 'yellow';
-                                        else if (totalIrigasi == 4) color = 'orange';
-                                        else if (totalIrigasi == 5) color = 'blue';
-                                        else if (totalIrigasi == 6) color = 'violet';
-                                        else if (totalIrigasi == 7) color = 'brown';
-                                        else if (totalIrigasi == 8) color = 'beige';
-                                        else if (totalIrigasi == 9) color = 'blueviolet';
-                                        else if (totalIrigasi == 10) color = 'purple';
-                                        else if (totalIrigasi == 11) color = 'peru';
+                                        if (id_jenis_irigasi == "2   ") color = 'red';
+                                        else if (id_jenis_irigasi == "3   ") color = 'yellow';
+                                        else if (id_jenis_irigasi == "4   ") color = 'orange';
+                                        else if (id_jenis_irigasi == "5   ") color = 'blue';
+                                        else if (id_jenis_irigasi == "6   ") color = 'violet';
+                                        else if (id_jenis_irigasi == "7   ") color = 'brown';
+                                        else if (id_jenis_irigasi == "8   ") color = 'beige';
+                                        else if (id_jenis_irigasi == "9   ") color = 'blueviolet';
+                                        else if (id_jenis_irigasi == "10  ") color = 'purple';
+                                        else if (id_jenis_irigasi == "11  ") color = 'peru';
 
                                         L.circle([kota.kota.latitude, kota.kota
-                                            .longitude], {
+                                                .longitude
+                                            ], {
                                                 color: color,
                                                 fillColor: color,
                                                 fillOpacity: 0.5,
                                                 radius: 5000
                                             }).addTo(map)
                                             .bindPopup(
-                                                `<b>${kota.kota.name}</b><br>Jenis Irigasi: ${totalIrigasi}`
-                                                );
+                                                `<b>${kota.kota.name}</b><br>Jenis Irigasi: ${jenisIrigasi}<br>Luas: ${luasIrigasi} Ha`
+                                            );
                                     });
                                 } else {
                                     Swal.fire({
@@ -884,30 +912,33 @@
                                     });
 
                                     data.data.forEach(function(kota) {
-                                        var totalIrigasi = kota.id_jenis_irigasi;
+                                        var id_jenis_irigasi = kota.id_jenis_irigasi;
+                                        var jenisIrigasi = kota.jenis_irigasi.name;
+                                        var luasIrigasi = kota.luas;
                                         var color = 'green';
 
-                                        if (totalIrigasi == 2) color = 'red';
-                                        else if (totalIrigasi == 3) color = 'yellow';
-                                        else if (totalIrigasi == 4) color = 'orange';
-                                        else if (totalIrigasi == 5) color = 'blue';
-                                        else if (totalIrigasi == 6) color = 'violet';
-                                        else if (totalIrigasi == 7) color = 'brown';
-                                        else if (totalIrigasi == 8) color = 'beige';
-                                        else if (totalIrigasi == 9) color = 'blueviolet';
-                                        else if (totalIrigasi == 10) color = 'purple';
-                                        else if (totalIrigasi == 11) color = 'peru';
+                                        if (id_jenis_irigasi == "2   ") color = 'red';
+                                        else if (id_jenis_irigasi == "3   ") color = 'yellow';
+                                        else if (id_jenis_irigasi == "4   ") color = 'orange';
+                                        else if (id_jenis_irigasi == "5   ") color = 'blue';
+                                        else if (id_jenis_irigasi == "6   ") color = 'violet';
+                                        else if (id_jenis_irigasi == "7   ") color = 'brown';
+                                        else if (id_jenis_irigasi == "8   ") color = 'beige';
+                                        else if (id_jenis_irigasi == "9   ") color = 'blueviolet';
+                                        else if (id_jenis_irigasi == "10  ") color = 'purple';
+                                        else if (id_jenis_irigasi == "11  ") color = 'peru';
 
                                         L.circle([kota.kota.latitude, kota.kota
-                                            .longitude], {
+                                                .longitude
+                                            ], {
                                                 color: color,
                                                 fillColor: color,
                                                 fillOpacity: 0.5,
                                                 radius: 5000
                                             }).addTo(map)
                                             .bindPopup(
-                                                `<b>${kota.kota.name}</b><br>Jenis Irigasi: ${totalIrigasi}`
-                                                );
+                                                `<b>${kota.kota.name}</b><br>Jenis Irigasi: ${jenisIrigasi}<br>Luas: ${luasIrigasi} Ha`
+                                            );
                                     });
                                 } else {
                                     Swal.fire({

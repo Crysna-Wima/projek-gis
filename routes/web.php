@@ -18,12 +18,8 @@ use App\Models\Routes;
 use Illuminate\Auth\Events\Login;
 
 Route::get('/', 'Landing\LandingPageController@index');
-Route::get('/tentang-kami', function () {
-    return view('home.tentang-kami'); 
-});
-Route::get('/data/curah-hujan', function () {
-    return view('home.data.curah-hujan'); 
-});
+Route::get('/tentang-kami', 'Landing\LandingPageController@tentangkami');
+Route::get('/data/curah-hujan', 'Landing\LandingPageController@curahhujan');
 Route::get('/data/irigasi', function () {
     return view('home.data.irigasi'); 
 });

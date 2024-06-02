@@ -137,6 +137,11 @@
                                             <button id="loading_submit" disabled style="display: none" type="button" class="btn btn-primary waves-effect waves-light">
                                                 <i class="bx bx-hourglass bx-spin font-size-16 align-middle me-2"></i> Validasi
                                             </button>
+                                            {{-- button back home--}}
+                                            <a href="{{url('/')}}" class="btn btn-light waves-effect waves-light align-items-center mt-2 text-success">
+                                                <i class="bx bx-arrow-back bx-flashing font-size-16 align-middle"></i>
+                                                Kembali
+                                            </a>
                                         </div>
                                     </form>
                                 </div>

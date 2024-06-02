@@ -17,4 +17,9 @@ class CurahHujan extends Model
         'bulan',
         'curah_hujan'
     ];
+
+    public function kota()
+    {
+        return $this->belongsTo(Regency::class, 'id_kota', 'id');
+    }
 }

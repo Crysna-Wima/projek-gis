@@ -1,4 +1,5 @@
 @extends('layouts.app')
+
 @section('css')
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
         integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
@@ -7,35 +8,17 @@
         #map {
             height: 400px
         }
-
-        .bg-green {
-            background-color: green;
-        }
-
-        .bg-yellow {
-            background-color: yellow;
-        }
-
-        .bg-orange {
-            background-color: orange;
-        }
-
-        .bg-red {
-            background-color: red;
-        }
-
-        .bg-brown {
-            background-color: brown;
-        }
     </style>
 @endsection
+
+
 @section('content')
     <style>
-        #dt_kemiringan>tbody>tr {
+        #dt_curah_hujan>tbody>tr {
             cursor: pointer;
         }
 
-        #dt_kemiringan>tbody>tr:hover {
+        #dt_curah_hujan>tbody>tr:hover {
             background-color: #00000030;
         }
 
@@ -99,11 +82,11 @@
         }
 
         /* .sticky-left {
-                                         position:-webkit-sticky;position:sticky;top:0px;left:0px;opacity: 1;background: rgb(255,255,255);
-                                     }
-                                     th.sticky-left {
-                                         z-index:9;
-                                     } */
+                             position:-webkit-sticky;position:sticky;top:0px;left:0px;opacity: 1;background: rgb(255,255,255);
+                         }
+                         th.sticky-left {
+                             z-index:9;
+                         } */
         .dtfh-floatingparenthead {
             top: 70px !important;
             overflow-x: auto !important;
@@ -116,7 +99,7 @@
             /* float: right; */
         }
 
-        #dt_kemiringan_filter {
+        #dt_curah_hujan_filter {
             display: none !important;
         }
 
@@ -213,31 +196,50 @@
         .btn-toggle.active {
             background-color: #009E3C;
         }
+
+        .bg-yellow {
+            background-color: yellow;
+        }
+
+        .bg-biru-muda {
+            background-color: rgb(0, 255, 229);
+        }
+
+        .bg-biru {
+            background-color: rgb(0, 110, 255);
+        }
+
+        .bg-biru-tua {
+            background-color: blue;
+        }
     </style>
 
     <div class="main-content">
         <div class="page-content">
             <div class="container-fluid">
+                <!-- start page title -->
+
                 <div class="col-xl-12">
                     <div class="card">
                         <div class="card-header p-2 bg-info shadow">
                             <div class="row">
-                                <h4 class="font-size-15 text-white col-6 m-1"><i class="fas fa-mountain mx-3"></i>Kemiringan
-                                    Wilayah</h4>
+                                <h4 class="font-size-15 text-white col-6 m-1"><i class="fas fa-cloud-rain mx-3"></i>Curah Hujan
+                                </h4>
                             </div>
                         </div>
+
                         <div class="card-body">
-                            <ul class="nav nav-tabs" role="tablist" id="tab_kemiringan">
-                                <li class="nav-item waves-effect waves-light" id="daftar_kemiringan">
-                                    <a class="nav-link tab_kem active" data-bs-toggle="tab" href="#tab_daftar_kemiringan"
+                            <ul class="nav nav-tabs" role="tablist" id="tab_curah_hujan">
+                                <li class="nav-item waves-effect waves-light" id="daftar_curah_hujan">
+                                    <a class="nav-link tab_cur active" data-bs-toggle="tab" href="#tab_daftar_curah_hujan"
                                         role="tab" data-state="1">
                                         <span class="d-block d-sm-none"><i class="fas fa-home"></i> <span
                                                 class="badge bg-danger rounded-pill"></span></span>
-                                        <span class="d-none d-sm-block">Daftar Kemiringan Wilayah</span>
+                                        <span class="d-none d-sm-block">Daftar Curah Hujan</span>
                                     </a>
                                 </li>
-                                <li class="nav-item waves-effect waves-light" id="mapping_kemiringan">
-                                    <a class="nav-link tab_kem" data-bs-toggle="tab" href="#tab_mapping_kemiringan"
+                                <li class="nav-item waves-effect waves-light" id="mapping_curah_hujan">
+                                    <a class="nav-link tab_cur" data-bs-toggle="tab" href="#tab_mapping_curah_hujan"
                                         role="tab" data-state="2">
                                         <span class="d-block d-sm-none"><i class="far fa-user"></i> <span
                                                 class="badge bg-danger rounded-pill"></span></span>
@@ -246,67 +248,118 @@
                                 </li>
                             </ul>
 
+                            {{-- tab panel  --}}
                             <div class="tab-content p-3 text-muted">
-                                {{-- tab_daftar_kemiringan --}}
-                                <div class="tab-pane fade show active" id="tab_daftar_kemiringan" role="tabpanel">
-                                    <h4 class="card-title mb-4 font-size-12">Daftar Kemiringan Wilayah</h4>
-                                    @can('kemiringan-C')
+                                {{-- tab_daftar_curah_hujan --}}
+                                <div class="tab-pane fade show active" id="tab_daftar_curah_hujan" role="tabpanel">
+                                    <h4 class="card-title mb-4 font-size-12">Daftar Curah Hujan</h4>
+                                    @can('curahhujan-C')
                                         <div class="row">
                                             <div class="col-sm-6"></div>
                                             <div class="col-sm-6">
                                                 <button
-                                                    class="btn btn-primary btn-sm mx-2 btn-tambah-kemiringan float-end mb-2">
-                                                    <i class="fas fa-plus mx-2"></i> Tambah Kemiringan Wilayah
+                                                    class="btn btn-primary btn-sm mx-2 btn-tambah-curah_hujan float-end mb-2">
+                                                    <i class="fas fa-plus mx-2"></i> Tambah Curah Hujan
                                                 </button>
                                             </div>
                                         </div>
                                     @endcan
 
-                                    <table id="dt_kemiringan" class="table table-bordered table-striped t_per test"
+                                    <table id="dt_curah_hujan" class="table table-bordered table-striped t_cur test"
                                         style="width: 3030px">
                                         <thead>
                                             <tr>
                                                 <th>No</th>
                                                 <th data-type="select" data-name="kota">Kabupaten/Kota</th>
-                                                <th data-type="select" data-name="id_kemiringa_wilayah">Kemiringan Wilayah
-                                                </th>
-                                                <th data-type="number" data-name="luas">Luas</th>
+                                                <th data-type="year" data-name="tahun">Tahun</th>
+                                                <th data-type="select" data-name="bulan">Bulan</th>
+                                                <th data-type="number" data-name="curah_hujan">Curah Hujan</th>
                                                 <th class="filterhead">Action</th>
                                             </tr>
                                             <tr>
                                                 <td></td>
                                                 <th data-type="select" data-name="kota"></th>
-                                                <th data-type="select" data-name="id_kemiringa_wilayah"></th>
-                                                <th data-type="number" data-name="luas"></th>
+                                                <th data-type="year" data-name="tahun"></th>
+                                                <th data-type="select" data-name="bulan"></th>
+                                                <th data-type="number" data-name="curah_hujan"></th>
                                                 <td class="filterhead"></td>
                                             </tr>
                                         </thead>
                                     </table>
+
                                 </div>
 
+
                                 {{-- tab_mapping --}}
-                                <div class="tab-pane fade" id="tab_mapping_kemiringan" role="tabpanel">
+                                <div class="tab-pane fade" id="tab_mapping_curah_hujan" role="tabpanel">
                                     <div class="row">
                                         <div class="col-xl-12">
                                             <div class="card-xl">
                                                 <div class="card-body">
-                                                    <h4 class="card-title mb-4">Mapping Kemiringan Wilayah</h4>
+                                                    <h4 class="card-title mb-4">Mapping Curah Hujan</h4>
                                                     {{-- button reload --}}
                                                     <div class="row mb-4">
-                                                        <div class="col-sm-6 row">
+                                                        <div class="col-sm-3 row">
                                                             <div class="col-sm-4">
-                                                                <label for="inputPassword" class="col-form-label">Kemiringan
-                                                                    Wilayah</label>
+                                                                <label for="inputPassword"
+                                                                    class="col-form-label">Tahun</label>
                                                             </div>
                                                             <div class="col-sm-6">
-                                                                <select class="form-control select2_kemiringan_map"
-                                                                    name='kemiringan_map' id="kemiringan_map">
-                                                                    <option value="">Pilih Kemiringan Wilayah</option>
-                                                                    @foreach ($id_kemiringan_wilayah as $item)
-                                                                        <option value="{{ $item->id }}">
-                                                                            {{ $item->name }}
-                                                                        </option>
-                                                                    @endforeach
+                                                                <div class="position-relative" id="datepicker5">
+                                                                    <input type="text" class="form-control"
+                                                                        data-provide="datepicker"
+                                                                        data-date-container='#datepicker5'
+                                                                        data-date-autoclose="true" data-date-format="yyyy"
+                                                                        data-date-min-view-mode="years" id="tahun_map"
+                                                                        name="tahun_map" value="{{ $tahun_now }}"
+                                                                        placeholder="e.g: 2024">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-3 row">
+                                                            <div class="col-sm-4">
+                                                                <label for="inputPassword"
+                                                                    class="col-form-label">Bulan</label>
+                                                            </div>
+                                                            <div class="col-sm-6">
+                                                                <select class="form-control" name='bulan_map'
+                                                                    id="bulan_map">
+                                                                    <option value="">Pilih Bulan</option>
+                                                                    <option value="1"
+                                                                        {{ $bulan_now == 1 ? 'selected' : '' }}>Januari
+                                                                    </option>
+                                                                    <option value="2"
+                                                                        {{ $bulan_now == 2 ? 'selected' : '' }}>Februari
+                                                                    </option>
+                                                                    <option value="3"
+                                                                        {{ $bulan_now == 3 ? 'selected' : '' }}>Maret
+                                                                    </option>
+                                                                    <option value="4"
+                                                                        {{ $bulan_now == 4 ? 'selected' : '' }}>April
+                                                                    </option>
+                                                                    <option value="5"
+                                                                        {{ $bulan_now == 5 ? 'selected' : '' }}>Mei</option>
+                                                                    <option value="6"
+                                                                        {{ $bulan_now == 6 ? 'selected' : '' }}>Juni
+                                                                    </option>
+                                                                    <option value="7"
+                                                                        {{ $bulan_now == 7 ? 'selected' : '' }}>Juli
+                                                                    </option>
+                                                                    <option value="8"
+                                                                        {{ $bulan_now == 8 ? 'selected' : '' }}>Agustus
+                                                                    </option>
+                                                                    <option value="9"
+                                                                        {{ $bulan_now == 9 ? 'selected' : '' }}>September
+                                                                    </option>
+                                                                    <option value="10"
+                                                                        {{ $bulan_now == 10 ? 'selected' : '' }}>Oktober
+                                                                    </option>
+                                                                    <option value="11"
+                                                                        {{ $bulan_now == 11 ? 'selected' : '' }}>November
+                                                                    </option>
+                                                                    <option value="12"
+                                                                        {{ $bulan_now == 12 ? 'selected' : '' }}>Desember
+                                                                    </option>
                                                                 </select>
                                                             </div>
                                                         </div>
@@ -316,7 +369,8 @@
                                                                     class="fas fa-search mx-2"></i>Search</button>
                                                         </div>
                                                         <div class="col-sm-12">
-                                                            <button type="button" class="btn btn-warning btn-sm float-end"
+                                                            <button type="button"
+                                                                class="btn btn-warning btn-sm float-end"
                                                                 id="btn_reload_map">
                                                                 <i class="bx bx-revision mx-2"></i>
                                                                 Reload
@@ -327,46 +381,39 @@
                                                     <div class="row mb-4">
                                                         <div class="col-sm-12">
                                                             <div class="row">
-                                                                <div class="col-sm-2">
-                                                                    <div class="d-flex align-items-center">
-                                                                        <div class="bg-green"
-                                                                            style="width: 20px; height: 20px;"></div>
-                                                                        <span class="mx-2">Datar (0-8%)</span>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-sm-2">
+                                                                <div class="col-sm-3">
                                                                     <div class="d-flex align-items-center">
                                                                         <div class="bg-yellow"
                                                                             style="width: 20px; height: 20px;"></div>
-                                                                        <span class="mx-2">Landai (8-5%)</span>
+                                                                        <span class="mx-2">Rendah</span>
                                                                     </div>
                                                                 </div>
-                                                                <div class="col-sm-2">
+                                                                <div class="col-sm-3">
                                                                     <div class="d-flex align-items-center">
-                                                                        <div class="bg-orange"
+                                                                        <div class="bg-biru-muda"
                                                                             style="width: 20px; height: 20px;"></div>
-                                                                        <span class="mx-2">Agak Curam (15-25%)</span>
+                                                                        <span class="mx-2">Normal</span>
                                                                     </div>
                                                                 </div>
-                                                                <div class="col-sm-2">
+                                                                <div class="col-sm-3">
                                                                     <div class="d-flex align-items-center">
-                                                                        <div class="bg-red"
+                                                                        <div class="bg-biru"
                                                                             style="width: 20px; height: 20px;"></div>
-                                                                        <span class="mx-2">Curam (25-45%)</span>
+                                                                        <span class="mx-2">Sedang</span>
                                                                     </div>
                                                                 </div>
-                                                                <div class="col-sm-2">
+                                                                <div class="col-sm-3">
                                                                     <div class="d-flex align-items-center">
-                                                                        <div class="bg-brown"
+                                                                        <div class="bg-biru-tua"
                                                                             style="width: 20px; height: 20px;"></div>
-                                                                        <span class="mx-2">Sangat Curam (>45%)</span>
+                                                                        <span class="mx-2">Tinggi</span>
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </div>
                                                     <div style="overflow-x: auto">
-                                                        <div id="map" style="height: 500px"></div>
+                                                        <div id="map_curah_hujan" style="height: 400px;"></div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -376,125 +423,85 @@
                                 </div>
                             </div>
                         </div>
-                        <!-- end card body -->
                     </div>
                     <!-- end card -->
                 </div>
+            </div>
 
-                <!-- Modal Tambah -->
-                <div class="modal fade" id="modal-tambah-kemiringan" data-bs-backdrop="static" data-bs-keyboard="false"
-                    aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                    <div class="modal-dialog modal-lg modal-dialog-scrollable">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="title-modal">Tambah Kemiringan Wilayah</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                    aria-label="Close"></button>
-                            </div>
 
-                            <div class="modal-body p-4">
-                                <div class="mb-3 row">
-                                    <label for="inputPassword" class="col-sm-4 col-form-label">Kota / Kabupaten
-                                        <strong><code>*</code></strong></label>
-                                    <div class="col-sm-8">
-                                        <select class="form-control input-kemiringan select2_kota" name='kota'
-                                            id="kota">
-                                            <option value="">Pilih kota / Kabupaten</option>
-                                            @foreach ($kota as $item)
-                                                <option value="{{ $item->id }}">{{ $item->name }}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="mb-3 row">
-                                    <label for="inputPassword" class="col-sm-4 col-form-label">Kemiringan Wilayah
-                                        <strong><code>*</code></strong></label>
-                                    <div class="col-sm-8">
-                                        <select class="form-control input-kemiringan select2_id_kemiringan_wilayah"
-                                            name='id_kemiringan_wilayah' id="id_kemiringan_wilayah">
-                                            <option value="">Pilih Kemiringan Wilayah</option>
-                                            @foreach ($id_kemiringan_wilayah as $item)
-                                                <option value="{{ $item->id }}">{{ $item->name }}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="mb-3 row">
-                                    <label for="inputPassword" class="col-sm-4 col-form-label">Luas (Ha)
-                                        <strong><code>*</code></strong></label>
-                                    <div class="col-sm-8">
-                                        <input type="number" class="form-control input-kemiringan" name='luas'
-                                            value="" id="luas" placeholder="e.g: 5.5" step="0.1">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                @can('kemiringan-C')
-                                    <button type="button" id="btn-simpan-kemiringan"
-                                        class="btn btn-primary btn-simpan-kemiringan"><i
-                                            class="fas fa-save mx-2"></i>Simpan</button>
-                                @endcan
-                            </div>
+            <!-- Modal Tambah -->
+            <div class="modal fade" id="modal-tambah-curah_hujan" data-bs-backdrop="static" data-bs-keyboard="false"
+                aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog modal-lg modal-dialog-scrollable">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="title-modal">Tambah Curah Hujan</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                aria-label="Close"></button>
                         </div>
-                    </div>
-                </div>
 
-
-                <!-- Modal Edit -->
-                <div class="modal fade" id="modal-edit-kemiringan" data-bs-backdrop="static" data-bs-keyboard="false"
-                    aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                    <div class="modal-dialog modal-lg modal-dialog-scrollable">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="title-modal">Edit Kemiringan Wilayah</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                    aria-label="Close"></button>
+                        <div class="modal-body p-4">
+                            <div class="mb-3 row">
+                                <label for="inputPassword" class="col-sm-4 col-form-label">Kota / Kabupaten
+                                    <strong><code>*</code></strong></label>
+                                <div class="col-sm-8">
+                                    <select class="form-control input-curah_hujan select2_kota" name='kota'
+                                        id="kota">
+                                        <option value="">Pilih kota / Kabupaten</option>
+                                        @foreach ($kota as $item)
+                                            <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
                             </div>
-
-                            <div class="modal-body p-4">
-                                <input type="hidden" class="edit-kemiringan" name="id_kemiringan" id="id_kemiringan"
-                                    value="">
-                                <div class="mb-3 row">
-                                    <label for="inputPassword" class="col-sm-4 col-form-label">Kota / Kabupaten
-                                        <strong><code>*</code></strong></label>
-                                    <div class="col-sm-8">
-                                        <select class="form-control edit-kemiringan select2_edit_kota" name='edit_kota'
-                                            id="edit_kota">
-                                            <option value="">Pilih Kota / Kabupaten</option>
-                                            @foreach ($kota as $item)
-                                                <option value="{{ $item->id }}">{{ $item->name }}</option>
-                                            @endforeach
-                                        </select>
+                            <div class="mb-3 row">
+                                <label for="inputPassword" class="col-sm-4 col-form-label">Tahun
+                                    <strong><code>*</code></strong></label>
+                                <div class="col-sm-8">
+                                    <div class="position-relative" id="datepicker5">
+                                        <input type="text" class="form-control input-curah_hujan"
+                                            data-provide="datepicker" data-date-container='#datepicker5'
+                                            data-date-autoclose="true" data-date-format="yyyy"
+                                            data-date-min-view-mode="years" id="tahun" name="tahun"
+                                            value="{{ date('Y') }}" placeholder="e.g: 2024">
                                     </div>
                                 </div>
-                                <div class="mb-3 row">
-                                    <label for="inputPassword" class="col-sm-4 col-form-label">Kemiringan Wilayah
-                                        <strong><code>*</code></strong></label>
-                                    <div class="col-sm-8">
-                                        <select class="form-control edit-kemiringan select2_edit_id_kemiringan_wilayah"
-                                            name='edit_id_kemiringan_wilayah' id="edit_id_kemiringan_wilayah">
-                                            <option value="">Pilih Kemiringan Wilayah</option>
-                                            @foreach ($id_kemiringan_wilayah as $item)
-                                                <option value="{{ $item->id }}">{{ $item->name }}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
+                            </div>
+                            <div class="mb-3 row">
+                                <label for="inputPassword" class="col-sm-4 col-form-label">Bulan
+                                    <strong><code>*</code></strong></label>
+                                <div class="col-sm-8">
+                                    <select class="form-control input-curah_hujan select2_bulan" name='bulan'
+                                        id="bulan">
+                                        <option value="">Pilih Bulan</option>
+                                        <option value="1">Januari</option>
+                                        <option value="2">Februari</option>
+                                        <option value="3">Maret</option>
+                                        <option value="4">April</option>
+                                        <option value="5">Mei</option>
+                                        <option value="6">Juni</option>
+                                        <option value="7">Juli</option>
+                                        <option value="8">Agustus</option>
+                                        <option value="9">September</option>
+                                        <option value="10">Oktober</option>
+                                        <option value="11">November</option>
+                                        <option value="12">Desember</option>
+                                    </select>
                                 </div>
-                                <div class="mb-3 row">
-                                    <label for="inputPassword" class="col-sm-4 col-form-label">Luas (Ha)
-                                        <strong><code>*</code></strong></label>
-                                    <div class="col-sm-8">
-                                        <input type="number" class="form-control edit-kemiringan" name='edit_luas'
-                                            value="" id="edit_luas" placeholder="e.g: 5.5" step="0.1">
-                                    </div>
+                            </div>
+                            <div class="mb-3 row">
+                                <label for="inputPassword" class="col-sm-4 col-form-label">Curah Hujan (mm)
+                                    <strong><code>*</code></strong></label>
+                                <div class="col-sm-8">
+                                    <input type="number" class="form-control input-curah_hujan" name='curah_hujan'
+                                        value="" id="curah_hujan" placeholder="e.g: 100">
                                 </div>
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                @can('kemiringan-U')
-                                    <button type="button" id="btn-edit-kemiringan"
-                                        class="btn btn-primary btn-edit-kemiringan"><i
+                                @can('curahhujan-C')
+                                    <button type="button" id="btn-simpan-curah_hujan"
+                                        class="btn btn-primary btn-simpan-curah_hujan"><i
                                             class="fas fa-save mx-2"></i>Simpan</button>
                                 @endcan
                             </div>
@@ -502,8 +509,93 @@
                     </div>
                 </div>
             </div>
+
+
+            <!-- Modal Edit -->
+            <div class="modal fade" id="modal-edit-curah_hujan" data-bs-backdrop="static" data-bs-keyboard="false"
+                aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog modal-lg modal-dialog-scrollable">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="title-modal">Edit Curah Hujan</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                aria-label="Close"></button>
+                        </div>
+
+                        <div class="modal-body p-4">
+                            <input type="hidden" class="edit-curah_hujan" name="id_curah_hujan" id="id_curah_hujan"
+                                value="">
+                            <div class="mb-3 row">
+                                <label for="inputPassword" class="col-sm-4 col-form-label">Kota / Kabupaten
+                                    <strong><code>*</code></strong></label>
+                                <div class="col-sm-8">
+                                    <select class="form-control edit-curah_hujan select2_edit_kota" name='edit_kota'
+                                        id="edit_kota">
+                                        <option value="">Pilih Kota / Kabupaten</option>
+                                        @foreach ($kota as $item)
+                                            <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="mb-3 row">
+                                <label for="inputPassword" class="col-sm-4 col-form-label">Tahun
+                                    <strong><code>*</code></strong></label>
+                                <div class="col-sm-8">
+                                    <div class="position-relative" id="datepicker5">
+                                        <input type="text" class="form-control edit-curah_hujan"
+                                            data-provide="datepicker" data-date-container='#datepicker5'
+                                            data-date-autoclose="true" data-date-format="yyyy"
+                                            data-date-min-view-mode="years" id="edit_tahun" name="edit_tahun"
+                                            value="{{ date('Y') }}" placeholder="e.g: 2024">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mb-3 row">
+                                <label for="inputPassword" class="col-sm-4 col-form-label">Bulan
+                                    <strong><code>*</code></strong></label>
+                                <div class="col-sm-8">
+                                    <select class="form-control edit-curah_hujan select2_edit_bulan" name='edit_bulan'
+                                        id="edit_bulan">
+                                        <option value="">Pilih Bulan</option>
+                                        <option value="1">Januari</option>
+                                        <option value="2">Februari</option>
+                                        <option value="3">Maret</option>
+                                        <option value="4">April</option>
+                                        <option value="5">Mei</option>
+                                        <option value="6">Juni</option>
+                                        <option value="7">Juli</option>
+                                        <option value="8">Agustus</option>
+                                        <option value="9">September</option>
+                                        <option value="10">Oktober</option>
+                                        <option value="11">November</option>
+                                        <option value="12">Desember</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="mb-3 row">
+                                <label for="inputPassword" class="col-sm-4 col-form-label">Curah Hujan (mm)
+                                    <strong><code>*</code></strong></label>
+                                <div class="col-sm-8">
+                                    <input type="number" class="form-control edit-curah_hujan" name='edit_curah_hujan'
+                                        value="" id="edit_curah_hujan" placeholder="e.g: 100">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            @can('curahhujan-U')
+                                <button type="button" id="btn-edit-curah_hujan"
+                                    class="btn btn-primary btn-edit-curah_hujan"><i
+                                        class="fas fa-save mx-2"></i>Simpan</button>
+                            @endcan
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-        @include('layouts.footer')
+    </div>
+    @include('layouts.footer')
     </div>
 @endsection
 
@@ -513,13 +605,12 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha.6/js/bootstrap.min.js"></script>
     <script>
         $(document).ready(function() {
-
             // change state tab
-            $(document).on("click", ".tab_kem", function() {
+            $(document).on("click", ".tab_cur", function() {
                 var curr_state = $(this).data('state');
                 if (curr_state == 1) {
                     $(document).ready(function() {
-                        if ($('#dt_kemiringan').length) {
+                        if ($('#dt_curah_hujan').length) {
                             table.ajax.reload();
                             table.columns.adjust().draw();
                         } else {
@@ -527,13 +618,15 @@
                         }
                     })
                 } else if (curr_state == 2) {
-                    var kemiringan = $('#kemiringan_map').val();
+                    var tahun = $('#tahun_map').val();
+                    var bulan = $('#bulan_map').val();
 
                     $.ajax({
-                        url: '/master-data/map-kemiringan',
+                        url: '/master-data/map-curah-hujan',
                         type: 'POST',
                         data: {
-                            kemiringan: kemiringan,
+                            tahun: tahun,
+                            bulan: bulan
                         },
                         headers: {
                             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
@@ -561,15 +654,16 @@
                                 });
 
                                 data.data.forEach(function(kota) {
-                                    var kemiringan = kota.id_kemiringan_wilayah;
-                                    var jenis_kemiringan = kota.kemiringan_wilayah.name;
-                                    var luas = kota.luas;
-                                    var color = 'green';
+                                    var curah_hujan = kota.curah_hujan;
+                                    var color = 'yellow';
 
-                                    if (kemiringan == 2) color = 'yellow';
-                                    else if (kemiringan == 3) color = 'orange';
-                                    else if (kemiringan == 4) color = 'red';
-                                    else if (kemiringan == 5) color = 'brown';
+                                    if (curah_hujan > 200) {
+                                        color = 'blue';
+                                    } else if (curah_hujan > 100) {
+                                        color = 'rgb(0, 110, 255)';
+                                    } else if (curah_hujan > 50) {
+                                        color = 'rgb(0, 255, 229)';
+                                    }
 
                                     L.circle([kota.kota.latitude, kota.kota
                                             .longitude
@@ -580,7 +674,7 @@
                                             radius: 5000
                                         }).addTo(map)
                                         .bindPopup(
-                                            `<b>${kota.kota.name}</b><br>Kemiringan: ${jenis_kemiringan}<br>Luas: ${luas} Ha`
+                                            `<b>${kota.kota.name}</b><br>Indeks Curah Hujan: ${curah_hujan} mm`
                                         );
                                 });
                             } else {
@@ -607,10 +701,10 @@
                 }
             });
 
-            @can('kemiringan-R')
+            @can('curahhujan-R')
 
                 // Set up the map
-                var map = L.map('map', {
+                var map = L.map('map_curah_hujan', {
                     center: [-7.250445, 112.768845], // Koordinat Jawa Timur
                     zoom: 8, // Set the initial zoom level
                 });
@@ -620,42 +714,40 @@
                     attribution: '© OpenStreetMap contributors'
                 }).addTo(map);
 
-                var mapData = @json($kemiringan);
+                var mapData = @json($curah_hujan);
                 console.log(mapData);
 
                 mapData.forEach(function(kota) {
-                    var kemiringan = kota.id_kemiringan_wilayah;
-                    var jenis_kemiringan = kota.kemiringan_wilayah.name;
-                    var luas = kota.luas;
-                    var color = 'green';
+                    var curah_hujan = kota.curah_hujan;
+                    var color = 'yellow';
 
-                    if (kemiringan == 2) color = 'yellow';
-                    else if (kemiringan == 3) color = 'orange';
-                    else if (kemiringan == 4) color = 'red';
-                    else if (kemiringan == 5) color = 'brown';
+                    if (curah_hujan > 200) {
+                        color = 'blue';
+                    } else if (curah_hujan > 100) {
+                        color = 'rgb(0, 110, 255)';
+                    } else if (curah_hujan > 50) {
+                        color = 'rgb(0, 255, 229)';
+                    }
 
-                    L.circle([kota.kota.latitude, kota.kota
-                            .longitude
-                        ], {
+                    L.circle([kota.kota.latitude, kota.kota.longitude], {
                             color: color,
                             fillColor: color,
                             fillOpacity: 0.5,
                             radius: 5000
                         }).addTo(map)
-                        .bindPopup(
-                            `<b>${kota.kota.name}</b><br>Kemiringan: ${jenis_kemiringan}<br>Luas: ${luas} Ha`
-                        );
+                        .bindPopup(`<b>${kota.kota.name}</b><br>Indeks Curah Hujan: ${curah_hujan} mm`);
                 });
 
                 $(document).on("click", "#search_map", function() {
-                    var kemiringan = $('#kemiringan_map').val();
-
+                    var tahun = $('#tahun_map').val();
+                    var bulan = $('#bulan_map').val();
 
                     $.ajax({
-                        url: '/master-data/map-kemiringan',
+                        url: '/master-data/map-curah-hujan',
                         type: 'POST',
                         data: {
-                            kemiringan: kemiringan,
+                            tahun: tahun,
+                            bulan: bulan,
                         },
                         headers: {
                             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
@@ -683,15 +775,16 @@
                                 });
 
                                 data.data.forEach(function(kota) {
-                                    var kemiringan = kota.id_kemiringan_wilayah;
-                                    var jenis_kemiringan = kota.kemiringan_wilayah.name;
-                                    var luas = kota.luas;
-                                    var color = 'green';
+                                    var curah_hujan = kota.curah_hujan;
+                                    var color = 'yellow';
 
-                                    if (kemiringan == 2) color = 'yellow';
-                                    else if (kemiringan == 3) color = 'orange';
-                                    else if (kemiringan == 4) color = 'red';
-                                    else if (kemiringan == 5) color = 'brown';
+                                    if (curah_hujan > 200) {
+                                        color = 'blue';
+                                    } else if (curah_hujan > 100) {
+                                        color = 'rgb(0, 110, 255)';
+                                    } else if (curah_hujan > 50) {
+                                        color = 'rgb(0, 255, 229)';
+                                    }
 
                                     L.circle([kota.kota.latitude, kota.kota
                                             .longitude
@@ -702,7 +795,7 @@
                                             radius: 5000
                                         }).addTo(map)
                                         .bindPopup(
-                                            `<b>${kota.kota.name}</b><br>Kemiringan: ${jenis_kemiringan}<br>Luas: ${luas} Ha`
+                                            `<b>${kota.kota.name}</b><br>Indeks Curah Hujan: ${curah_hujan} mm`
                                         );
                                 });
                             } else {
@@ -729,13 +822,15 @@
                 });
 
                 $(document).on("click", "#btn_reload_map", function() {
-                    var kemiringan = $('#kemiringan_map').val();
+                    var tahun = $('#tahun_map').val();
+                    var bulan = $('#bulan_map').val();
 
                     $.ajax({
-                        url: '/master-data/map-kemiringan',
+                        url: '/master-data/map-curah-hujan',
                         type: 'POST',
                         data: {
-                            kemiringan: kemiringan,
+                            tahun: tahun,
+                            bulan: bulan
                         },
                         headers: {
                             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
@@ -761,15 +856,16 @@
                                 });
 
                                 data.data.forEach(function(kota) {
-                                    var kemiringan = kota.id_kemiringan_wilayah;
-                                    var jenis_kemiringan = kota.kemiringan_wilayah.name;
-                                    var luas = kota.luas;
-                                    var color = 'green';
+                                    var curah_hujan = kota.curah_hujan;
+                                    var color = 'yellow';
 
-                                    if (kemiringan == 2) color = 'yellow';
-                                    else if (kemiringan == 3) color = 'orange';
-                                    else if (kemiringan == 4) color = 'red';
-                                    else if (kemiringan == 5) color = 'brown';
+                                    if (curah_hujan > 200) {
+                                        color = 'blue';
+                                    } else if (curah_hujan > 100) {
+                                        color = 'rgb(0, 110, 255)';
+                                    } else if (curah_hujan > 50) {
+                                        color = 'rgb(0, 255, 229)';
+                                    }
 
                                     L.circle([kota.kota.latitude, kota.kota
                                             .longitude
@@ -780,7 +876,7 @@
                                             radius: 5000
                                         }).addTo(map)
                                         .bindPopup(
-                                            `<b>${kota.kota.name}</b><br>Kemiringan: ${jenis_kemiringan}<br>Luas: ${luas} Ha`
+                                            `<b>${kota.kota.name}</b><br>Indeks Curah Hujan: ${curah_hujan} mm`
                                         );
                                 });
                             } else {
@@ -806,8 +902,9 @@
                     });
                 });
 
-                $('#dt_kemiringan').DataTable().clear().destroy();
-                var table = $("#dt_kemiringan").DataTable({
+
+                $('#dt_curah_hujan').DataTable().clear().destroy();
+                var table = $("#dt_curah_hujan").DataTable({
                     scrollX: true,
                     orderCellsTop: false,
                     pageLength: 10,
@@ -880,7 +977,7 @@
                             });
                         })
 
-                        $('#dt_role').DataTable().columns.adjust()
+                        $('#dt_curah_hujan').DataTable().columns.adjust()
                         this.api().columns().every(function(index) {
                             var data_type = this.header().getAttribute('data-type');
                             var iName = this.header().getAttribute('data-name');
@@ -906,12 +1003,20 @@
                                         options +=
                                             "<option value='{{ $item->id }}'>{{ $item->name }}</option>";
                                     @endforeach
-                                } else if (iName == "id_kemiringan_wilayah") {
+                                } else if (iName == "bulan") {
                                     options += "<option value=''>Semua</option>";
-                                    @foreach ($id_kemiringan_wilayah as $item)
-                                        options +=
-                                            "<option value='{{ $item->id }}'>{{ $item->name }}</option>";
-                                    @endforeach
+                                    options += "<option value='1'>Januari</option>";
+                                    options += "<option value='2'>Februari</option>";
+                                    options += "<option value='3'>Maret</option>";
+                                    options += "<option value='4'>April</option>";
+                                    options += "<option value='5'>Mei</option>";
+                                    options += "<option value='6'>Juni</option>";
+                                    options += "<option value='7'>Juli</option>";
+                                    options += "<option value='8'>Agustus</option>";
+                                    options += "<option value='9'>September</option>";
+                                    options += "<option value='10'>Oktober</option>";
+                                    options += "<option value='11'>November</option>";
+                                    options += "<option value='12'>Desember</option>";
                                 }
 
                                 input.innerHTML = options
@@ -953,7 +1058,7 @@
                         });
                     },
                     ajax: {
-                        url: '/master-data/kemiringan/list',
+                        url: '/master-data/curah-hujan/list',
                         complete: function() {
                             $('.dtfh-floatingparenthead').on('scroll', function() {
                                 //    console.log('ssss');
@@ -979,17 +1084,23 @@
                         },
                         {
                             width: '200px',
-                            data: 'id_kemiringan_wilayah',
-                            name: 'id_kemiringan_wilayah',
+                            data: 'tahun',
+                            name: 'tahun',
+                            className: 'text-center'
+                        },
+                        {
+                            width: '100px',
+                            data: 'bulan',
+                            name: 'bulan',
                             className: 'text-center'
                         },
                         {
                             width: '300px',
-                            data: 'luas',
-                            name: 'luas',
+                            data: 'curah_hujan',
+                            name: 'curah_hujan',
                             className: 'text-center',
                             template: function(row) {
-                                return row.$luas + ' Ha';
+                                return row.curah_hujan + ' mm';
                             },
                         },
                         {
@@ -1000,11 +1111,11 @@
                             searchable: false,
                             template: function(row) {
                                 return "<center>" +
-                                    @can('kemiringan-U')
+                                    @can('curahhujan-U')
                                         "<button type='button' class='btn btn-outline-warning btn-sm tooltips btn-edit' title='Edit' data-bs-toggle='tooltip' data-bs-placement='top' data-id=" +
                                         row.id + "><i class='fas fa-pen'></i></button>  " +
                                     @endcan
-                                @can('kemiringan-D')
+                                @can('curahhujan-D')
                                     "<button type='button' class='btn btn-outline-danger btn-sm tooltips btn-delete' title='Delete' data-bs-toggle='tooltip' data-bs-placement='top' data-id=" +
                                     row.id + "><i class='fas fa-trash-alt'></i></button> " +
                                 @endcan
@@ -1017,32 +1128,34 @@
             @endcan
 
 
-            @can('kemiringan-C')
+            @can('curahhujan-C')
 
                 $('.select2_kota').select2({
                     width: '100%',
                     placeholder: "Pilih kota / Kabupaten",
                     allowClear: true,
-                    dropdownParent: $('#modal-tambah-kemiringan')
+                    dropdownParent: $('#modal-tambah-curah_hujan')
                 });
-                $('.select2_id_kemiringan_wilayah').select2({
+
+                $('.select2_bulan').select2({
                     width: '100%',
-                    placeholder: "Pilih Jenis Tanah",
+                    placeholder: "Pilih Bulan",
                     allowClear: true,
-                    dropdownParent: $('#modal-tambah-kemiringan')
+                    dropdownParent: $('#modal-tambah-curah_hujan')
                 });
 
-                $(document).on("click", ".btn-tambah-kemiringan", function() {
-                    $("#modal-tambah-kemiringan").modal("show");
+                $(document).on("click", ".btn-tambah-curah_hujan", function() {
+                    $("#modal-tambah-curah_hujan").modal("show");
                     $('#kota').val('').trigger('change');
-                    $('#id_kemiringan_wilayah').val('').trigger('change');
-                    $('#luas').val('');
+                    $('#tahun').val('');
+                    $('#bulan').val('').trigger('change');
+                    $('#curah_hujan').val('');
                 });
 
-                $(document).on("click", "#btn-simpan-kemiringan", function() {
+                $(document).on("click", "#btn-simpan-curah_hujan", function() {
                     var isValid = true;
 
-                    $('.input-kemiringan').each(function() {
+                    $('.input-curah_hujan').each(function() {
                         $(this).removeClass('is-invalid');
                         $(this).parent().find('.invalid-feedback').remove();
                         if ($(this).attr('type') == 'text') {
@@ -1064,6 +1177,17 @@
                                 $(this).parent().append(
                                     '<div class="invalid-feedback">Harus diisi dan lebih dari 0</div>'
                                 );
+                            } else {
+                                $(this).removeClass('is-invalid');
+                                $(this).parent().find('.invalid-feedback').remove();
+                            }
+                        } else if ($(this).is('select')) {
+                            var inputValue = $(this).val().trim();
+                            if (inputValue === '') {
+                                isValid = false;
+                                $(this).addClass('is-invalid');
+                                $(this).parent().append(
+                                    '<div class="invalid-feedback">Harus diisi</div>');
                             } else {
                                 $(this).removeClass('is-invalid');
                                 $(this).parent().find('.invalid-feedback').remove();
@@ -1085,22 +1209,24 @@
 
 
                     var kota = $('#kota').val();
-                    var id_kemiringan_wilayah = $('#id_kemiringan_wilayah').val();
-                    var luas = $('#luas').val();
+                    var tahun = $('#tahun').val();
+                    var bulan = $('#bulan').val();
+                    var curah_hujan = $('#curah_hujan').val();
 
                     $.ajax({
-                        url: '/master-data/kemiringan',
+                        url: '/master-data/curah-hujan',
                         type: 'POST',
                         headers: {
                             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
                         },
                         data: {
                             kota: kota,
-                            id_kemiringan_wilayah: id_kemiringan_wilayah,
-                            luas: luas,
+                            tahun: tahun,
+                            bulan: bulan,
+                            curah_hujan: curah_hujan,
                         },
                         beforeSend: function() {
-                            $('.btn-simpan-kemiringan').attr('disabled', 'disabled');
+                            $('.btn-simpan-curah_hujan').attr('disabled', 'disabled');
                             Swal.fire({
                                 title: 'Mohon Tunggu',
                                 text: 'Sedang Menyimpan...',
@@ -1113,7 +1239,7 @@
                         },
                         success: function(data) {
                             Swal.close();
-                            $('.btn-simpan-kemiringan').removeAttr('disabled', 'disabled');
+                            $('.btn-simpan-curah_hujan').removeAttr('disabled', 'disabled');
                             if (data.status == 'success') {
                                 Swal.fire({
                                     icon: 'success',
@@ -1122,7 +1248,7 @@
                                     showConfirmButton: false,
                                     timer: 1500
                                 });
-                                $("#modal-tambah-kemiringan").modal("hide");
+                                $("#modal-tambah-curah_hujan").modal("hide");
                                 table.ajax.reload();
                             } else {
                                 Swal.fire({
@@ -1136,7 +1262,7 @@
                         },
                         error: function(data) {
                             Swal.close();
-                            $('.btn-simpan-kemiringan').removeAttr('disabled', 'disabled');
+                            $('.btn-simpan-curah_hujan').removeAttr('disabled', 'disabled');
                             Swal.fire({
                                 icon: 'error',
                                 title: 'Gagal',
@@ -1149,38 +1275,40 @@
                 });
 
                 // on modal close
-                $('#modal-tambah-kemiringan').on('hidden.bs.modal', function(e) {
+                $('#modal-tambah-curah_hujan').on('hidden.bs.modal', function(e) {
                     $('#kota').val('').trigger('change');
-                    $('#id_kemiringan_wilayah').val('').trigger('change');
-                    $('#luas').val('');
+                    $('#tahun').val('');
+                    $('#bulan').val('');
+                    $('#curah_hujan').val('');
 
                     // remove invalid class
-                    $('.input-kemiringan').each(function() {
+                    $('.input-curah_hujan').each(function() {
                         $(this).removeClass('is-invalid');
                         $(this).parent().find('.invalid-feedback').remove();
                     });
                 });
             @endcan
 
-            @can('kemiringan-U')
+            @can('curahhujan-U')
 
                 $('.select2_edit_kota').select2({
                     width: '100%',
                     placeholder: "Pilih Kota / Kabupaten",
                     allowClear: true,
-                    dropdownParent: $('#modal-edit-kemiringan')
+                    dropdownParent: $('#modal-edit-curah_hujan')
                 });
-                $('.select2_edit_id_kemiringan_wilayah').select2({
+
+                $('.select2_edit_bulan').select2({
                     width: '100%',
-                    placeholder: "Pilih Jenis Tanah",
+                    placeholder: "Pilih Bulan",
                     allowClear: true,
-                    dropdownParent: $('#modal-edit-kemiringan')
+                    dropdownParent: $('#modal-edit-curah_hujan')
                 });
 
                 $(document).on("click", ".btn-edit", function() {
                     var id = $(this).data('id');
                     $.ajax({
-                        url: '/master-data/kemiringan/' + id,
+                        url: '/master-data/curah-hujan/' + id,
                         type: 'GET',
                         beforeSend: function() {
                             Swal.fire({
@@ -1196,13 +1324,13 @@
                         success: function(data) {
                             Swal.close();
                             if (data.status == 'success') {
-                                $("#modal-edit-kemiringan").modal("show");
+                                $("#modal-edit-curah_hujan").modal("show");
                                 console.log(data.data.id);
-                                $('#id_kemiringan').val(data.data.id);
+                                $('#id_curah_hujan').val(data.data.id);
                                 $('#edit_kota').val(data.data.id_kota).trigger('change');
-                                $('#edit_id_kemiringan_wilayah').val(data.data
-                                    .id_kemiringan_wilayah).trigger('change');
-                                $('#edit_luas').val(data.data.luas);
+                                $('#edit_tahun').val(data.data.tahun);
+                                $('#edit_bulan').val(data.data.bulan).trigger('change');
+                                $('#edit_curah_hujan').val(data.data.curah_hujan);
                             } else {
                                 Swal.fire({
                                     icon: 'error',
@@ -1226,22 +1354,23 @@
                     });
                 });
 
-                $('#modal-edit-kemiringan').on('hidden.bs.modal', function(e) {
-                    $('#id_kemiringan').val('');
+                $('#modal-edit-curah_hujan').on('hidden.bs.modal', function(e) {
+                    $('#id_curah_hujan').val('');
                     $('#edit_kota').val('').trigger('change');
-                    $('#edit_id_kemiringan_wilayah').val('').trigger('change')
-                    $('#edit_luas').val('');
+                    $('#edit_tahun').val('');
+                    $('#edit_bulan').val('').trigger('change');
+                    $('#edit_curah_hujan').val('');
                     // remove invalid class
-                    $('.edit-kemiringan').each(function() {
+                    $('.edit-curah_hujan').each(function() {
                         $(this).removeClass('is-invalid');
                         $(this).parent().find('.invalid-feedback').remove();
                     });
                 });
 
-                $(document).on("click", "#btn-edit-kemiringan", function() {
+                $(document).on("click", "#btn-edit-curah_hujan", function() {
                     var isValid = true;
 
-                    $('.edit-kemiringan').each(function() {
+                    $('.edit-curah_hujan').each(function() {
                         $(this).removeClass('is-invalid');
                         $(this).parent().find('.invalid-feedback').remove();
                         if ($(this).attr('type') == 'text') {
@@ -1267,6 +1396,17 @@
                                 $(this).removeClass('is-invalid');
                                 $(this).parent().find('.invalid-feedback').remove();
                             }
+                        } else if ($(this).is('select')) {
+                            var inputValue = $(this).val().trim();
+                            if (inputValue === '') {
+                                isValid = false;
+                                $(this).addClass('is-invalid');
+                                $(this).parent().append(
+                                    '<div class="invalid-feedback">Harus diisi</div>');
+                            } else {
+                                $(this).removeClass('is-invalid');
+                                $(this).parent().find('.invalid-feedback').remove();
+                            }
                         }
                     });
 
@@ -1283,24 +1423,26 @@
                     }
 
 
-                    var id = $('#id_kemiringan').val();
+                    var id = $('#id_curah_hujan').val();
                     var kota = $('#edit_kota').val();
-                    var id_kemiringan_wilayah = $('#edit_id_kemiringan_wilayah').val();
-                    var luas = $('#edit_luas').val();
+                    var tahun = $('#edit_tahun').val();
+                    var bulan = $('#edit_bulan').val();
+                    var curah_hujan = $('#edit_curah_hujan').val();
 
                     $.ajax({
-                        url: '/master-data/kemiringan/' + id,
+                        url: '/master-data/curah-hujan/' + id,
                         type: 'POST',
                         headers: {
                             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
                         },
                         data: {
                             kota: kota,
-                            id_kemiringan_wilayah: id_kemiringan_wilayah,
-                            luas: luas,
+                            tahun: tahun,
+                            bulan: bulan,
+                            curah_hujan: curah_hujan,
                         },
                         beforeSend: function() {
-                            $('.btn-edit-kemiringan').attr('disabled', 'disabled');
+                            $('.btn-edit-curah_hujan').attr('disabled', 'disabled');
                             Swal.fire({
                                 title: 'Mohon Tunggu',
                                 text: 'Sedang Menyimpan...',
@@ -1313,7 +1455,7 @@
                         },
                         success: function(data) {
                             Swal.close();
-                            $('.btn-edit-kemiringan').removeAttr('disabled', 'disabled');
+                            $('.btn-edit-curah_hujan').removeAttr('disabled', 'disabled');
                             if (data.status == 'success') {
                                 Swal.fire({
                                     icon: 'success',
@@ -1322,7 +1464,7 @@
                                     showConfirmButton: false,
                                     timer: 1500
                                 });
-                                $("#modal-edit-kemiringan").modal("hide");
+                                $("#modal-edit-curah_hujan").modal("hide");
                                 table.ajax.reload();
                             } else {
                                 Swal.fire({
@@ -1336,7 +1478,7 @@
                         },
                         error: function(data) {
                             Swal.close();
-                            $('.btn-edit-kemiringan').removeAttr('disabled', 'disabled');
+                            $('.btn-edit-curah_hujan').removeAttr('disabled', 'disabled');
                             Swal.fire({
                                 icon: 'error',
                                 title: 'Gagal',
@@ -1349,7 +1491,7 @@
                 });
             @endcan
 
-            @can('kemiringan-D')
+            @can('curahhujan-D')
 
                 $(document).on("click", ".btn-delete", function() {
                     var id = $(this).data('id');
@@ -1365,7 +1507,7 @@
                     }).then((result) => {
                         if (result.isConfirmed) {
                             $.ajax({
-                                url: '/master-data/kemiringan/destroy/' + id,
+                                url: '/master-data/curah-hujan/destroy/' + id,
                                 type: 'DELETE',
                                 headers: {
                                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr(

@@ -218,8 +218,6 @@
     <div class="main-content">
         <div class="page-content">
             <div class="container-fluid">
-                <!-- start page title -->
-
                 <div class="col-xl-12">
                     <div class="card">
                         <div class="card-header p-2 bg-info shadow">
@@ -516,8 +514,8 @@
                 if (curr_state == 1){
                     $(document).ready(function() {
                         if ($('#dt_produktifitas').length) {
-                            $('#dt_produktifitas').DataTable().columns.adjust().draw();
                             table.ajax.reload();
+                            table.columns.adjust().draw();
                         } else {
                             location.reload();
                         }
@@ -659,6 +657,8 @@
                     success: function(data) {
                         Swal.close();
                         if (data.status == 'success') {
+                            map.invalidateSize();
+
                             map.eachLayer(function(layer) {
                                 if (layer instanceof L.Circle) {
                                     map.removeLayer(layer);

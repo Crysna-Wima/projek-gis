@@ -143,6 +143,8 @@ class new_seeder extends Seeder
             ['permission' => 'curahhujan-D', 'middleware' => 'lang,authz', 'type' => 'data', 'method' => 'DELETE', 'url' => '/master-data/curah-hujan/destroy/{id}', 'route' => 'MasterData\CurahHujanController@destroy', 'guard' => 'web'],
             ['permission' => 'curahhujan-C', 'middleware' => 'lang,authz', 'type' => 'data', 'method' => 'POST', 'url' => '/master-data/curah-hujan', 'route' => 'MasterData\CurahHujanController@store', 'guard' => 'web'],
             ['permission' => 'curahhujan-U', 'middleware' => 'lang,authz', 'type' => 'data', 'method' => 'POST', 'url' => '/master-data/curah-hujan/{id}', 'route' => 'MasterData\CurahHujanController@update', 'guard' => 'web'],
+            ['middleware' => 'lang', 'type' => 'data', 'method' => 'POST', 'url' => '/master-data/map-curah-hujan', 'route' => 'MasterData\CurahHujanController@searchMap', 'guard' => 'web'],
+
 
             // route kemiringan
             ['permission' => 'kemiringan-R', 'middleware' => 'lang,authz', 'type' => 'view', 'method' => 'GET', 'url' => '/master-data/kemiringan', 'route' => 'MasterData\KemiringanController@index', 'guard' => 'web'],
@@ -151,6 +153,7 @@ class new_seeder extends Seeder
             ['permission' => 'kemiringan-D', 'middleware' => 'lang,authz', 'type' => 'data', 'method' => 'DELETE', 'url' => '/master-data/kemiringan/destroy/{id}', 'route' => 'MasterData\KemiringanController@destroy', 'guard' => 'web'],
             ['permission' => 'kemiringan-C', 'middleware' => 'lang,authz', 'type' => 'data', 'method' => 'POST', 'url' => '/master-data/kemiringan', 'route' => 'MasterData\KemiringanController@store', 'guard' => 'web'],
             ['permission' => 'kemiringan-U', 'middleware' => 'lang,authz', 'type' => 'data', 'method' => 'POST', 'url' => '/master-data/kemiringan/{id}', 'route' => 'MasterData\KemiringanController@update', 'guard' => 'web'],
+            ['middleware' => 'lang', 'type' => 'data', 'method' => 'POST', 'url' => '/master-data/map-kemiringan', 'route' => 'MasterData\KemiringanController@searchMap', 'guard' => 'web'],
 
             // route jenis tanah
             ['permission' => 'jenistanah-R', 'middleware' => 'lang,authz', 'type' => 'view', 'method' => 'GET', 'url' => '/master-data/jenis-tanah', 'route' => 'MasterData\JenisTanahController@index', 'guard' => 'web'],
@@ -159,6 +162,7 @@ class new_seeder extends Seeder
             ['permission' => 'jenistanah-D', 'middleware' => 'lang,authz', 'type' => 'data', 'method' => 'DELETE', 'url' => '/master-data/jenis-tanah/destroy/{id}', 'route' => 'MasterData\JenisTanahController@destroy', 'guard' => 'web'],
             ['permission' => 'jenistanah-C', 'middleware' => 'lang,authz', 'type' => 'data', 'method' => 'POST', 'url' => '/master-data/jenis-tanah', 'route' => 'MasterData\JenisTanahController@store', 'guard' => 'web'],
             ['permission' => 'jenistanah-U', 'middleware' => 'lang,authz', 'type' => 'data', 'method' => 'POST', 'url' => '/master-data/jenis-tanah/{id}', 'route' => 'MasterData\JenisTanahController@update', 'guard' => 'web'],
+            ['middleware' => 'lang', 'type' => 'data', 'method' => 'POST', 'url' => '/master-data/map-jenis-tanah', 'route' => 'MasterData\JenisTanahController@searchMap', 'guard' => 'web'],
         ];
 
         foreach ($dataRoute as $route) {

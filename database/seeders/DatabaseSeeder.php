@@ -29,5 +29,10 @@ class DatabaseSeeder extends Seeder
         $this->call(JenisTanahSeeder::class);
         $this->call(KemiringanWilayahSeeder::class);
         $this->call(ProduktifitasSeeder::class);
+        $this->call(DataIrigasi::class);
+        $this->call(CurahHujanSeeder::class);
+        $this->call(DataKemiringanSeeder::class);
+        $this->call(DataJenisTanahSeeder::class);
+
     }
 }

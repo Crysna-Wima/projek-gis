@@ -22,6 +22,7 @@ class KemiringanController extends Controller
         $data['menu']  = Menu::select('id', 'name')->get();
         $data['kota'] = Regency::where('province_id', '35')->get();
         $data['id_kemiringan_wilayah'] = Kemiringan_Wilayah::get();
+        $data['kemiringan'] = Kemiringan::with('kota')->with('kemiringanWilayah')->get();
 
         return view('masterdata.kemiringan.index', $data);
     }
@@ -172,5 +173,18 @@ class KemiringanController extends Controller
             $messages = ['status' => 'error', 'message' => 'Data failed to delete'];
             return response()->json($messages, 500, [], JSON_PRETTY_PRINT);
         }
+    }
+
+    public function searchMap(Request $request)
+    {
+        $kemiringan = $request->input('kemiringan');
+        
+        if ($kemiringan == null || $kemiringan == '' || $kemiringan == 0 || $kemiringan == 'undefined') {
+            $kemiringan = Kemiringan::with('kota')->with('kemiringanWilayah')->get();
+        } else {
+            $kemiringan = Kemiringan::with('kota')->with('kemiringanWilayah')->where('id_kemiringan_wilayah', $kemiringan)->get();
+        }
+    
+        return response()->json(['status' => 'success', 'data' => $kemiringan]);
     }
 }

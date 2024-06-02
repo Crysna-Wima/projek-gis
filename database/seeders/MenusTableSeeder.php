@@ -16,7 +16,7 @@ class MenusTableSeeder extends Seeder
     {
         //
         $datas = [
-            ['type'=> 'dashboard', 'icon' => 'fas fa-home', 'name' => 'Dashboard', 'url' => 'dashboard', 'permission' => 'dashboard', 'order_no' => 1],
+            ['type'=> 'dashboard', 'icon' => 'fas fa-home', 'name' => 'Dashboard', 'url' => '/dashboard', 'permission' => 'dashboard', 'order_no' => 1],
             // ['type'=> 'dashboard', 'icon' => 'fa fa-server text-success mr-5', 'name' => 'Master Data', 'url' => '#', 'permission' => 'masterdata'],
             ['type'=> 'dashboard', 'icon' => 'fas fa-coins', 'name' => 'Master Data', 'url' => '#', 'permission' => 'home', 'order_no' => 2],
             ['type'=> 'dashboard', 'icon' => 'fas fa-cog', 'name' => 'Web Settings', 'url' => '#', 'permission' => 'websettings', 'order_no' => 3],

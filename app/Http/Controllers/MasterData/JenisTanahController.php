@@ -23,7 +23,7 @@ class JenisTanahController extends Controller
         $data['kota'] = Regency::where('province_id', '35')->get();
         $data['id_jenis_tanah'] = Jenis_Tanah::get();
         $jenis_tanah = 6;
-        $data['jenis_tanah'] = JenisTanah::with('kota')->where('id_jenis_tanah', $jenis_tanah)->get();
+        $data['jenis_tanah'] = JenisTanah::with('kota')->with('jenistanah')->where('id_jenis_tanah', $jenis_tanah)->get();
         $data['jenis_tanah_now'] = $jenis_tanah;
 
         return view('masterdata.jenistanah.index', $data);
@@ -171,16 +171,19 @@ class JenisTanahController extends Controller
 
     public function searchMap(Request $request)
     {
-        $tahun = $request->input('tahun', date('Y'));
-        $jenis_tanah = $request->input('jenis_tanah', 1);
+        $jenis_tanah = $request->input('jenis_tanah');
         
         if ($jenis_tanah == null || $jenis_tanah == '' || $jenis_tanah == 0 || $jenis_tanah == 'undefined') {
-            $jenis_tanah = 1; // Default to 1 if invalid
+            $jenisTanah = JenisTanah::with('kota')
+                ->with('jenistanah')
+                ->get();
         }
-    
-        $jenisTanah = JenisTanah::with('kota')
-            ->where('id_jenis_tanah', $jenis_tanah)
-            ->get();
+        else {
+            $jenisTanah = JenisTanah::with('kota')
+                ->with('jenistanah')
+                ->where('id_jenis_tanah', $jenis_tanah)
+                ->get();
+        }
     
         return response()->json(['status' => 'success', 'data' => $jenisTanah]);
     }

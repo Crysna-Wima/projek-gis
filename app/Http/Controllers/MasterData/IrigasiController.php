@@ -23,10 +23,8 @@ class IrigasiController extends Controller
         $data['kota'] = Regency::where('province_id', '35')->get();
         $data['id_jenis_irigasi'] = Jenis_Irigasi::get();
         $tahun_now = date('Y');
-        $jenis_irigasi = 6;
-        $data['irigasi'] = Irigasi::with('kota')->where('tahun', $tahun_now)->where('id_jenis_irigasi', $jenis_irigasi)->get();
+        $data['irigasi'] = Irigasi::with('kota')->with('jenis_irigasi')->where('tahun', $tahun_now)->get();
         $data['tahun_now'] = $tahun_now;
-        $data['jenis_irigasi_now'] = $jenis_irigasi;  
 
         return view('masterdata.irigasi.index', $data);
     }
@@ -193,20 +191,23 @@ class IrigasiController extends Controller
     public function searchMap(Request $request)
     {
         $tahun = $request->input('tahun', date('Y'));
-        $jenis_irigasi = $request->input('jenis_irigasi', 1);
-        
-        if ($jenis_irigasi == null || $jenis_irigasi == '' || $jenis_irigasi == 0 || $jenis_irigasi == 'undefined') {
-            $jenis_irigasi = 1; // Default to 1 if invalid
-        }
-    
+        $jenis_irigasi = $request->input('jenis_irigasi');
+
         if ($tahun == null || $tahun == '' || $tahun == 0 || $tahun == 'undefined') {
             $tahun = date('Y'); // Default to current year if invalid
         }
-    
-        $irigasi = Irigasi::with('kota')
+        
+        if ($jenis_irigasi == null || $jenis_irigasi == '' || $jenis_irigasi == 0 || $jenis_irigasi == 'undefined') {
+            $irigasi = Irigasi::with('kota')->with('jenis_irigasi')
             ->where('tahun', $tahun)
-            ->where('id_jenis_irigasi', $jenis_irigasi)
             ->get();
+        } else {
+            $irigasi = Irigasi::with('kota')->with('jenis_irigasi')
+                ->where('tahun', $tahun)
+                ->where('id_jenis_irigasi', $jenis_irigasi)
+                ->get();
+        }
+        
     
         return response()->json(['status' => 'success', 'data' => $irigasi]);
     }

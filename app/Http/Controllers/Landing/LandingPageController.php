@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Landing;
 
 use App\Http\Controllers\Controller;
+use App\Models\CurahHujan;
+use App\Models\Regency;
 use Illuminate\Http\Request;
 
 class LandingPageController extends Controller
@@ -15,51 +17,32 @@ class LandingPageController extends Controller
         return view(('home.index'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
+    public function tentangkami(){
+        return view(('home.tentang-kami'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
+    public function curahhujan(){
+        $tahun_now = date('Y');
+        $bulan_now = ltrim(date('m'), '0');
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
+        // Array untuk memetakan angka bulan ke nama bulan
+        $namaBulan = [
+            1 => 'Januari', 2 => 'Februari', 3 => 'Maret', 4 => 'April',
+            5 => 'Mei', 6 => 'Juni', 7 => 'Juli', 8 => 'Agustus',
+            9 => 'September', 10 => 'Oktober', 11 => 'November', 12 => 'Desember'
+        ];
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
+        $data['tahun_now'] = $tahun_now;
+        $data['bulan_now'] = $namaBulan[$bulan_now];
+        $data['jumlah_kota'] = Regency::where('province_id', '35')->count();
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
+        // rata-rata curah hujan bulan ini tahun ini (2 digit dibelakang koma)
+        $data['intensitas_hujan'] = round(CurahHujan::where('tahun', $tahun_now)->where('bulan', $bulan_now)->avg('curah_hujan'), 2);
+        $data['curah_hujan_tertinggi'] = CurahHujan::where('tahun', $tahun_now)->where('bulan', $bulan_now)->max('curah_hujan');
+        $data['curah_hujan_terendah'] = CurahHujan::where('tahun', $tahun_now)->where('bulan', $bulan_now)->min('curah_hujan');
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
+        $data['curah_hujan'] = CurahHujan::with('kota')->where('tahun', $tahun_now)->where('bulan', $bulan_now)->get();
+
+        return view('home.data.curah-hujan', $data);
     }
 }
